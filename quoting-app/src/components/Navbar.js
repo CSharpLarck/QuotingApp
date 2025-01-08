@@ -1,36 +1,19 @@
-function Navbar() {
-    return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container">
-                <a className="navbar-brand" href="#">Quoting App</a>
-                <button
-                className="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarNav"
-                aria-controls="navbarNav"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-            >
-                <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                    <li className="nav-item">
-                        <a className="nav-link active" href="#">Home</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link active" href="#">Quotes</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link active" href="#">Orders</a>
-                    </li>
-                </ul>
-            </div> 
-        </div> 
-    </nav>
-);
+import React from 'react';
+import { Link } from 'react-router-dom';  // Import Link from react-router-dom
+import './Navbar.css';
 
+function Navbar() {
+  return (
+    <nav className="navbar">
+      <div className="logo">Designer Blinds Quoting & Ordering Software</div>
+      <ul className="nav-links">
+        <li><Link to="/products">Products</Link></li>  {/* Changed a to Link */}
+        <li><Link to="/resources">Resources</Link></li>  {/* Changed a to Link */}
+        <li><Link to="/contact">Contact</Link></li>  {/* Changed a to Link */}
+      </ul>
+      <button className="sign-in">Sign In</button>
+    </nav>
+  );
 }
 
 export default Navbar;
