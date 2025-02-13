@@ -1,0 +1,126 @@
+.navbar {
+    max-width: 1000px; /* ✅ Match Manage Orders Dashboard Width */
+    margin: auto; /* ✅ Centers it */
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #2c2f33; /* ✅ Professional Dark Grey */
+    color: white;
+    border-radius: 10px; /* ✅ Subtle rounded edge */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ✅ Subtle shadow */
+}
+
+/* ✅ Left Branding */
+.nav-left {
+    display: flex;
+    flex-direction: column; /* ✅ Stack title & subtitle vertically */
+    align-items: flex-start; /* ✅ Align text to the left */
+    gap: 3px; /* ✅ Space between title and subtitle */
+}
+
+/* ✅ "Designer Blinds" - Larger, Emphasized */
+.brand-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0px; /* ✅ Remove extra margin */
+}
+
+/* ✅ "Quoting Software" - Smaller, Secondary */
+.brand-subtitle {
+    font-size: .9rem;
+    font-weight: normal;
+    color: #b0b3b8; /* ✅ Light Grey for Contrast */
+    margin-top: 2px; /* ✅ Small space from title */
+}
+
+
+/* ✅ Center Navigation */
+.nav-center {
+    display: flex;
+    gap: 15px;
+    margin-right: 10px;
+    flex-grow: 1;
+    justify-content: right;
+}
+
+/* ✅ Style for Navigation Buttons */
+.nav-button {
+    background-color: #40444b;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.2s;
+    border: 1px solid #5865f2;
+}
+
+.nav-button:hover {
+    background-color: #5865f2;
+    transform: scale(1.05);
+}
+
+/* ✅ Right Section: User Info & Logout */
+.nav-right {
+    display: flex;
+    flex-direction: column; /* ✅ Stack username above logout */
+    align-items: flex-end; /* ✅ Align to right side */
+    gap: 3px; /* ✅ Less gap between username and logout */
+    margin-right: -10px;
+}
+
+/* ✅ Username Style (Now Above Logout Button) */
+.user-info {
+    display: flex;
+    flex-direction: column; /* ✅ Stack username on top */
+    align-items: center;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    margin-bottom: 3px; /* ✅ Ensures space between name and button */
+}
+
+/* ✅ Smaller Logout Button */
+.logout-button {
+    background: #ff4d4d;
+    border: none;
+    padding: 5px 10px; /* ✅ Smaller Size */
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12px; /* ✅ Smaller Font */
+    font-weight: bold;
+    width: 80px; /* ✅ Smaller Width */
+    text-align: center;
+}
+
+.logout-button:hover {
+    background: #cc0000;
+}
+
+/* ✅ Sign In Button */
+.signin-button {
+    background: #32cd32;
+    padding: 8px 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.signin-button:hover {
+    background: #228b22;
+}
+
+/* ✅ Ensure Navbar and Dashboard Align on Large Screens */
+@media (min-width: 1200px) {
+    .navbar {
+        max-width: 1000px; /* ✅ Matches Large Dashboard Width */
+    }
+}

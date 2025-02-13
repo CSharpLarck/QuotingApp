@@ -1,0 +1,262 @@
+.manage-quotes-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-bottom: 80px; /* Extra spacing at the bottom */
+}
+
+/* ✅ Make header and button appear in a row */
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Pushes the button to the left and header to the right */
+  align-items: center; /* Aligns items vertically */
+  margin-bottom: 20px; /* Space below */
+}
+
+/* ✅ Style for the button */
+.start-quote-button {
+  background-color: #007bff; /* Primary blue */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  margin-top: 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  width: 175px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.start-quote-button:hover {
+  background-color: #d6d6d6;
+  color: black;
+}
+
+.start-quote-button:active {
+  background-color: #0056b3;
+}
+
+/* ✅ Ensure header aligns properly */
+.header {
+  flex-grow: 1; /* Ensures the header takes up remaining space */
+  text-align: left; /* Centers the text */
+  padding-left: 130px;
+}
+
+
+.header-title {
+  font-size: 1.8rem;
+  margin-left: -347px;
+
+  font-weight: bold;
+}
+
+.header-description {
+  color: #555;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-height: 100vh; /* Adjust to prevent excessive scrolling */
+}
+
+.quotes-table {
+  width: 100%;
+  padding-bottom: 150px;
+}
+
+.table-header {
+  background-color: #f5f5f5;
+  text-align: left;
+}
+
+.table-cell {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-row.clickable-row {
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.table-row.clickable-row:hover {
+  background-color: #f0f8ff;
+}
+
+.no-quotes {
+  text-align: center;
+  font-weight: bold;
+  color: #777;
+  padding: 20px;
+}
+
+/* ✅ Fix dropdown visibility issue */
+.actions-cell {
+  position: relative; /* Ensures dropdown stays positioned */
+}
+
+/* ✅ Style for the Edit Button */
+.edit-button {
+  background-color: #3c4044; /* Blue color */
+  color: white;
+  border: none;
+  width: 50px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.edit-button:hover {
+  background-color: #0b68c6; /* Darker blue */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.edit-button:active {
+  transform: scale(0.98); /* Slight shrink effect when clicked */
+}
+
+/* ✅ Dropdown Container */
+.edit-dropdown {
+  position: absolute;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 8px 0;
+  width: 150px;
+  top: 40px; /* Adjust based on placement */
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ✅ Remove blue highlight on selection */
+.edit-dropdown button {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s;
+  outline: none; /* ✅ Prevent blue outline */
+  -webkit-tap-highlight-color: transparent; /* ✅ Remove blue highlight on mobile */
+}
+
+/* ✅ Style when button is clicked */
+.edit-dropdown button:focus {
+  background: #f0f0f0 !important;
+  color: #000 !important; /* Ensure text stays black */
+  outline: none; /* ✅ Prevent blue outline */
+}
+
+.edit-dropdown-container:hover .dropdown-menu {
+  display: flex;
+}
+
+/* ✅ Dropdown Menu Styling */
+.dropdown-menu {
+  position: absolute;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 8px 0;
+  width: 160px;
+  top: 40px; /* Adjust based on placement */
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd; /* ✅ Adds a subtle border */
+}
+
+/* ✅ Hover effect for dropdown buttons */
+.dropdown-menu button {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background: #f0f0f0;
+}
+
+/* ✅ Clicked state */
+.dropdown-menu button:active {
+  background: #ddd;
+  color: #000;
+}
+
+/* ✅ Remove focus outline */
+.dropdown-menu button:focus {
+  outline: none;
+}
+
+/* ✅ Dropdown Arrow Indicator */
+.dropdown-arrow {
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  width: 10px;
+  height: 10px;
+  background: white;
+  transform: rotate(45deg);
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ✅ Positioning for the Table Actions */
+.actions-cell {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* ✅ Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 15px;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-weight: bold;
+}
