@@ -8,17 +8,16 @@ import {
 } from "firebase/auth";
 
 
-
-// ✅ Firebase Configuration
 const firebaseConfig = {
   apiKey: "AIzaSyA3yAXswNzlE_nVwE1Z97LzQJUh3PyUjSY",
   authDomain: "designerblinds-c482a.firebaseapp.com",
   projectId: "designerblinds-c482a",
-  storageBucket: "designerblinds-c482a.firebasestorage.app",
+  storageBucket: "designerblinds-c482a.appspot.com",
   messagingSenderId: "141452257923",
   appId: "1:141452257923:web:74db6313db9391bc2949b6",
   measurementId: "G-JJ77HVBTJX"
 };
+
 
 // ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
