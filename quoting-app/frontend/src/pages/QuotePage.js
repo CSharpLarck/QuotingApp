@@ -6,13 +6,28 @@ import "./QuotePage.css"; // Ensure CSS is imported
 const QuotePage = () => {
   const { quoteId } = useParams();
   const [quote, setQuote] = useState(null);
+
+  // eslint-disable-next-line no-unused-vars
   const [currentQuoteId, setCurrentQuoteId] = useState(null);
+
+  // eslint-disable-next-line no-unused-vars
   const [customerName, setCustomerName] = useState("");
-const [poNumber, setPoNumber] = useState("");
-const [sidemark, setSidemark] = useState("");
-const [address, setAddress] = useState("");
-const [phoneNumber, setPhoneNumber] = useState("");
-const [showAlert, setShowAlert] = useState(false);
+
+  // eslint-disable-next-line no-unused-vars
+  const [poNumber, setPoNumber] = useState("");
+
+  // eslint-disable-next-line no-unused-vars
+  const [sidemark, setSidemark] = useState("");
+
+  // eslint-disable-next-line no-unused-vars
+  const [address, setAddress] = useState("");
+
+  // eslint-disable-next-line no-unused-vars
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  // eslint-disable-next-line no-unused-vars
+  const [showAlert, setShowAlert] = useState(false);
+
 
 
 
@@ -69,8 +84,10 @@ const [showAlert, setShowAlert] = useState(false);
     }
   };
 
-  const handleAddMoreItems = async () => {
-    console.log("📌 handleAddMoreItems triggered"); // Debugging log
+// eslint-disable-next-line no-unused-vars
+const handleAddMoreItems = async () => {
+  console.log("📌 handleAddMoreItems triggered");
+
   
     if (!currentQuoteId) {
       console.warn("⚠️ No currentQuoteId found!");

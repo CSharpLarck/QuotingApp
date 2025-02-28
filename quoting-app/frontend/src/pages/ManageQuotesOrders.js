@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { db, collection, query, getDoc, orderBy, addDoc, serverTimestamp, getDocs, doc, deleteDoc, updateDoc } from "../firebase";
 import { auth } from "../firebase"; // ✅ Import Firebase auth
 import emailjs from "emailjs-com";
@@ -9,12 +9,17 @@ import RequestMeasureAlert from "../components/RequestMeasureAlert"; // Import t
 const ManageQuotesOrders = () => {
   const [quotes, setQuotes] = useState([]);
   const [selectedQuote, setSelectedQuote] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
   const quotesPerPage = 10; // ✅ 10 quotes per page
   const [showMeasureAlert, setShowMeasureAlert] = useState(false);
 
   const navigate = useNavigate();
+
+  // eslint-disable-next-line no-unused-vars
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // eslint-disable-next-line no-unused-vars
   const [currentQuoteId, setCurrentQuoteId] = useState(null);
+
 
   useEffect(() => {
     const fetchUserQuotes = async () => {
@@ -166,11 +171,16 @@ const ManageQuotesOrders = () => {
   
 
   
-  // ✅ Pagination Logic
-  const indexOfLastQuote = currentPage * quotesPerPage;
-  const indexOfFirstQuote = indexOfLastQuote - quotesPerPage;
-  const currentQuotes = quotes.slice(indexOfFirstQuote, indexOfLastQuote);
-  const totalPages = Math.ceil(quotes.length / quotesPerPage);
+// ✅ Pagination Logic
+const indexOfLastQuote = currentPage * quotesPerPage;
+const indexOfFirstQuote = indexOfLastQuote - quotesPerPage;
+
+// eslint-disable-next-line no-unused-vars
+const currentQuotes = quotes.slice(indexOfFirstQuote, indexOfLastQuote);
+
+// eslint-disable-next-line no-unused-vars
+const totalPages = Math.ceil(quotes.length / quotesPerPage);
+
 
   return (
     <div className="manage-quotes-container">

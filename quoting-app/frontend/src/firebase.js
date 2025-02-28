@@ -4,7 +4,7 @@ import {
   addDoc, updateDoc, deleteDoc, serverTimestamp 
 } from "firebase/firestore";
 import { 
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged 
+  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword
 } from "firebase/auth";
 
 

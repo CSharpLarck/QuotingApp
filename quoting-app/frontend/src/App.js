@@ -21,8 +21,14 @@ import { onAuthStateChanged } from "firebase/auth";
 
 const App = () => {
   const [categories, setCategories] = useState([]);
+
+  // eslint-disable-next-line no-unused-vars
   const [user, setUser] = useState(null);
+
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
+
+
 
   useEffect(() => {
     async function fetchCategories() {

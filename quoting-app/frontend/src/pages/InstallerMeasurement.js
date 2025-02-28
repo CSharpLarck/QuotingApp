@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom"; // ✅ Ensure Correct Import
 
-import { collection, getDocs, addDoc, getDoc, setDoc, arrayUnion, getFirestore, query, where, onSnapshot, doc, updateDoc, serverTimestamp } from "firebase/firestore";
+import { collection, getDocs, getFirestore, query, where, onSnapshot, doc, updateDoc, serverTimestamp } from "firebase/firestore";
 import "./InstallerMeasurement.css";
 
 const db = getFirestore();
