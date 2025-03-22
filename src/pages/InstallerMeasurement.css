@@ -1,0 +1,344 @@
+/* ✅ Fully Responsive Container */
+.installer-measurement-container {
+  width: 328px; /* ✅ Same width as Release Liability Form */
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-x: hidden;
+}
+
+/* ✅ Back to Dashboard Button */
+.back-to-dashboard-button {
+  background-color: #d5d2d2;
+  color: black;
+  padding: 12px 20px;
+  font-size: 16px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  text-align: center;
+}
+
+.back-to-dashboard-button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* ✅ Customer Selection Dropdown Styling */
+.customer-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.customer-selection label {
+  font-weight: bold;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.customer-dropdown {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 302px; /* ✅ Matches Release Liability Form inputs */
+  background: white;
+  cursor: pointer;
+}
+
+/* ✅ Responsive Form Layout */
+.measurement-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 10px;
+}
+
+/* ✅ Make inputs fill available space */
+.measurement-input {
+  width: 290px; /* ✅ Matches Release Liability Form */
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+/* ✅ Responsive Measurement Group */
+.measurement-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+/* ✅ Make Width & Height Inputs Smaller */
+.measurement-group .measurement-input {
+  width: 235px; /* ✅ Same as Release Liability */
+  min-width: 65px;
+  padding: 8px;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* ✅ Make Fraction Dropdown Smaller */
+.measurement-select {
+  width: 50px;
+  min-width: 60px;
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 11px;
+  border-radius: 5px;
+}
+
+/* ✅ Title Styling */
+.measurement-mount-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* ✅ Mount Dropdown */
+.measurement-mount {
+  width: 310px;
+  min-width: 60px;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+/* ✅ Error message styling */
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ✅ Increase button size for easy tapping */
+.measurement-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+}
+
+.next-measurement-button,
+.submit-button {
+  width: 324px; /* ✅ Matches Release Liability Form */
+  padding: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.next-measurement-button:hover,
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* ✅ Responsive Measure Sheet */
+.measure-sheet {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px; /* 🔹 Reduced font size */
+  margin-top: 20px;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Darker Header Styling */
+.measure-sheet thead {
+  background: #333;
+  color: white;
+  font-size: 13px; /* 🔹 Reduced header font size */
+}
+
+/* ✅ Header Text */
+.measure-sheet th {
+  padding: 9.5px; /* 🔹 Reduced padding */
+  text-align: center;
+  font-weight: bold;
+  font-size: 11px; /* 🔹 Smaller font for headers */
+}
+
+/* ✅ Table Body Text */
+.measure-sheet td {
+  padding: 6px; /* 🔹 Reduced padding */
+  font-size: 11px; /* 🔹 Smaller font for table content */
+}
+
+/* ✅ Alternating Row Colors */
+.measure-sheet tbody tr:nth-child(odd) {
+  background: #f8f9fa;
+}
+.measure-sheet tbody tr:nth-child(even) {
+  background: #e0e0e0;
+}
+
+/* ✅ Hover Effect */
+.measure-sheet tbody tr:hover {
+  background: #d6e4ff;
+  transition: background 0.3s ease-in-out;
+}
+
+/* ✅ Left-Aligned Notes Row */
+.notes-row {
+  background: #f1f1f1;
+  font-style: italic;
+  font-weight: 500;
+  text-align: left;
+  padding: 8px; /* 🔹 Reduced padding */
+  font-size: 11px; /* 🔹 Smaller font size */
+  border-left: 3px solid #007bff;
+  border-bottom: 1px solid #ddd;
+}
+
+/* ✅ Responsive Table for Mobile */
+@media (max-width: 768px) {
+  .measure-sheet {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .measure-sheet th,
+  .measure-sheet td {
+    padding: 8.6px; /* 🔹 Adjusted padding for mobile */
+    font-size: 11px; /* 🔹 Smaller text */
+  }
+}
+
+
+  .installer-measurement-container {
+    width: 328px; /* ✅ Matches form width */
+    padding: 10px;
+  }
+
+  .measurement-input,
+  .customer-dropdown {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .next-measurement-button {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .submit-button {
+ background-color: green;
+  }
+
+
+/* ✅ Ensure Responsive Alignment */
+@media (max-width: 768px) {
+  .measurement-group {
+    justify-content: flex-start;
+  }
+
+  .measurement-group {
+    flex-direction: row;
+  }
+
+  .measurement-input {
+    font-size: 16px;
+  }
+}
+
+/* ✅ Dark overlay */
+.signature-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ✅ Centered modal box */
+.signature-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 307px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ✅ Signature Canvas */
+.signature-canvas {
+  border: 2px solid #000;
+  border-radius: 5px;
+  width: 100%;
+  height: 150px;
+  margin-top: 10px;
+}
+
+/* ✅ Ensure Signature Buttons Are in One Row */
+.signature-buttons {
+  display: flex;
+  justify-content: center; /* ✅ Centers buttons */
+  gap: 5px; /* ✅ Space between buttons */
+  margin-left: 50px;
+}
+
+/* ✅ Ensure Both Buttons Are Same Size */
+.signature-buttons button {
+  flex: 1; /* ✅ Ensures equal width */
+  max-width: 200px; /* ✅ Prevents excessive stretching */
+  height: 50px; /* ✅ Forces same height */
+  padding: 12px 0;
+  font-size: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* ✅ Clear Button (Red) */
+.signature-buttons .clear-btn {
+  background: red !important;
+  color: white !important;
+}
+
+.signature-buttons .clear-btn:hover {
+  background: darkred; /* Darker red on hover */
+}
+
+/* ✅ Accept & Submit Button (Green) */
+.signature-buttons .submit-btn {
+  background: green !important;
+  color: white !important;
+}
+
+.signature-buttons .submit-btn:hover {
+  background: darkgreen; /* Darker green on hover */
+}
+
+/* ✅ Disabled Button Styling */
+.submit-button:disabled {
+  background: #ccc !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}

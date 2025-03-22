@@ -1,0 +1,449 @@
+
+
+/* ✅ Header and Button Alignment */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* ✅ Allows wrapping on smaller screens */
+  margin-bottom: 20px;
+}
+
+/* ✅ Start Quote Button */
+.start-quote-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  width: 180px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.start-quote-button:hover {
+  background-color: #0056b3;
+}
+
+.start-quote-button:active {
+  background-color: #003d80;
+}
+
+/* ✅ Header Styles */
+.header {
+  flex-grow: 1;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.header-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  text-align: center; /* ✅ Centering for smaller screens */
+}
+
+.header-description {
+  color: #555;
+  text-align: center; /* ✅ Centering for better readability */
+}
+/* ✅ Ensure Extra Space Below the Last Item */
+.table-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  padding-bottom: 150px; /* Increased padding for dropdown visibility */
+  overflow-x: auto;
+  overflow-y: visible;
+  display: block;
+  position: relative;
+}
+
+/* ✅ Add margin to create space below the last row */
+.quotes-table {
+  width: 100%;
+  padding-bottom: 100px; /* Extra space below table */
+}
+
+/* ✅ Space at the bottom of the last row */
+.quotes-table tbody tr:last-child {
+  margin-bottom: 100px; /* Space below last row */
+}
+
+/* ✅ Extend Parent Container for more space */
+.manage-quotes-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  padding-bottom: 200px; /* Increased space */
+}
+
+/* ✅ Dropdown Positioning */
+.dropdown-menu {
+  position: absolute;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 8px 0;
+  width: 150px;
+  top: 40px;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+}
+
+/* ✅ Ensure Dropdown is Visible */
+.edit-dropdown-container {
+  position: relative; /* Ensures dropdown is positioned correctly */
+}
+
+.edit-button {
+  background-color: #3c4044;
+  color: white;
+  border: none;
+  width: 45px;
+  padding: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+/* ✅ Ensure Extra Space for Mobile */
+@media (max-width: 768px) {
+  .table-container {
+    padding-bottom: 250px; /* Ensure extra space for dropdown */
+  }
+
+  .quotes-table tbody tr:last-child {
+    margin-bottom: 120px; /* Extra space below last row */
+  }
+}
+
+@media (max-width: 480px) {
+  .table-container {
+    padding-bottom: 220px;
+  }
+
+  .quotes-table tbody tr:last-child {
+    margin-bottom: 100px;
+  }
+}
+
+
+/* ✅ Table Header */
+.table-header {
+  background-color: #f5f5f5;
+  text-align: left;
+}
+
+.table-cell {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px; /* ✅ Smaller text for better fit */
+}
+
+/* ✅ Clickable Rows */
+.table-row.clickable-row {
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.table-row.clickable-row:hover {
+  background-color: #f0f8ff;
+}
+
+/* ✅ Empty Table Message */
+.no-quotes {
+  text-align: center;
+  font-weight: bold;
+  color: #777;
+  padding: 20px;
+}
+
+/* ✅ Dropdown Menu & Actions */
+.actions-cell {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+/* ✅ Edit Button */
+.edit-button {
+  background-color: #3c4044;
+  color: white;
+  border: none;
+  width: 45px;
+  padding: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.edit-button:hover {
+  background-color: #0b68c6;
+  transform: scale(1.05);
+}
+
+.edit-button:active {
+  transform: scale(0.98);
+}
+
+
+.dropdown-menu button {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.dropdown-menu button:hover {
+  background: #f0f0f0;
+}
+
+/* ✅ Pagination Controls */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 15px;
+}
+
+.pagination-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.pagination-button:hover {
+  background-color: #0056b3;
+}
+
+.pagination-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-weight: bold;
+}
+
+/* ✅ Responsive Design - Mobile & Tablet */
+@media (max-width: 768px) {
+  .manage-quotes-container {
+    padding: 15px;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .header-title {
+    font-size: 1.4rem;
+  }
+
+  .start-quote-button {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .table-container {
+    padding-bottom: 300px;
+
+  }
+
+  .quotes-table {
+    font-size: 12px;
+    min-width: 100%;
+    padding-bottom: 300px;
+
+    
+  }
+
+  .dropdown-menu {
+    width: 140px;
+  }
+
+  .edit-button {
+    width: 40px;
+    font-size: 12px;
+  }
+
+  .pagination-controls {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}
+
+/* ✅ Extra Small Screens */
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.2rem;
+  }
+
+  .table-cell {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .dropdown-menu {
+    width: 120px;
+  }
+
+  .pagination-button {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+.notification-bell-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 20px 0 0;
+}
+
+.notification-bell {
+  background: none;
+  border: none;
+  font-size: 24px;
+  position: relative;
+  cursor: pointer;
+}
+
+.notification-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: 35px;
+  right: 0;
+  width: 250px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 999;
+}
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  transition: background-color 0.2s ease, font-weight 0.2s ease;
+  cursor: pointer;
+}
+
+.notification-item.unread {
+  background-color: #e6f0ff; /* Highlight unread */
+  font-weight: bold;
+}
+
+.notification-item.read {
+  background-color: #fff;
+  font-weight: normal;
+}
+
+/* Hover effect for all items */
+.notification-item:hover {
+  background-color: #d0e0ff;
+  transform: scale(1.01);
+  transition: all 0.15s ease-in-out;
+}
+.notification-item {
+  position: relative;
+  padding: 12px 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.notification-item:hover {
+  background-color: #f0f7ff;
+}
+
+.notification-item.read {
+  background-color: #f5f5f5;
+}
+.notification-item.unread {
+  background-color: #fffbea;
+  border-left: 4px solid #facc15;
+}
+.mark-all-read-container {
+  padding: 8px 12px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 8px;
+  text-align: right;
+
+}
+
+.mark-all-read {
+  background: transparent;
+  border: none;
+  color: #007bff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 10px;
+  display: inline-block;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  border-radius: 4px;
+}
+
+.mark-all-read:hover {
+  background-color: #e6f0ff;
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+
+
+
+.notification-close-btn {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.notification-close-btn:hover {
+  color: red;
+}
+

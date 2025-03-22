@@ -1,0 +1,67 @@
+.settings-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Keep Header Centered, Content Left-Aligned */
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+/* ✅ Admin Button */
+.register-user-button {
+  background-color: #5865f2;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.register-user-button:hover {
+  background-color: #4a7bde;
+  transform: scale(1.05);
+}
+
+/* ✅ User Information - Proper Left Alignment */
+.user-info {
+  text-align: left;
+  padding-left: 10px; /* Small left padding for better readability */
+}
+
+.user-info p {
+  font-size: 16px;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+/* ✅ Makes sure last item does not have a border */
+.user-info p:last-child {
+  border-bottom: none;
+}
+
+/* ✅ Responsive Design */
+@media (max-width: 600px) {
+  .settings-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .register-user-button {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,1166 @@
+/* ✅ Prevent horizontal scrolling on mobile */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  background-color: #f4f7fc; /* ✅ Light background to contrast sections */
+  margin-bottom: 100px;
+}
+
+.quote-details-container {
+  padding: 20px;
+  background-color: #f9f9f9; /* Light background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.customer-info-container {
+  background: #222f3e; /* ✅ Darker, high-contrast background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* ✅ Stronger shadow */
+  margin-bottom: 25px;
+  border-left: 6px solid #007bff; /* ✅ Bright accent */
+  color: #ffffff; /* ✅ White text for readability */
+}
+
+.customer-info-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px; /* ✅ Reduces spacing for better alignment */
+  margin-bottom: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.customer-info-grid div {
+  flex: 1;
+  min-width: 250px; /* ✅ Prevents elements from being too small */
+  padding: 8px 15px;
+  background: #ffffff; /* ✅ Card-like effect */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* ✅ Light shadow */
+  display: flex;
+  align-items: center;
+  gap: 8px; /* ✅ Spacing between label and value */
+}
+
+.customer-info-grid strong {
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.customer-info-grid div span {
+  color: #555;
+  font-size: 14px;
+}
+
+/* ✅ Mobile-Friendly Adjustments */
+@media (max-width: 768px) {
+  .customer-info-grid {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .customer-info-grid div {
+    width: 100%;
+    text-align: left;
+  }
+}
+
+
+
+
+/* ✅ Back Button Section */
+.back-button-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px 20px;
+  background: #e9ecef; /* ✅ Subtle background */
+  border-bottom: 2px solid #ccc;
+}
+
+.back-to-orders-btn {
+  background-color: #d5d2d2;
+  color: black;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.back-to-orders-btn:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+/* ✅ Quote Details Container */
+.quote-details-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  margin-bottom: 100px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* ✅ Section Headers */
+.info-header h2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+/* ✅ Mobile-Friendly Adjustments */
+@media (max-width: 768px) {
+  .back-button-container {
+    padding: 8px 15px;
+  }
+
+  .back-to-orders-btn {
+    font-size: 13px;
+    padding: 8px 14px;
+  }
+
+  .info-header h2 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .back-button-container {
+    padding: 5px 10px;
+  }
+
+  .back-to-orders-btn {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
+  .info-header h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* ✅ Standardize All Containers to 1050px Width */
+.back-button-container,
+.quote-details-container,
+.full-width-installation-questions,
+.table-container {
+  width: 100%;
+  max-width: 1000px; /* ✅ Consistently sets max-width */
+  margin: auto; /* ✅ Centers everything */
+  padding: 20px; /* ✅ Ensures consistent padding */
+}
+
+.installation-actions {
+  width: 1000px; /* ✅ Consistently sets max-width */
+  margin: auto; /* ✅ Centers everything */
+  padding: 20px; /* ✅ Ensures consistent padding */
+}
+
+/* ✅ Table Section */
+.table-container {
+  width: 100%;
+  max-width: 1000px;
+  overflow-x: auto;
+  margin-bottom: 25px;
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top:   10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Installation Section */
+.full-width-installation-questions {
+  width: 100%;
+  max-width: 1000px;
+  padding: 20px;
+  background-color: #fff8e1; /* ✅ Light yellow background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Ensure Installation Actions Fit Properly */
+.installation-actions {
+  width: 1000px; /* ✅ Consistently sets max-width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+/* ✅ Mobile-Friendly Adjustments */
+@media (max-width: 768px) {
+  .back-button-container,
+  .quote-details-container,
+  .full-width-installation-questions,
+  .table-container,
+  .installation-actions {
+    max-width: 90%; /* ✅ Ensures they scale properly */
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .back-button-container,
+  .quote-details-container,
+  .full-width-installation-questions,
+  .table-container,
+  .installation-actions {
+    max-width: 90%; /* ✅ Takes full screen width */
+    padding: 10px;
+  }
+}
+
+/* ✅ Ensure table fits within the container */
+.quote-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Ensures a stable table layout */
+}
+
+/* ✅ Style Headers */
+.quote-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Bottom line under headers */
+  border-right: 1px solid #ddd; /* Faint gray column lines */
+}
+
+/* ✅ Style Data Cells */
+.quote-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Adds row separation */
+  border-right: 1px solid #eee; /* Faint column separator */
+  text-align: left;
+}
+
+/* ✅ Remove Right Border for Last Column (Edit Button) */
+.quote-table th:last-child,
+.quote-table td:last-child {
+  border-right: none;
+}
+
+/* ✅ Hover Effect */
+.quote-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.quote-table th:first-child {
+
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+
+/* ✅ Style for the Line Column */
+.quote-table th:nth-child(1) {
+
+  width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ✅ Adjust Quantity & Price Column Width */
+.quote-table td:first-child,
+  .quote-table td:nth-child(1) {
+  width: 40px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.quote-table th:nth-child(2),
+.quote-table th:nth-child(3) {
+  width: 57px;
+  text-align: center;
+}
+
+/* Adjust column width for Window Location */
+  .quote-table td:nth-child(2),
+  .quote-table td:nth-child(3) {
+  width: 50px; /* Adjust width as needed */
+  max-width: 200px;
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis; /* Adds "..." if text is too long */
+  text-align: center;
+}
+
+/* Adjust column width for Window Location */
+.quote-table th:nth-child(4) {
+  width: 150px; /* Adjust width as needed */
+  max-width: 150px;
+  text-overflow: ellipsis; /* Adds "..." if text is too long */
+  text-align: left;
+}
+
+.quote-table td:nth-child(4) {
+  width: 150px; /* Adjust width as needed */
+  max-width: 150px;
+  font-size: 13px;
+  text-align: left;
+}
+
+/* ✅ Adjust Control Options columns 8 & 9 */
+.quote-table th:nth-child(5),
+.quote-table td:nth-child(5) {
+  width: 85px; /* Adjust width as needed */
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds "..." if text is too long */
+  text-align: left;
+}
+
+/* ✅ Adjust Width and Height */
+.quote-table th:nth-child(6),
+.quote-table th:nth-child(7) {
+  width: 45px;
+  text-align: center;
+}
+
+/* ✅ Adjust Width and Height */
+.quote-table td:nth-child(6),
+.quote-table td:nth-child(7) {
+  width: 45px;
+  font-size: 13px;
+  text-align: center;
+}
+
+
+
+.quote-table th:nth-child(8),
+.quote-table td:nth-child(9) {
+  width: 115px; /* Adjust width as needed */
+  max-width: 250px;
+  text-overflow: ellipsis; /* Adds "..." if text is too long */
+  text-align: left;
+}
+
+.quote-table th:nth-child(9),
+.quote-table td:nth-child(9) {
+  width: 135px; /* Adjust width as needed */
+  max-width: 250px;
+  text-overflow: ellipsis; /* Adds "..." if text is too long */
+  text-align: left;
+}
+
+.quote-table th:nth-child(10),
+.quote-table td:nth-child(10) {
+  width: 55px; /* Adjust width as needed */
+  text-overflow: ellipsis; /* Adds "..." if text is too long */
+  text-align: center;
+}
+
+/* ✅ Style Product Column Text */
+.sub-text {
+  font-size: 12px;
+  color: #555;
+  display: block;
+  margin-top: 2px;
+}
+/* ✅ Total Summary Wrapper - Matches Other Containers */
+.total-summary-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  background: white; /* ✅ Matches other sections */
+  border-radius: 10px; /* ✅ Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ✅ Soft shadow */
+  border-left: 5px solid #007bff; /* ✅ Blue accent for visual appeal */
+}
+
+/* ✅ Each Line: Uniform Spacing & Borders */
+.units-line,
+.suggested-retail-line,
+.install-price-line,
+.product-total-line,
+.shipping-cost-line,
+.taxes-line,
+.total-retail-line,
+.install-total-line {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd; /* ✅ Subtle divider */
+}
+
+
+
+/* ✅ Two-Column Layout (Desktop) */
+.two-column-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 20px;
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+}
+
+/* ✅ Summary Left Column */
+.summary-left-column,
+.summary-right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 20px;
+  background-color: white; /* ✅ Matches rest of the UI */
+  border-radius: 10px;
+  border-left: 5px solid #6c757d; /* ✅ Gray accent for distinction */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Right Column: Installation Actions */
+.installation-right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 250px;
+}
+
+/* ✅ Installation Actions Styling */
+.installation-actions {
+  width: 100%;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 20px;
+  background: #f8f9fa; /* ✅ Light background */
+  border-radius: 10px;
+  border-left: 5px solid #6c757d;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* ✅ Checkbox Button Styling */
+.install-button {
+  display: flex;
+  align-items: center; /* ✅ Vertically centers checkbox & text */
+  justify-content: flex-start; /* ✅ Aligns checkbox to the left */
+  background-color: #28a745; /* Green for Install */
+  color: white;
+  width: 180px; /* ✅ Ensures uniform button width */
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: -1px;
+  transition: background 0.3s ease-in-out;
+  gap: 10px; /* ✅ Space between checkbox and text */
+  cursor: pointer;
+}
+
+
+
+/* ✅ Hover Effects */
+.install-button:hover,
+.measure-request-btn:hover {
+  background-color: #218838;
+}
+
+/* ✅ Ensure Checkboxes Are Properly Aligned */
+.install-button input[type="checkbox"] {
+  transform: scale(1.3); /* ✅ Make the checkbox slightly bigger */
+  margin-left: -40px; /* ✅ Keep it aligned left */
+  cursor: pointer;
+  width: 90px;
+}
+
+/* ✅ Label Styling to Make Everything Clickable */
+.install-button label {
+  display: flex;
+  align-items: left;
+  font-size: 16px;
+  
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%; /* ✅ Ensures label fills the button */
+}
+
+/* ✅ Ensure the span text does not move */
+.install-button span {
+  flex-grow: 1; /* ✅ Makes the text take up the remaining space */
+  margin-left: -20px; /* ✅ Keep it aligned left */
+
+  text-align: left; /* ✅ Keeps text centered inside the button */
+}
+
+
+
+.add-more-items-btn {
+  background-color: #007BFF; /* Blue color for attention */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.save-quote-btn {
+  background-color: #007BFF; /* Blue color for attention */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.save-quote-btn:hover,
+.add-more-items-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.save-quote-btn:active {
+  background-color: #004080; /* Even darker when clicked */
+  transform: scale(0.98);
+}
+.editable-po-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 2vh;
+
+}
+
+.editable-po-input {
+  padding: 3px 10px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 150px;
+  margin-bottom: 3px;
+}
+
+/* 🗑️ Delete Button */
+.edit-btn {
+  background: #3945e3;
+  color: white;
+  margin-bottom: 5px;
+  border: none;
+  padding: 5px 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  width: 50px;
+}
+
+.edit-btn:hover {
+  background: #3945e3;
+}
+
+/* Generic styling for all disabled buttons */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Optional: Specific tweaks for your button classes */
+.submit-order-btn:disabled,
+.install-button:disabled,
+.measure-request-btn:disabled,
+.save-quote-btn:disabled,
+.add-more-items-btn:disabled {
+  background-color: #ccc;
+  color: #666;
+  border: 1px solid #999;
+}
+
+
+.edit-btn:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  border: none;
+}
+
+
+/* 🗑️ Delete Button */
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  width: 50px;
+}
+
+.delete-btn:hover{
+  background: #b02a37;
+}
+
+/* ✅ Add More Items
+   If you no longer need a separate container, you can remove or adjust it. */
+.add-more-items-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+  margin-top: -175px;
+}
+
+.distance-input-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.distance-cost-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Space between the cost box and tooltip icon */
+  position: relative;
+}
+
+.distance-cost-box {
+  background-color: #f4f4f4;
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.tooltip-box {
+  position: absolute;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  max-width: 300px;
+  white-space: nowrap;
+  z-index: 10;
+
+  /* Positioning */
+  top: 50%; /* Align vertically with the icon */
+  left: 100%; /* Place it directly to the right of the icon */
+  transform: translateY(-50%); /* Centers tooltip to the icon */
+  margin-left: 8px; /* Adds some space between icon and tooltip */
+}
+
+/* Ensure tooltip icon has relative positioning for absolute placement */
+.tooltip-icon {
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  color: #007bff;
+}
+
+
+
+
+
+/* ✅ Installation questions block */
+.installation-questions {
+  width: 100%;
+  width: 1000px; /* ✅ Consistently sets max-width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ✅ Primary Question - Ensures checkbox & text are inline */
+.primary-question {
+  display: flex;
+  align-items: center; /* ✅ Keeps checkbox and text aligned */
+  gap: 10px; /* ✅ Adds spacing between checkbox and text */
+  font-weight: bold;
+  font-size: 14px;
+  width: 100%;
+  white-space: nowrap; /* ✅ Prevents text from wrapping */
+}
+
+/* ✅ Style the checkboxes */
+.primary-question input[type="checkbox"] {
+  width: 18px; /* ✅ Slightly larger for touch devices */
+  height: 18px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer; /* ✅ Ensures easier interaction */
+}
+
+/* ✅ Ensures number inputs are aligned properly */
+.secondary-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 8px 0; /* ✅ Adjusted margin for spacing */
+  gap: 10px; /* ✅ Consistent spacing */
+}
+
+/* ✅ Style for number input */
+.secondary-question input {
+  width: 60px;
+  padding: 6px;
+  font-size: 11px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* ✅ Responsive Mobile Adjustments */
+@media (max-width: 768px) {
+  .primary-question {
+    font-size: 13px;
+    gap: 8px; /* ✅ Adjusts spacing for smaller screens */
+    white-space: normal; /* ✅ Allows text to wrap properly */
+  }
+
+  .secondary-question {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .secondary-question input {
+    width: 50px;
+    font-size: 11px;
+    padding: 5px;
+  }
+}
+
+/* ✅ Extra Small Screens */
+@media (max-width: 480px) {
+  .primary-question {
+    flex-wrap: wrap; /* ✅ Allows text to wrap if needed */
+    font-size: 12px;
+    gap: 6px;
+  }
+
+  .secondary-question {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px; /* ✅ Slightly reduce indent for mobile */
+  }
+
+  .secondary-question input {
+    width: 100%;
+    max-width: 80px;
+  }
+}
+
+
+
+/* ✅ Distance Question */
+.distance-question {
+  display: block;
+  align-items: center;
+  gap: 8px; /* ✅ Keeps spacing minimal */
+  margin-bottom: 10px;
+}
+
+/* ✅ Mobile-Friendly Adjustments */
+@media (max-width: 768px) {
+  .full-width-installation-questions {
+    max-width: 95%; /* ✅ Uses more screen space while keeping margins */
+    padding: 1rem;
+  }
+
+  .installation-questions {
+    max-width: 100%;
+  }
+
+  .primary-question {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px; /* ✅ Ensures proper spacing */
+  }
+
+  .primary-question input[type="checkbox"] {
+    width: 20px;
+    height: 20px; /* ✅ Larger touch-friendly checkboxes */
+  }
+
+  .secondary-question {
+    flex-wrap: wrap; /* ✅ Allows wrapping if needed */
+    gap: 5px;
+  }
+
+  .secondary-question input {
+    width: 50px;
+    font-size: 11px;
+    padding: 5px;
+  }
+}
+
+/* ✅ Extra Small Screens */
+@media (max-width: 450px) {
+  .full-width-installation-questions {
+    padding: 0.8rem;
+  }
+
+  .primary-question {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .secondary-question {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px; /* ✅ Slightly reduce indent for mobile */
+  }
+
+  .secondary-question input {
+    width: 100%;
+    max-width: 80px;
+  }
+}
+
+/* ✅ Two-Column Layout (Desktop) */
+.two-column-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 10px 20px;
+  margin-top: 20px;
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+}
+
+/* ✅ Styling for the Gross Profit Margin Dropdown */
+.gross-profit-margin-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa; /* ✅ Light gray background */
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.gross-profit-margin-container label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.gross-profit-margin-container select {
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.gross-profit-margin-container select:hover {
+  border-color: #007bff;
+}
+
+/* ✅ Ensure Gross Profit Dropdown is Responsive */
+@media (max-width: 768px) {
+  .gross-profit-margin-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gross-profit-margin-container select {
+    width: 100%;
+    margin-top: 5px;
+  }
+}
+
+/* ✅ Updated "Suggested Customer Retail" Container */
+.summary-right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Styling for Pricing Breakdown */
+.product-retail-line,
+.total-retail-line,
+.shipping-cost-line,
+.install-price-line {
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+/* ✅ Grand Total: Highlighted */
+.total-retail-line {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: left;
+  color: #007bff; /* ✅ Matches the blue theme */
+}
+
+/* ✅ Responsive Layout Adjustments */
+@media (max-width: 768px) {
+  .summary-right-column {
+    width: 100%;
+  }
+}
+
+/* ✅ Ensure consistent styling for the pricing container */
+.units-line,
+.suggested-retail-line,
+.product-total-line,
+.product-retail-line,
+.shipping-cost-line,
+.install-price-line {
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* ✅ Update "two-column-wrapper" for better spacing */
+.two-column-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 20px;
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+}
+
+/* ✅ Mobile Adjustments */
+@media (max-width: 768px) {
+  .two-column-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .summary-left-column,
+  .summary-right-column {
+    width: 100%;
+  }
+}
+
+
+/* ✅ Pricing lines styling */
+.units-line,
+.suggested-retail-line,
+.product-total-line,
+.shipping-cost-line,
+.taxes-line,
+.install-price-line {
+  font-size: 13px;
+  font-weight: bold;
+  padding: 2px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* ✅ Grand Total: Highlighted */
+.install-total-line,
+.total-retail-line {
+  font-size: 18px;
+  text-align: left;
+}
+
+/* ✅ Right Column: Buttons & Checkboxes */
+.installation-right-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 230px;
+  margin-right: 30px;
+}
+
+/* ✅ Installation Actions Wrapper */
+.installation-actions {
+  width: 100%;
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* ✅ Buttons & Checkboxes */
+.install-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #28a745;
+  color: white;
+  width: 100%;
+  max-width: 200px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  gap: 10px;
+}
+
+.measure-request-btn {
+
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  background-color: #28a745;
+  color: white;
+  width: 100%;
+  max-width: 230px;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  gap: 10px;
+}
+
+.install-button:hover,
+.measure-request-btn:hover {
+  background-color: #218838;
+}
+
+/* ✅ Buttons for Adding Items & Saving Quote */
+.add-more-items-btn,
+.save-quote-btn,
+.submit-order-btn {
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.add-more-items-btn:hover,
+.save-quote-btn:hover,
+.submit-order-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.save-quote-btn:active {
+  background-color: #004080;
+  transform: scale(0.98);
+}
+
+/* ✅ Responsive: Mobile View */
+@media (max-width: 768px) {
+  .two-column-wrapper {
+    flex-direction: column; /* ✅ Stacks columns on top of each other */
+    align-items: center;
+    gap: 15px;
+  }
+
+  .summary-left-column {
+    width: 100%;
+    text-align: left; /* ✅ Center text on mobile */
+  }
+
+  .installation-right-column {
+    align-items: center;
+    max-width: 100%;
+  }
+
+  .installation-actions {
+    width: 100%;
+    max-width: 400px; /* ✅ Make buttons larger for better touch */
+  }
+
+  .install-button,
+  .measure-request-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .add-more-items-btn,
+  .save-quote-btn {
+    width: 100%;
+    max-width: 220px;
+  }
+}
+
+/* ✅ Extra Small Screens */
+@media (max-width: 480px) {
+  .two-column-wrapper {
+    padding: 10px;
+  }
+
+  .summary-left-column {
+    padding: 10px;
+  }
+
+  .installation-actions {
+    max-width: 100%;
+  }
+
+  .install-button,
+  .measure-request-btn {
+    max-width: 200px;
+  }
+
+  .add-more-items-btn,
+  .save-quote-btn {
+    max-width: 220px;
+  }
+}
