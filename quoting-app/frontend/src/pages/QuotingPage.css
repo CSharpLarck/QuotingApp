@@ -1,0 +1,725 @@
+/* ✅ Main container for product configuration */
+.product-config-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    max-width: 1600px;
+    margin: 20px auto;
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+    min-height: 100vh;
+    padding-bottom: 100px;
+}
+
+.customer-info-container {
+  width: 100%;
+  max-width: 300px; /* Set a max width to keep the form compact */
+  margin: 0 auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+
+  border: 2px solid #ccc;
+}
+
+.customer-info-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.customer-info-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 10px;
+  display: block;
+}
+
+.customer-info-input {
+  width: 93%;
+  padding: 10px;
+  margin-bottom: -2px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+
+
+
+/* ✅ Ensures scrolling past the product configuration */
+body {
+    min-height: 140vh; /* Extends the overall page height for scrolling */
+}
+
+/* ✅ Two-column layout */
+.form-columns {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+    width: 100%;
+
+}
+
+/* ✅ Standard Width & Height Container */
+.standard-dimension-container,
+.quickship-dimension-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    width: 100%;
+    max-width: 240px;
+}
+
+
+
+/* ✅ Space between label and input */
+.standard-dimension-container label,
+.quickship-dimension-container label {
+    margin-bottom: -5px;  /* Controls space between label and input */
+    margin-top: 10px;
+}
+
+
+/* ✅ Error Message (Now Below Input) */
+.error-text {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 3px; /* Ensures spacing below input */
+  display: block;
+}
+
+
+/* ✅ Standard Width & Height Input */
+.dimension-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 12px;
+    max-width: 560px;
+}
+
+/* ✅ Fraction Dropdown */
+.dimension-fraction {
+    flex: 1;
+    width: 40px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: -18px;
+    margin-right: 50px;
+}
+
+/* ✅ Quick Ship Dropdown Styling (Unchanged) */
+.quickship-dimension-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    max-width: 160px; /* Keeps dropdowns more compact */
+    margin-bottom: 10px;
+}
+
+
+.quickship-dimension-container select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #b8b9ba;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fffefe;
+    cursor: pointer;
+}
+
+
+
+/* ✅ Quick Ship Error Messages (Width & Height) */
+.quickship-error {
+    color: red; /* Standard error color */
+    font-size: 12px; /* Smaller font for compact display */
+    font-weight: bold;
+    margin-top: 3px; /* Space between dropdown and error message */
+    margin-left: 2px; /* Align error slightly to the left */
+    display: block; /* Ensures it appears below the dropdown */
+    width: 100%; /* Keeps error aligned with input */
+}
+
+/* ✅ Wrapper for error messages (Ensures it's separate from input) */
+.error-wrapper {
+  width: 100%; /* Ensures it aligns with the input width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align text to the left */
+  margin-top: 3px; /* Adds space below input */
+}
+
+/* ✅ Error text for Width & Height */
+.width-error,
+.height-error {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 2px; /* Ensures space between input & error */
+  margin-left: 2px; /* Aligns with input */
+}
+
+
+
+
+/* Ensure form fields take up full width */
+.form-label,
+.form-select {
+  display: block;  /* Ensures input fields are block elements */
+  width: 100%;  /* Makes sure they don’t shrink */
+  margin-top: 5px;
+}
+
+/* ✅ Left: Product Column */
+.product-column {
+    flex: 2;
+    padding-left: 50px;
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.05);
+    min-height: 100vh; /* Ensures full height */
+}
+
+.tooltip {
+    background-color: rgba(86, 82, 82, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    position: absolute;
+    z-index: 999;
+    max-width: 400px; /* ✅ Ensures text wraps */
+    word-wrap: break-word; /* ✅ Breaks long words */
+    white-space: normal; /* ✅ Allows text to wrap */
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .dropdown-with-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .info-button {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(111, 111, 255);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 25%;
+    cursor: pointer;
+    margin-left: 5px;
+    line-height: 20px;
+  }
+/* ✅ Wrapper for error messages (Ensures it's separate from input) */
+.error-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 3px; /* Ensures space between input & error */
+}
+
+/* ✅ Error text for Width & Height */
+.width-error,
+.height-error {
+  color: red;
+  font-size: 12px;
+  width: 500px;
+  font-weight: bold;
+  margin-top: 2px;
+  margin-left: 2px; /* Align with input */
+}
+
+/* ✅ Input + Fraction Wrapper (Ensures inline layout) */
+.dimension-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 300px;
+ 
+}
+
+/* ✅ Input Styling */
+.width-input,
+.height-input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 1px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* ✅ Fraction Dropdown */
+.dimension-fraction {
+  width: 50px;
+    padding: 5px;
+    margin-bottom: -10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+  
+  .error-border {
+    border: 1px solid red;
+  }
+
+  
+  .submit-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out, transform 0.1s ease-in-out;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+
+ /* ✅ Lighten Effect when Clicked */
+.add-to-quote-btn:active {
+  background: #0056b3; /* Darker Blue */
+  transform: scale(0.97); /* Slight press-down effect */
+}
+  
+
+/* ✅ Right: Price Column (Larger) */
+.price-column {
+    flex: 2.7;  /* Increased from 2.2 */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    min-width: 420px; /* Slightly increased */
+    max-width: 750px; /* More room for pricing */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Ensures proper stacking of elements */
+.right-column-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+/* ✅ Total Price Styling */
+.total-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #007b00;
+    background: #fff;
+    padding: 12px;
+    border-radius: 6px;
+    border: 2px solid #007b00;
+    width: 94%;
+}
+
+/* ✅ Quantity input fix */
+.quantity-container {
+    width: 10%;
+}
+
+/* ✅ Input Fields Styling */
+.form-input {
+    width: 100%;
+    display: block;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 220px; /* Ensures consistency with dropdowns */
+}
+
+
+.window-opening-width-container {
+    display: flex;
+    flex-direction: column; /* Ensures label and input stay aligned */
+    gap: 4px; /* Adjusts spacing between label and input */
+    margin-bottom: 1px; /* Adds space below for better layout */
+  }
+  
+  .window-opening-width-container label {
+    font-size: 16px; /* Makes label smaller for a cleaner look */
+    font-weight: 600; /* Ensures readability */
+    margin-top: 1px;
+  }
+  
+  .window-opening-width-container input {
+    padding: 6px 10px; /* Adds spacing inside the input */
+    font-size: 14px; /* Adjusts input text size */
+    width: 100%; /* Makes input box responsive */
+    max-width: 260px; /* Prevents it from stretching too wide */
+    border: 1px solid #ccc; /* Adds a subtle border */
+    border-radius: 4px; /* Rounds corners slightly */
+    margin-top: 2px;
+    margin-bottom: 0px;
+  }
+
+  /* ✅ Liner Options Container */
+.liner-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Consistent spacing between label, dropdown, and error message */
+  margin-bottom: 15px;
+}
+
+/* ✅ Liner Label Styling */
+.liner-label {
+  font-size: 18x;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+  margin-bottom: -5px;
+}
+
+.window-location-container {
+    display: flex;
+    flex-direction: column; /* Stack label and input closely */
+    gap: 4px; /* Adjust the spacing between label and input */
+  }
+  
+  /* ✅ Customize the Window Location Error */
+.window-location-error {
+    color: red;
+    margin-top: -20px;
+    margin-left: 5px;
+    margin-top: -5px;
+    font-size: 10pt;
+    display: block;
+  }
+  
+
+  .window-location-container label {
+    font-size: 16px; /* Adjust font size if needed */
+    font-weight: 600; /* Make the label slightly bold */
+    margin-top: 12px;
+    margin-bottom: 1px;
+  }
+  
+  .window-location-container input {
+    padding: 6px; /* Adjust padding for a cleaner look */
+    font-size: 14px;
+    margin-top: 1px;
+    margin-bottom: 7px;
+    width: 100%; /* Ensure input takes full width */
+    border: 1px solid #ccc; /* Add a subtle border */
+    border-radius: 4px;
+  }
+  
+
+/* ✅ Ensure Mounting Position does not get pushed up too close */
+.mounting-position-container {
+    margin-top: 10px;  /* Ensures adequate spacing */
+}
+
+/* ✅ Ensure Mounting Position does not get pushed up too close */
+.mounting-position-container label {
+  margin-bottom: 0px;  /* Ensures adequate spacing */
+}
+
+/* ✅ Adjust form field layout: Labels on top, inputs below */
+.form-label {
+    display: flex;
+    flex-direction: column; /* Ensures vertical stacking */
+    font-weight: bold;
+    margin-bottom: 1px; /* Space between label and input */
+}
+
+/* ✅ Input Fields & Dropdowns */
+.form-input, 
+.form-select {
+    width: 100%;
+    max-width: 250px; /* Compact but readable */
+    padding: 6px;
+    margin-bottom: 1px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: #fff;
+    font-size: 14px;
+}
+
+/* ✅ Ensure dropdown/input sections align properly */
+.dropdown-container, 
+.control-options-container, 
+.hardware-options-container, 
+.additional-options-container, 
+.motorization-options, 
+.handle-options-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 240px; /* Ensures uniform width */
+    margin-bottom: 10px; /* Space between form sections */
+}
+
+/* 🏆 Ensure "Additional Options" Always Appears Last */
+.additional-options {
+    order: 99;
+    margin-top: 5px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+}
+
+/* ✅ Ensures consistency with checkboxes */
+.checkbox-group .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+/* ✅ Space out the dropdowns */
+.dropdown-container {
+    margin-bottom: 15px;
+}
+
+/* ✅ Fixes spacing for "Decorative Tape" */
+.decorative-tape-selection {
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+/* ✅ Styles for No Additional Charge Message */
+.no-extra-charge-message {
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 10px;
+    background: #f9f9f9;
+    text-align: left;
+    max-width: 90%;
+}
+
+/* ✅ Styles for Accessories Pricing Info Message */
+.accessory-info-message {
+    font-size: 14px;
+    font-style: italic;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    margin-top: 10px;
+    background: #f9f9f9;
+    text-align: left;
+    max-width: 90%;
+}
+
+.option-price-item {
+    display: flex;
+    justify-content: space-between; /* Align name on left, price on right */
+    align-items: center; /* Center items vertically */
+    padding: 6px 10px; /* Add spacing inside each option */
+    border-bottom: 1px solid #ddd; /* Add a subtle divider between options */
+    font-size: 14px; /* Adjust text size */
+    font-weight: 500; /* Improve readability */
+  }
+  
+  .option-price-item:last-child {
+    border-bottom: none; /* Remove border for last item */
+  }
+  
+  .option-name {
+    flex: 1; /* Allows option name to take up space */
+    text-align: left; /* Aligns name to the left */
+    font-weight: 600; /* Makes option name bolder */
+    color: #333; /* Darken text for better contrast */
+  }
+  
+  .option-price {
+    min-width: 60px; /* Ensures consistent price alignment */
+    text-align: right; /* Aligns price to the right */
+    font-weight: 700; /* Makes price stand out */
+    color: #616161; /* Highlights price in blue */
+    margin-right: 25px;
+  }
+  
+
+/* 🎯 Motorization Options Styling */
+.motorization-options {
+    margin-top: 10px;
+    padding-top: 0px;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+  }
+  
+  .motorization-options h4 {
+    margin-bottom: 15px;
+    font-size: .95rem;
+    font-weight: 550;
+  }
+  
+  /* Grid layout for better organization */
+  .motorization-options-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  /* Checkbox container */
+  .motorization-checkbox {
+   font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #ddd;
+  }
+  
+  /* Custom Checkbox Styling */
+  .motorization-checkbox input[type="checkbox"] {
+    display: none;
+  }
+  
+  .motorization-checkbox .custom-checkbox {
+    width: 12px;
+    height: 12px;
+    border: 2px solid #000000;
+    border-radius: 4px;
+    display: inline-block;
+    position: relative;
+  }
+  
+  .motorization-checkbox input[type="checkbox"]:checked + .custom-checkbox {
+    background-color: #ffffff;
+    border-color: #000811;
+  }
+  
+  .motorization-checkbox input[type="checkbox"]:checked + .custom-checkbox::after {
+    content: "✔";
+    color: rgb(0, 0, 0);
+    font-size: 10px;
+    font-weight: bold;
+    position: absolute;
+    left: 3px;
+    top: -2px;
+  }
+  
+
+/* ✅ Responsive Fixes */
+@media (max-width: 1024px) {
+    .form-columns {
+        flex-direction: column;
+    }
+
+    .product-column, 
+    .price-column {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-config-container {
+        flex-direction: column;
+    }
+
+    .price-column {
+        width: 100%;
+    }
+}
+
+/* ✅ Center align the buttons */
+.quote-actions {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 15px; /* Adds spacing between buttons */
+  margin-top: 20px;
+}
+
+/* ✅ Style for the "Add Item to Quote" button */
+.add-to-quote-btn {
+  background-color: #007bff; /* Blue color */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-to-quote-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* ✅ Style for the "Go to Quote" button */
+.go-to-quote-btn {
+  background-color: #28a745; /* Green color */
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  width: 200px;
+
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.go-to-quote-btn:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+/* ✅ Make buttons responsive */
+@media (max-width: 600px) {
+  .quote-actions {
+    flex-direction: column; /* Stack buttons on smaller screens */
+  }
+
+  .add-to-quote-btn,
+  .go-to-quote-btn {
+    width: 100%; /* Make buttons full width */
+    text-align: center;
+  }
+}
+
+.accessory-info-message1 {
+  color: rgba(255, 0, 0, 0.604); /* Makes text red */
+  font-weight: bold; /* Makes text bold */
+  font-size: 14px; /* Adjusts text size */
+  margin-top: 5px; /* Adds some spacing */
+  display: block; /* Ensures proper layout */
+}
+

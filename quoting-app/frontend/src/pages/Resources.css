@@ -1,0 +1,93 @@
+.resources-container {
+  max-width: 1000px; /* Match the width of Manage Quotes Orders */
+  margin: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Centered Page Title */
+.resources {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+/* ✅ Make All Buttons in One Row */
+.resources-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  margin-bottom: 50px;
+}
+
+/* ✅ Standard Button Styling */
+.resources-button {
+  padding: 8px 15px;
+  background-color: #4CAF50; /* Green background */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  width: 220px; /* Smaller width */
+  text-align: center;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.resources-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* ✅ Product Resources Grid */
+.product-resources {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive Grid */
+  gap: 20px;
+}
+
+/* ✅ Individual Product Item Styling */
+.product-item {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+}
+
+.product-item h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.product-item ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-item ul li {
+  margin-bottom: 5px;
+}
+
+.product-item a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.product-item a:hover {
+  text-decoration: underline;
+}
+
+/* ✅ Mobile Responsive */
+@media (max-width: 768px) {
+  .resources-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  .product-resources {
+    grid-template-columns: 1fr; /* Stack items on smaller screens */
+  }
+}

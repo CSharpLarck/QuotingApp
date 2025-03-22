@@ -1,0 +1,27 @@
+/* Sidebar.css */
+.sidebar {
+    background-color: #f4f4f4;
+    height: 100vh; /* Sidebar should take full height */
+    padding: 20px;
+  }
+  
+  .sidebar-item {
+    margin-bottom: 20px;
+  }
+  
+  .sidebar-item button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    text-align: left;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .sidebar-item button:hover {
+    background-color: #0056b3;
+  }
+  

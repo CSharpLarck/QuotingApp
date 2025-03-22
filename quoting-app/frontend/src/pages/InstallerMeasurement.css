@@ -1,0 +1,247 @@
+
+
+  /* ✅ General container adjustments for better mobile experience */
+.installer-measurement-container {
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 25px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 40px;
+  }
+
+  /* ✅ Back to Dashboard Button */
+.back-to-dashboard-button {
+    top: 20px;
+    left: 20px;
+    background-color: #d5d2d2;
+    color: black;
+    padding: 8px 15px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .back-to-dashboard-button:hover {
+    background-color: #007bff;
+  }
+  
+
+
+  /* ✅ Customer Selection Dropdown Styling */
+  .customer-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 10px;
+  }
+
+  .customer-selection label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+  }
+
+  .customer-dropdown {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 100%;
+    max-width: 320px;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  .customer-dropdown:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+   /* ✅ Mobile-friendly form layout */
+   .measurement-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+  }
+  
+  /* ✅ Inputs optimized for touch and smaller width */
+  .measurement-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 90%;
+    max-width: 320px;
+    margin: auto;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* ✅ Measurement group for width and height with fraction dropdown */
+  .measurement-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .measurement-group .measurement-input {
+    flex: 1;
+  }
+
+  .measurement-group .measurement-select {
+    flex: 0.5;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+  }
+
+  .measurement-group .measurement-select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* ✅ Error message styling */
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -5px;
+    text-align: center;
+  }
+  
+  /* ✅ Increase button size for easy tapping */
+  .measurement-buttons {
+    display: flex;
+    flex-direction: column; /* Stack buttons on smaller screens */
+    align-items: center;
+    gap: 8px;
+    padding: 0 10px;
+  }
+  
+  .next-measurement-button,
+  .submit-button {
+    width: 90%;
+    max-width: 320px; /* Limits width for a better fit */
+    padding: 10px;
+    font-size: 16px; /* Slightly smaller for better mobile spacing */
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .next-measurement-button:hover,
+  .submit-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* ✅ Disable button when invalid */
+  .next-measurement-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+ /* ✅ General table styling */
+.measure-sheet {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .header-title {
+    text-align: center;
+  }
+  
+  /* ✅ Header styling */
+  .measure-sheet thead {
+    background: #555555;
+    color: white;
+  }
+  
+  .measure-sheet th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  /* ✅ Row styling */
+  .measure-sheet td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* ✅ Alternate row background for readability */
+  .measure-sheet tbody tr:nth-child(even) {
+    background: #f8f9fa;
+  }
+  
+  /* ✅ Hover effect */
+  .measure-sheet tbody tr:hover {
+    background: #eef4ff;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  /* ✅ Notes row styling */
+  .notes-row {
+    background: #f1f1f1;
+    font-style: italic;
+    font-weight: 500;
+    text-align: left;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* ✅ Delete button styling */
+  .delete-button {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .delete-button:hover {
+    transform: scale(1.2);
+  }
+  
+  /* ✅ Responsive Table */
+  @media (max-width: 768px) {
+    .measure-sheet {
+      font-size: 12px;
+    }
+  
+    .measure-sheet th,
+    .measure-sheet td {
+      padding: 8px;
+    }
+  
+    .notes-row {
+      padding: 8px;
+      font-size: 12px;
+    }
+  }
