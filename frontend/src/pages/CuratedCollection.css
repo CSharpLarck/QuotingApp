@@ -1,0 +1,162 @@
+/* ======================================= */
+/* ✅ Curated Collection - Main Container */
+/* ======================================= */
+.curated-collection-container {
+  padding: 50px;
+  text-align: center;
+  margin: auto;
+}
+
+/* ✅ Gallery Grid - Matches Brochure Styling */
+.curated-collection-container .fabric-gallery {
+  display: grid;
+  margin-left: -50px;
+  margin-right: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 20px;
+  justify-content: center; /* ✅ Ensures grid items are centered */
+}
+
+
+/* ✅ Individual Fabric Item */
+.curated-collection-container .fabric-gallery figure {
+  width: 100%;
+  height: auto;
+  transition: transform 0.2s ease;
+}
+
+/* ✅ Fabric Images */
+.curated-collection-container .fabric-gallery img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* ✅ Image Hover Effect */
+.curated-collection-container .fabric-gallery img:hover {
+  transform: scale(1.15); /* ✅ Subtle zoom effect */
+}
+
+/* ✅ Fabric Captions */
+.curated-collection-container .fabric-gallery figcaption {
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* ======================================= */
+/* ✅ Modal Overlay - Fullscreen Effect */
+/* ======================================= */
+.curated-collection-container .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  margin-left: -20px;
+}
+
+/* ✅ Modal Content */
+.curated-collection-container .modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+/* ✅ Modal Image */
+.curated-collection-container .modal-image {
+  max-width: 87vw; /* ✅ Responsive Modal Size */
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 8px;
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+
+/* ======================================= */
+/* ✅ Navigation Arrows (Previous & Next) */
+/* ======================================= */
+.curated-collection-container .arrow-container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: -85px;
+  width: 100%;
+}
+
+/* ✅ Arrow Button Styles */
+.curated-collection-container .arrow-button {
+  background-color: #3a6aa1;
+  color: white;
+  border: none;
+  width: 300px;
+  height: 60px;
+  font-size: 32px;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin: 0 10px;
+  margin-bottom: 23px;
+}
+
+/* ✅ Arrow Button Hover Effects */
+.curated-collection-container .arrow-button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* ======================================= */
+/* ✅ Responsive Adjustments */
+/* ======================================= */
+
+/* ✅ Medium Screens (Tablets) */
+/* ✅ Medium Screens (Tablets) */
+@media (max-width: 1024px) {
+  .curated-collection-container {
+    padding: 15px;
+    max-width: 90%; /* ✅ Ensures center alignment on smaller screens */
+  }
+  .curated-collection-container .fabric-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    justify-content: center; /* ✅ Ensures alignment */
+  }
+}
+
+/* ✅ Small Screens (Phones) */
+@media (max-width: 768px) {
+  .curated-collection-container {
+    padding: 10px;
+    max-width: 95%; /* ✅ Adjusted for better centering */
+  }
+  .curated-collection-container .fabric-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    justify-content: center; /* ✅ Center items */
+  }
+}

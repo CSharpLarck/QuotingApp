@@ -1,0 +1,243 @@
+.quote-details-container {
+    max-width: 1050px;
+    margin: auto;
+    margin-bottom: 100px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .customer-info {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .customer-info h2 {
+    margin-bottom: 10px;
+  }
+  
+  .customer-info p {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+
+  }
+
+/* ✅ Ensure table fits within the container */
+.quote-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* ✅ Ensures a stable table layout */
+}
+  
+  /* ✅ Style Headers */
+  .quote-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* ✅ Bottom line under headers */
+    border-right: 1px solid #ddd; /* ✅ Faint gray column lines */
+  }
+  
+  /* ✅ Style Data Cells */
+  .quote-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* ✅ Adds row separation */
+    border-right: 1px solid #eee; /* ✅ Faint column separator */
+    text-align: left;
+  }
+  
+  /* ✅ Remove Right Border for Last Column (Edit Button) */
+  .quote-table th:last-child,
+  .quote-table td:last-child {
+    border-right: none;
+  }
+  
+  /* ✅ Hover Effect */
+  .quote-table tr:hover {
+    background-color: #f9f9f9;
+  }
+  
+  /* ✅ Style for the Line Column */
+  .quote-table th:first-child,
+  .quote-table td:first-child {
+    width: 30px;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* ✅ Adjust Quantity & Price Column Width */
+  .quote-table th:nth-child(2),
+  .quote-table td:nth-child(2) {
+    width: 55px;
+    text-align: center;
+  }
+  
+  .quote-table th:nth-child(3),
+  .quote-table td:nth-child(3) {
+    width: 50px;
+    text-align: center;
+  }
+
+    /* Adjust column width for Window Location */
+.quote-table th:nth-child(4),
+.quote-table td:nth-child(4) {
+  width: 180px;  /* Adjust width as needed */
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;  /* Adds "..." if text is too long */
+  text-align: left;
+}
+
+  /* Adjust column width for Window Location */
+.quote-table th:nth-child(5) {
+  width: 70px;  /* Adjust width as needed */
+  max-width: 100px;
+  text-overflow: ellipsis;  /* Adds "..." if text is too long */
+  text-align: center;
+}
+
+
+.quote-table td:nth-child(5) {
+  width: 70px;  /* Adjust width as needed */
+  max-width: 100px;
+  font-size: 12px;
+  text-align: left;
+}
+
+
+  /* ✅ Adjust Width and Height */
+  .quote-table th:nth-child(6),
+  .quote-table td:nth-child(6),
+  .quote-table th:nth-child(7),
+  .quote-table td:nth-child(7) {
+    width: 45px;
+    text-align: center;
+  }
+
+    /* ✅ Adjust Control Options */
+  .quote-table th:nth-child(8),
+  .quote-table td:nth-child(8) {
+  width: 150px;  /* Adjust width as needed */
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;  /* Adds "..." if text is too long */
+  text-align: left;
+}
+
+    /* ✅ Adjust Control Options */
+    .quote-table th:nth-child(9),
+    .quote-table td:nth-child(9) {
+    width: 135px;  /* Adjust width as needed */
+    max-width: 250px;
+  
+    text-overflow: ellipsis;  /* Adds "..." if text is too long */
+    text-align: left;
+  }
+  
+  /* ✅ Style Product Column Text */
+.sub-text {
+    font-size: 12px;
+    color: #555;
+    display: block;
+    margin-top: 2px;
+  }
+  
+  
+  .total-summary-wrapper {
+    display: flex;
+    justify-content: flex-start; /* Aligns content to the left */
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 100px;
+  }
+  
+  .total-summary-left h3 {
+    text-align: left;
+    
+  }
+  
+  .total-summary-left h3 strong {
+    font-weight: bold; /* ✅ Ensures only "Total Price" is bold */
+    
+  }
+  
+  .total-units {
+    font-weight: normal; /* ✅ Keeps "Total Units" regular */
+  }
+  
+  /* ✅ Back to Quotes & Orders Button Styling */
+.back-to-orders-btn {
+    top: 20px;
+    left: 20px;
+    background-color: #d5d2d2;
+    color: black;
+    padding: 8px 15px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .back-to-orders-btn:hover {
+    background-color: #007bff;
+  }
+
+  
+  /* 🗑️ Delete Button */
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #b02a37;
+}
+
+  /* ✅ Add More Items Button */
+.add-more-items-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 80px;
+  margin-top: -175px;
+}
+
+.add-more-items-btn {
+  background-color: #28a745; /* ✅ Green color */
+  color: white;
+  border: none;
+  width: 200px;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.add-more-items-btn:hover {
+  background-color: #218838;
+}
+
+  
+  
+  
+  

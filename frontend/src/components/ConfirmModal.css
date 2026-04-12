@@ -1,0 +1,112 @@
+/* ✅ Overlay */
+.confirm-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  
+  /* ✅ Modal Container */
+  .confirm-modal-container {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  /* ✅ Title */
+  .confirm-modal-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin-bottom: 1rem;
+  }
+  
+  /* ✅ Message */
+  .confirm-modal-message {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 2rem;
+  }
+  
+  /* ✅ Button Container */
+  .confirm-modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  /* ✅ Button Base Style */
+  .confirm-btn {
+    font-weight: 600;
+    padding: 0.6rem 1.25rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    min-width: 120px;
+    font-size: 0.95rem;
+  }
+  
+  /* ❌ Cancel Button */
+  .cancel-btn {
+    background-color: #f0e2e2;
+    color: #1a202c;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #cbd5e0;
+  }
+  
+  /* ✅ Submit Button */
+  .submit-btn {
+    background-color: #16a34a;
+    color: #ffffff;
+  }
+  
+  .submit-btn:hover {
+    background-color: #15803d;
+  }
+  
+  /* ✅ Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* ✅ Responsive Adjustments */
+  @media (max-width: 480px) {
+    .confirm-modal-title {
+      font-size: 1.25rem;
+    }
+  
+    .confirm-modal-message {
+      font-size: 0.95rem;
+    }
+  
+    .confirm-btn {
+      min-width: 100%;
+      padding: 0.75rem;
+    }
+  
+    .confirm-modal-buttons {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+  

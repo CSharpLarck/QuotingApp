@@ -1,0 +1,137 @@
+/* Curated Collection Container */
+.curated-collection-container {
+    padding: 20px;
+    width: 1200px;
+    text-align: center;
+    margin: 0 auto;
+
+  }
+  
+  /* Fabric Gallery Grid */
+  .curated-collection-container .fabric-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Reduced minimum width for smaller images */
+    gap: 25px;  /* Increased gap between images */
+    padding: 20px;
+    align-items: center;
+  }
+  
+  /* Individual Fabric Gallery Image */
+  .curated-collection-container .fabric-gallery figure {
+    width: 100%;
+    height: auto;
+    transition: transform 0.2s ease;
+
+  }
+  
+  /* Image Size Adjustment */
+  .curated-collection-container .fabric-gallery img {
+    width: 90%; /* Reduced width to 90% of the container */
+    height: auto;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+  }
+  
+  .curated-collection-container .fabric-gallery img:hover {
+    transform: scale(1.12); /* Slight zoom effect on hover */
+  }
+  
+  /* Image Caption */
+  .curated-collection-container .fabric-gallery figcaption {
+    font-size: 1rem;
+    margin-top: 10px;
+    font-weight: 600;
+    color: #333; /* Dark text for contrast */
+  }
+  
+  /* Modal Overlay Styles */
+  .curated-collection-container .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+}
+  
+  /* Modal Content */
+  .curated-collection-container .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+}
+  
+  /* Modal Image */
+  .curated-collection-container .modal-image {
+    max-width: 80vw;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+  
+  /* Arrow Container */
+  .curated-collection-container .arrow-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: -30px; /* Adjusted position */
+    width: 100%;
+  }
+  
+  /* Arrow Button Styles */
+  .curated-collection-container .arrow-button {
+    background-color: #3a6aa1; /* Blue background */
+    color: white;
+    border: none;
+    font-size: 48px; /* Large arrow size */
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 5px; /* Slightly rounded corners */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth effects */
+    margin: 0 20px; /* Space between arrows */
+  }
+  
+  /* Arrow Button Hover Effects */
+  .curated-collection-container .arrow-button:hover {
+    background-color: rgba(0, 0, 0, 0.6); /* Darken on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Subtle shadow on hover */
+  }
+  
+  /* Font Style for Previous and Next Arrows */
+  .curated-collection-container .arrow-button.prev b,
+  .curated-collection-container .arrow-button.next b {
+    font-size: 30px; /* Adjusted arrow size */
+    font-weight: bold;
+  }
+  
+  /* Previous Arrow Styling */
+  .curated-collection-container .arrow-button.prev {
+    margin-right: 10px;
+  }
+  
+  /* Next Arrow Styling */
+  .curated-collection-container .arrow-button.next {
+    margin-left: 10px;
+  }
+  
+  /* Media Query for Larger Screens */
+  @media (min-width: 768px) {
+    .curated-collection-container .fabric-gallery {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjusted for slightly smaller images */
+    }
+  }
+  

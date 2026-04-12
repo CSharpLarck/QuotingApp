@@ -1,0 +1,18 @@
+{
+  "hosting": {
+    "public": "frontend/build", 
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "headers": [
+      {
+        "source": "/favicon.ico",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=86400"
+          }
+        ]
+      }
+    ],
+    "rewrites": [{ "source": "**", "destination": "/index.html" }] 
+  }
+}

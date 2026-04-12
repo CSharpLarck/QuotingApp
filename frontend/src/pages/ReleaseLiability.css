@@ -1,0 +1,303 @@
+/* ✅ General Page Styling */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+/* ================================= */
+/* ✅ Email Section - Send to Customer */
+/* ================================= */
+.email-section {
+  width: 328px; /* Matches form width */
+  margin: 15px auto;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #eef2f7;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.email-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.email-section label {
+  font-size: 1rem;
+  width: 100%;
+  text-align: left;
+}
+
+.email-section input {
+  width: 302px; /* Matches form inputs */
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.email-btn {
+  width: 302px;
+  padding: 14px;
+  margin-top: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.email-btn:hover {
+  background-color: #218838;
+}
+
+/* ================================= */
+/* ✅ Release of Liability Form */
+/* ================================= */
+.release-liability-container {
+  width: 328px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.release-liability-container h2 {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* ✅ Section Separator */
+.form-divider {
+  width: 100%;
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+/* ✅ Labels & Inputs */
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+input,
+textarea {
+  width: 302px; /* Matches form inputs */
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* ================================= */
+/* ✅ Customer Signature Section */
+/* ✅ Customer Signature Section */
+.signature-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.signature-canvas {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 320px;
+  height: 120px;
+  background: #f8f8f8;
+}
+
+/* ✅ Signature Buttons */
+.signature-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* 🔹 Increased spacing between buttons */
+  margin-top: 15px;
+}
+
+/* ✅ Updated Button Styling */
+.signature-buttons button {
+  width: 324px; /* ✅ Matches both buttons */
+  padding: 14px;
+  font-size: 1rem; /* ✅ Ensures both buttons have the same text size */
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease-in-out;
+  text-align: center;
+}
+
+/* ✅ Clear Button */
+.signature-buttons button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* ✅ Hover & Active Effects */
+.signature-buttons button:hover {
+  opacity: 0.85;
+  transform: scale(1.03); /* 🔹 Slight growth effect */
+}
+
+.signature-buttons button:active {
+  transform: scale(0.98);
+}
+
+/* ================================= */
+/* ✅ Mobile Adjustments */
+/* ================================= */
+@media (max-width: 480px) {
+  .signature-canvas {
+    max-width: 280px;
+  }
+
+  .signature-buttons {
+    flex-direction: column; /* 🔹 Stack buttons on small screens */
+    gap: 10px;
+  }
+
+  .signature-buttons button {
+    width: 100%; /* 🔹 Full width for better accessibility */
+    font-size: .95rem;
+  }
+}
+
+
+/* ================================= */
+/* ✅ Checkbox Agreement */
+/* ================================= */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #007bff;
+  cursor: pointer;
+}
+
+/* ================================= */
+/* ✅ Submit Button */
+/* ================================= */
+.submit-btn {
+  width: 324px;
+  padding: 14px;
+  margin-top: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: bold;
+
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ================================= */
+/* ✅ Mobile Responsive Adjustments */
+/* ================================= */
+@media (max-width: 768px) {
+  .release-liability-container,
+  .email-section {
+    padding: 15px;
+    margin: 15px auto;
+  }
+
+  .release-liability-container h2 {
+    font-size: 1.2rem;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  input,
+  textarea {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .email-btn,
+  .submit-btn {
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
+
+/* ✅ Small Devices (Phones) */
+@media (max-width: 480px) {
+  .email-section,
+  .release-liability-container {
+    padding: 12px;
+  }
+
+  .release-liability-container h2 {
+    font-size: 1.1rem;
+  }
+
+  input,
+  textarea {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .email-btn,
+  .submit-btn {
+    font-size: 0.9rem;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+}
+
+/* ✅ Signature Canvas Mobile Adjustments */
+@media (max-width: 480px) {
+  .signature-canvas {
+    max-width: 280px;
+  }
+}
+
+/* ✅ Back to Dashboard Button */
+.back-to-dashboard-button {
+  background-color: #d5d2d2;
+  color: black;
+  padding: 12px 20px;
+  font-size: 14px;
+  width: 176px;
+  margin-left: -10px;
+  margin-top: -10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+
+}
+
+.back-to-dashboard-button:hover {
+  background-color: #007bff;
+  color: white;
+}
