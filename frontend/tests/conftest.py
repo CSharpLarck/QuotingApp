@@ -13,24 +13,34 @@ def is_server_up(url: str) -> bool:
             return 200 <= response.status < 500
     except (urllib.error.URLError, ValueError):
         return False
+    
 
-
-@pytest.fixture
+@pytest.fixture(scope="session")
 def base_url():
     return BASE_URL
 
 
-@pytest.fixture
-def page(base_url):
+@pytest.fixture(scope="session")
+def playwright_instance():
+    with sync_playwright() as p:
+        yield p
+
+
+@pytest.fixture(scope="session")
+def browser(playwright_instance, base_url):
     if not is_server_up(base_url):
         pytest.fail(
             f"Frontend server is not reachable at {base_url}. "
             "Start the app with 'npm start' before running tests."
         )
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
-        yield page
-        browser.close()
+    browser = playwright_instance.chromium.launch(headless=True)
+    yield browser
+    browser.close()
 
+
+@pytest.fixture
+def page(browser):
+    page = browser.new_page()
+    yield page
+    page.close()
