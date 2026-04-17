@@ -1,6 +1,8 @@
+import pytest
 from playwright.sync_api import expect
 
 
+@pytest.mark.smoke
 def test_signin_page_loads(page, base_url):
     page.goto(f"{base_url}/signin", wait_until="domcontentloaded", timeout=30000)
 
@@ -8,6 +10,7 @@ def test_signin_page_loads(page, base_url):
     assert "/signin" in page.url
 
 
+@pytest.mark.smoke
 def test_signin_fields_visible(page, base_url):
     page.goto(f"{base_url}/signin", wait_until="domcontentloaded", timeout=30000)
 
@@ -19,4 +22,3 @@ def test_signin_fields_visible(page, base_url):
     expect(password_field).to_be_visible()
     expect(signin_button).to_be_visible()
 
-    

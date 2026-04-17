@@ -34,7 +34,7 @@ def browser(playwright_instance, base_url):
             "Start the app with 'npm start' before running tests."
         )
 
-    browser = playwright_instance.chromium.launch(headless=False)
+    browser = playwright_instance.chromium.launch(headless=True)
     yield browser
     browser.close()
 

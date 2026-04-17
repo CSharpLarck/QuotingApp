@@ -1,6 +1,8 @@
+import pytest
 from playwright.sync_api import expect
 
 
+@pytest.mark.regression
 def test_empty_login_shows_validation(page, base_url):
     page.goto(f"{base_url}", wait_until="domcontentloaded", timeout=30000)
 
@@ -15,7 +17,7 @@ def test_empty_login_shows_validation(page, base_url):
     assert email_field.evaluate("el => el.checkValidity()") is False
 
     
-
+@pytest.mark.regression
 def test_invalid_login_shows_error(page, base_url):
     page.goto(f"{base_url}/signin", wait_until="domcontentloaded", timeout=30000)
 

@@ -1,6 +1,8 @@
+import pytest
 from playwright.sync_api import expect
 
 
+@pytest.mark.smoke
 def test_valid_login_redirects(page, base_url):
     page.goto(f"{base_url}/signin", wait_until="domcontentloaded", timeout=5000)
 
