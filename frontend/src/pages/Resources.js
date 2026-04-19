@@ -13,18 +13,6 @@ const Resources = () => {
     navigate('/curatedcollection');
   };
 
-
-  const handleViewInstallerMeasurements = () => {
-    console.log("Navigating to Installer Measurement Page...");
-    navigate('/installer-measurement'); // ✅ Matches App.js
-
-  };
-
-  const handleViewReleaseForm = () => {
-    navigate('/release-liability'); // ✅ Route to the new form
-  };
-  
-
   return (
     <div className="resources-container">
       <section className="resources">
@@ -33,8 +21,6 @@ const Resources = () => {
       <div className="resources-buttons">
     <button className="resources-button" onClick={handleViewBrochure}>Product Brochure</button>
     <button className="resources-button" onClick={handleViewCuratedCollection}>Fabric Collection</button>
-    <button className="resources-button" onClick={handleViewInstallerMeasurements}>Measurement Form</button>
-    <button className="resources-button" onClick={handleViewReleaseForm}>Release of Liability</button>
 
   </div>
 

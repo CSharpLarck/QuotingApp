@@ -9,7 +9,6 @@ import BrochurePage from "./components/BrochurePage";
 import CuratedCollection from "./pages/CuratedCollection";
 import QuotingPage from "./pages/QuotingPage";
 import QuotePage from "./pages/QuotePage";
-import InstallerMeasurement from "./pages/InstallerMeasurement";
 import ViewMeasurements from "./pages/ViewMeasurements";
 import { auth, db } from "./firebase";
 // eslint-disable-next-line
@@ -17,7 +16,6 @@ import { AuthProvider, useAuth } from "./context/AuthContext";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import RegisterUser from "./pages/RegisterUser";
 import { onAuthStateChanged } from "firebase/auth";
-import ReleaseLiability from "./pages/ReleaseLiability";
 import FormCompletion from "./pages/FormCompletion";
 
 
@@ -108,8 +106,6 @@ const MainRoutes = ({ categories, userRole, loading }) => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/brochure" element={<BrochurePage />} />
         <Route path="/curatedcollection" element={<CuratedCollection />} />
-        <Route path="/installer-measurement" element={<InstallerMeasurement />} />
-        <Route path="/release-liability" element={<ReleaseLiability />} />
         <Route path="/form-completion" element={<FormCompletion />} />
         <Route path="/quotingpage/edit/:quoteId/:editItemIndex" element={<QuotingPage />} />
 

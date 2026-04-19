@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db, doc, getDoc, setDoc, runTransaction, updateDoc, collection, addDoc, serverTimestamp } from "../firebase";
 import CustomAlert from "./CustomAlert"; // ✅ Import Custom Alert
-import RequestMeasureAlert from "./RequestMeasureAlert"; // ✅ Import Request Measure Alert
 import emailjs from "emailjs-com";
 import  ConfirmModal from "../components/ConfirmModal";
 
@@ -39,13 +38,10 @@ const QuotePage = () => {
   const [needsLadder, setNeedsLadder] = useState(false);
   const [ladderWindowCount, setLadderWindowCount] = useState(1);
   const [distance, setDistance] = useState(""); // Distance in miles
-  const [distanceCost, setDistanceCost] = useState(0);
   const [isSubmittingOrder, setIsSubmittingOrder] = useState(false);
 
   const [needsRemoval, setNeedsRemoval] = useState(false);
   const [removalCount, setRemovalCount] = useState(1); // Default to 1 when checked
-  const [showMeasureAlert, setShowMeasureAlert] = useState(false);
-
   const [needsHaulOff, setNeedsHaulOff] = useState(false);
   const [haulOffCount, setHaulOffCount] = useState(1); // Default to 1 when checked
   const [shippingCost, setShippingCost] = useState(0); // ✅ New state for shipping cost
@@ -59,6 +55,7 @@ const QuotePage = () => {
   // eslint-disable-next-line
   const totalRetail = totalSuggestedRetail + shippingCost + (includeInstallation ? installationCost : 0);
   const [showSubmitAlert, setShowSubmitAlert] = useState(false);
+  // eslint-disable-next-line
   const [userName, setUserName] = useState("");
 
   
@@ -161,22 +158,7 @@ const QuotePage = () => {
   }, [quoteId, navigate]);
   
 
-  const calculateDistanceCost = useCallback(() => {
-    let cost = 0;
-    const miles = parseFloat(distance);
 
-    if (!isNaN(miles)) {
-      if (miles < 30) {
-        cost = 0; // No charge for distances below 30 miles
-      } else if (miles >= 30 && miles <= 60) {
-        cost = 60; // Flat $60 charge for 30-60 miles
-      } else {
-        cost = 60 + 2 * (miles - 60); // Additional $2 per mile beyond 60 miles
-      }
-    }
-
-    setDistanceCost(cost);
-  }, [distance]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -252,10 +234,6 @@ const handleSubmitOrder = async () => {
   }
 };
 
-
-  useEffect(() => {
-    calculateDistanceCost();
-  }, [distance, calculateDistanceCost]);
 
   const calculateTotalCosts = useCallback((items) => {
     let totalInstall = items.length > 20 ? 300 : items.length > 10 ? 200 : 150;
@@ -603,7 +581,7 @@ const getAdditionalOptionsForEmail = (item) => {
 };
 
 
-
+// eslint-disable-next-line
 const handleRequestMeasure = async (quoteId) => {
   console.log(`Request Measure Triggered for Quote ID: ${quoteId}`);
 
@@ -688,8 +666,6 @@ const handleRequestMeasure = async (quoteId) => {
           status: "Requested",
           timestamp: serverTimestamp(),
       });
-            // ✅ Show Custom Alert Instead of `alert()`
-            setShowMeasureAlert(true);
 
              const formatQuoteItemsForEmail = (quoteItems) => {
               return quoteItems
@@ -1038,23 +1014,7 @@ const handleRequestMeasure = async (quoteId) => {
         disabled={isQuoteSubmitted}
       />
       <span>Include Installation</span>
-    </label>
-{/* ✅ Show "Request Measure" button only if quote status is "Quote" */}
-{quote?.status === "Quote" && !["David Bliss"].includes(userName) && (
-  <button
-    className="measure-request-btn"
-    onClick={() => handleRequestMeasure(quoteId)}
-    disabled={isQuoteSubmitted}
-  >
-    Request Measure
-  </button>
-)}
-
-
-
-
-
-  
+    </label>  
 
     {/* ✅ Add More Items Button */}
     <button className="add-more-items-btn" onClick={handleAddMoreItems}  disabled={isQuoteSubmitted}
@@ -1115,167 +1075,11 @@ const handleRequestMeasure = async (quoteId) => {
 )}
 
 {showSaveAlert && <CustomAlert message="Quote saved successfully!" onClose={() => setShowSaveAlert(false)} />}
-          {showMeasureAlert && <RequestMeasureAlert message="A professional installer has been requested to." onClose={() => setShowMeasureAlert(false)} />}
   </div>
 </div>
 
 </div>
-{/* ✅ Installation Questions Section */}
-{includeInstallation && (
-  <div className="full-width-installation-questions">
-    <div className="installation-questions">
-      <h3>Installation Questions</h3>
 
-      <div className="distance-question">
-  Customer distance from store (miles):
-  
-  <div className="distance-input-container">
-    <input
-      type="number"
-      value={distance}
-      onChange={(e) => setDistance(e.target.value)}
-      disabled={isQuoteSubmitted}
-      min="0"
-    />
-  </div>
-
-  <div className="distance-cost-container">
-  <div className="distance-cost-box">
-    <strong>Distance Charge:</strong>{" "}
-    {distanceCost === 0 ? "No Charge" : `$${distanceCost.toFixed(0)}`}
-  </div>
-
-  <span
-    className="tooltip-icon"
-    onClick={(e) => {
-      e.stopPropagation();
-      setShowTooltip((prev) => !prev);
-    }}
-  >
-    ⓘ
-  </span>
-
-  {showTooltip && (
-    <div className="tooltip-box">
-      <p><strong>Distance Pricing:</strong></p>
-      <p><strong>No Charge</strong> for distances under 30 miles</p>
-      <p>Minimum Charge: $60 (for 30-60 miles)</p>
-      <p>Additional Charge: $2 per mile beyond 60 miles</p>
-    </div>
-  )}
-</div>
-
-</div>
-
-
-
-  
-
-{/* ✅ Ladder Question */}
-<div className="ladder-question">
-  <div className="primary-question">
-    <input
-      type="checkbox"
-      id="ladder-checkbox"
-      checked={needsLadder}
-      disabled={isQuoteSubmitted}
-      onChange={(e) => {
-        setNeedsLadder(e.target.checked);
-        setLadderWindowCount(e.target.checked ? 1 : 0);
-      }}
-    />
-    <label htmlFor="ladder-checkbox">
-      Need a ladder (adds $35 per blind)
-    </label>
-  </div>
-
-  {needsLadder && (
-    <div className="secondary-question">
-      <span>How many windows need a ladder?</span>
-      <input
-        type="number"
-        value={ladderWindowCount}
-        disabled={isQuoteSubmitted}
-        onChange={(e) =>
-          setLadderWindowCount(Math.max(1, parseInt(e.target.value, 10) || 1))
-        }
-        min="1"
-      />
-    </div>
-  )}
-</div>
-
-{/* ✅ Blind Removal Question */}
-<div className="removal-question">
-  <div className="primary-question">
-    <input
-      type="checkbox"
-      id="removal-checkbox"
-      checked={needsRemoval}
-      disabled={isQuoteSubmitted}
-      onChange={(e) => {
-        setNeedsRemoval(e.target.checked);
-        setRemovalCount(e.target.checked ? 1 : 0);
-      }}
-    />
-    <label htmlFor="removal-checkbox">
-      Blinds to remove (adds $10 per blind)
-    </label>
-  </div>
-
-  {needsRemoval && (
-    <div className="secondary-question">
-      <span>How many blinds to remove?</span>
-      <input
-        type="number"
-        value={removalCount}
-        disabled={isQuoteSubmitted}
-        onChange={(e) =>
-          setRemovalCount(Math.max(1, parseInt(e.target.value, 10) || 1))
-        }
-        min="1"
-      />
-    </div>
-  )}
-</div>
-
-{/* ✅ Haul Off Question */}
-<div className="hauloff-question">
-  <div className="primary-question">
-    <input
-      type="checkbox"
-      id="hauloff-checkbox"
-      checked={needsHaulOff}
-      disabled={isQuoteSubmitted}
-      onChange={(e) => {
-        setNeedsHaulOff(e.target.checked);
-        setHaulOffCount(e.target.checked ? 1 : 0);
-      }}
-    />
-    <label htmlFor="hauloff-checkbox">
-      Blinds to haul off (adds $10 per blind)
-    </label>
-  </div>
-
-  {needsHaulOff && (
-    <div className="secondary-question">
-      <span>How many blinds to haul off?</span>
-      <input
-        type="number"
-        value={haulOffCount}
-        disabled={isQuoteSubmitted}
-        onChange={(e) =>
-          setHaulOffCount(Math.max(1, parseInt(e.target.value, 10) || 1))
-        }
-        min="1"
-      />
-    </div>
-  )}
-</div>
-
-    </div>
-  </div>
-)}
 
     </div>
   );
