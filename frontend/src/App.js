@@ -1,23 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import ManageQuotesOrders from "./pages/ManageQuotesOrders";
-import Resources from "./pages/Resources";
-import Settings from "./pages/Settings";
-import SignIn from "./pages/SignIn";
-import BrochurePage from "./components/BrochurePage";
-import CuratedCollection from "./pages/CuratedCollection";
-import QuotingPage from "./pages/QuotingPage";
-import QuotePage from "./pages/QuotePage";
-import ViewMeasurements from "./pages/ViewMeasurements";
+import Navbar from "./components/NavBar/Navbar";
+import ManageQuotesOrders from "./pages/ManageQuotesPage/ManageQuotesOrders";
+import Resources from "./pages/ResourcesPage/Resources";
+import Settings from "./pages/SettingsPage/Settings";
+import SignIn from "./pages/SignInPage/SignIn";
+import BrochurePage from "./pages/BrochurePage/BrochurePage";
+import CuratedCollection from "./pages/CuratedCollectionPage/CuratedCollection";
+import QuotingPage from "./pages/NewQuotePage/NewQuote";
+import QuotePage from "./pages/QuotePage/QuotePage";
 import { auth, db } from "./firebase";
 // eslint-disable-next-line
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import RegisterUser from "./pages/RegisterUser";
+import RegisterUser from "./pages/RegisterUserPage/RegisterUser";
 import { onAuthStateChanged } from "firebase/auth";
-import FormCompletion from "./pages/FormCompletion";
-
 
 const App = () => {
   const [categories, setCategories] = useState([]);
@@ -106,7 +103,6 @@ const MainRoutes = ({ categories, userRole, loading }) => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/brochure" element={<BrochurePage />} />
         <Route path="/curatedcollection" element={<CuratedCollection />} />
-        <Route path="/form-completion" element={<FormCompletion />} />
         <Route path="/quotingpage/edit/:quoteId/:editItemIndex" element={<QuotingPage />} />
 
 
@@ -117,7 +113,6 @@ const MainRoutes = ({ categories, userRole, loading }) => {
         <Route path="/quote/:quoteId" element={userRole ? <QuotePage /> : <Navigate to="/signin" />} />
         <Route path="/quotingpage/:quoteId" element={userRole ? <QuotingPage /> : <Navigate to="/signin" />} />
         <Route path="/quotingpage" element={userRole ? <QuotingPage categories={categories} /> : <Navigate to="/signin" />} />
-        <Route path="/viewmeasurements/:quoteId" element={userRole ? <ViewMeasurements /> : <Navigate to="/signin" />} />
 
         {/* ✅ Admin-Only Routes */}
         <Route path="/register-user" element={isAdmin ? <RegisterUser /> : <Navigate to="/settings" />} />
