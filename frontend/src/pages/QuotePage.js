@@ -1005,16 +1005,6 @@ const handleRequestMeasure = async (quoteId) => {
 <div className="installation-right-column">
   <div className="installation-actions">
 
-    {/* ✅ Checkbox & Button for Installation */}
-    <label className="install-button">
-      <input
-        type="checkbox"
-        checked={includeInstallation}
-        onChange={handleToggleInstallation}
-        disabled={isQuoteSubmitted}
-      />
-      <span>Include Installation</span>
-    </label>  
 
     {/* ✅ Add More Items Button */}
     <button className="add-more-items-btn" onClick={handleAddMoreItems}  disabled={isQuoteSubmitted}
@@ -1104,10 +1094,10 @@ const getAdditionalOptions = (item) => {
     item.hingeColor && item.hingeColor !== "N/A" ? `${item.hingeColor}` : null,
 
 // ✅ Only show liner info if product supports liners (e.g. NOT shutters)
-!item.product?.toLowerCase().includes("shutter") &&
-item.linerOptions && item.linerOptions !== "N/A"
-  ? `${item.linerOptions}${item.linerColor && item.linerColor !== "N/A" ? ` (${item.linerColor})` : ""}`
-  : null,
+    !item.product?.toLowerCase().includes("shutter") &&
+    item.linerOptions && item.linerOptions !== "N/A"
+     ? `${item.linerOptions}${item.linerColor && item.linerColor !== "N/A" ? ` (${item.linerColor})` : ""}`
+      : null,
 
 
 
