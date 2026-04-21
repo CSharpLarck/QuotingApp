@@ -1,30 +1,25 @@
-/* ✅ Full-page Centering */
 .sign-in-container {
-  max-width: 1000px; /* ✅ Matches other page widths */
-  margin: auto;
-  display: flex; /* ✅ Flexbox for centering */
+  max-width: 1000px;
+  margin: 40px auto;
+  margin-top: -150px;
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 45vh; /* ✅ Full viewport height */
+  min-height: 70vh;
   padding: 20px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: transparent;
 }
 
-/* ✅ Form Wrapper (Perfectly Centered) */
 .sign-in-form {
   background-color: #ffffff;
-  padding: 30px;
-  margin-top: -15px;
-  border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  padding: 32px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 380px; /* ✅ Slightly Larger for a Balanced Look */
+  max-width: 460px;
   text-align: center;
 }
 
-/* ✅ Heading */
 .sign-in-form h2 {
   color: #333;
   font-size: 24px;
@@ -32,25 +27,23 @@
   font-weight: bold;
 }
 
-/* ✅ Form Input Fields */
 .sign-in-form input {
-  width: 93%;
+  width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   margin: 10px 0;
-  border-radius: 5px;
+  border-radius: 6px;
   border: 1px solid #ccc;
   font-size: 16px;
   background-color: #f9f9f9;
 }
 
-/* ✅ Focus Style for Inputs */
 .sign-in-form input:focus {
   border-color: #5e8cfe;
   outline: none;
   background-color: #fff;
 }
 
-/* ✅ Error Message */
 .error-message {
   color: #ff4d4d;
   font-size: 14px;
@@ -58,14 +51,14 @@
   margin-bottom: 10px;
 }
 
-/* ✅ Submit Button */
 .sign-in-form button {
   width: 100%;
+  box-sizing: border-box;
   padding: 12px;
   background-color: #5865f2;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 16px;
   cursor: pointer;
   font-weight: bold;
@@ -74,10 +67,9 @@
 
 .sign-in-form button:hover {
   background-color: #4a7bde;
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
-/* ✅ Forgot Password Button (If Used Later) */
 .forgot-password-button {
   background: none;
   border: none;
@@ -92,21 +84,73 @@
   color: #0056b3;
 }
 
-/* ✅ Success Message */
 .success-message {
   color: green;
   font-weight: bold;
   margin-top: 10px;
 }
 
-/* ✅ Mobile Responsiveness */
+.demo-description {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  color: #555;
+  text-align: center;
+}
+
+.demo-access-box {
+  width: 100%;
+  box-sizing: border-box;
+  background: #f8f9fc;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.demo-access-box h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: #222;
+}
+
+.demo-access-box p {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
+}
+
+.demo-fill-button {
+  margin-top: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  background-color: #5865f2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.demo-fill-button:hover {
+  background-color: #4a7bde;
+  transform: scale(1.02);
+}
+
 @media (max-width: 600px) {
   .sign-in-container {
-    padding: 20px;
+    margin: 20px auto;
+    min-height: auto;
+    padding: 16px;
   }
 
   .sign-in-form {
-    padding: 25px;
-    max-width: 100%; /* ✅ Ensures Full Width on Smaller Screens */
+    padding: 24px;
+    max-width: 100%;
   }
 }
