@@ -54,11 +54,22 @@ const SignIn = () => {
       } else {
         setError("User not found in database. Contact admin.");
       }
-    } 
+    }
+
     catch (error) {
-  console.error("Sign-in failed:", error);
-  setError(error.message);
-}
+      console.error("Sign-In Failed:", error);
+
+      if (error.code === 'auth/invalid-credential') {
+        setError('Invalid email or password');
+      } else if (error.code === 'auth/user-not-found') {
+        setError('No account found with this email');
+      } else if (error.code === 'auth/wrong-password') { 
+        setError('Invalid email or password');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
+  
+  }
   };
 
   return (
@@ -84,6 +95,7 @@ const SignIn = () => {
 
         {error && <p className="error-message">{error}</p>}
 
+    
         <input
           type="email"
           placeholder="Email Address"

@@ -1061,8 +1061,6 @@ const handleRequestMeasure = async (quoteId) => {
     onClose={() => setShowSaveAlert(false)} // ✅ Hide Alert on Close
   />
 )}
-
-{showSaveAlert && <CustomAlert message="Quote saved successfully!" onClose={() => setShowSaveAlert(false)} />}
   </div>
 </div>
 
