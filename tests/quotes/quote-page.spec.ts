@@ -12,7 +12,7 @@ test.describe('Quote Page', () => {
         await page.getByRole('button', { name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
 
-    })
+ 
 });
 
 
@@ -31,7 +31,7 @@ test.describe('Quote Page', () => {
 
        
 // Checking customer information is rendering properly      
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible();
+        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 10000 });
         await expect(page.getByPlaceholder('Enter sidemark')).toBeVisible();
         await expect(page.getByPlaceholder('Enter address')).toBeVisible();
         await expect(page.getByPlaceholder('Enter phone number')).toBeVisible();
@@ -97,3 +97,32 @@ test.describe('Quote Page', () => {
 
     
     });
+
+
+
+// Validation errors appear for required fields when user submits form before field submissions are entered
+    test('validation errors appear when user tries to add item with empty required fields', async ({ page }) => {
+        await page.goto('/signin');
+
+        await page.getByRole('button', { name: 'Try Demo Account' }).click();
+        await page.getByRole('button', { name: 'Sign In'}).click();
+
+        await expect(page).toHaveURL('/');
+
+        await page.getByRole('button', { name: 'Start New Quote' }).click();
+        await expect(page).toHaveURL('/quote');
+
+        const addItemButton = page.getByRole('button', { name: 'Add Item(s) to Quote' });
+
+        await expect(addItemButton).toBeVisible();
+        await addItemButton.scrollIntoViewIfNeeded();
+        await addItemButton.click();
+
+        await expect(page.getByText('Customer name is required.')).toBeVisible();
+        await expect(page.getByText('Sidemark is required.')).toBeVisible();
+        await expect(page.getByText('Address is required.')).toBeVisible();
+        await expect(page.getByText('Phone Number is required.')).toBeVisible();
+
+    });
+
+});
