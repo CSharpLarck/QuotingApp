@@ -6,8 +6,8 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
 import "./SignIn.css";
 
-const DEMO_EMAIL = "demo@yourapp.com";
-const DEMO_PASSWORD = "DemoPassword123!";
+const DEMO_EMAIL = "demo@designerblindsapp.com";
+const DEMO_PASSWORD = "Demo1234!";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -54,9 +54,11 @@ const SignIn = () => {
       } else {
         setError("User not found in database. Contact admin.");
       }
-    } catch (error) {
-      setError("Invalid email or password.");
-    }
+    } 
+    catch (error) {
+  console.error("Sign-in failed:", error);
+  setError(error.message);
+}
   };
 
   return (
@@ -71,8 +73,7 @@ const SignIn = () => {
 
         <div className="demo-access-box">
           <h3>Demo Access</h3>
-        <p>Click below to automatically sign in using a demo account.</p>
-          <button
+        <p>Click below to automatically fill the demo credentials.</p>          <button
             type="button"
             className="demo-fill-button"
             onClick={handleDemoFill}
