@@ -25,3 +25,9 @@ yarn-error.log*
 __pycache__/
 *.pyc
 .env
+
+.env
+.env.local
+.firebase/
+test-results/
+frontend/test-results/

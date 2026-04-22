@@ -29,9 +29,11 @@ test.describe('Quote Page', () => {
         await page.getByRole('button', {name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
 
+        await page.waitForLoadState('networkidle');
+        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
        
 // Checking customer information is rendering properly      
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 10000 });
+        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible;
         await expect(page.getByPlaceholder('Enter sidemark')).toBeVisible();
         await expect(page.getByPlaceholder('Enter address')).toBeVisible();
         await expect(page.getByPlaceholder('Enter phone number')).toBeVisible();
@@ -52,6 +54,9 @@ test.describe('Quote Page', () => {
 
         await page.getByRole('button', {name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
+
+        await page.waitForLoadState('networkidle');
+        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
 
 // Checking quoting details is rendering properly              
         await expect(page.getByText('Select Category:')).toBeVisible();
@@ -89,6 +94,9 @@ test.describe('Quote Page', () => {
 
         await page.getByRole('button', {name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
+
+        await page.waitForLoadState('networkidle');
+        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
         
 // Checking total price is rendering properly              
         await expect(page.getByText('Total Price: $0')).toBeVisible();
@@ -111,6 +119,9 @@ test.describe('Quote Page', () => {
 
         await page.getByRole('button', { name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
+
+        await page.waitForLoadState('networkidle');
+        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
 
         const addItemButton = page.getByRole('button', { name: 'Add Item(s) to Quote' });
 
@@ -135,8 +146,9 @@ test.describe('Quote Page', () => {
 
         await page.getByRole('button', { name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 10000 });
-
+        
+        await page.waitForLoadState('networkidle');
+        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
 // Enter required customer information
         await page.getByPlaceholder('Enter customer name').fill('John Smith');
         await page.getByPlaceholder('Enter sidemark').fill('Test 1');
