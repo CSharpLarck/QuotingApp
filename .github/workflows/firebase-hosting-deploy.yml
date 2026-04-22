@@ -1,12 +1,14 @@
-name: Deploy to Firebase Hosting on push
+name: Deploy to Firebase Hosting
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Playwright Tests"]
+    types:
+      - completed
 
 jobs:
   build_and_deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
 
     steps:
