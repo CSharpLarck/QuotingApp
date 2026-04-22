@@ -29,7 +29,6 @@ test.describe('Quote Page', () => {
         await page.getByRole('button', {name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
 
-        await page.waitForLoadState('networkidle');
         await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
        
 // Checking customer information is rendering properly      
@@ -55,7 +54,6 @@ test.describe('Quote Page', () => {
         await page.getByRole('button', {name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
 
-        await page.waitForLoadState('networkidle');
         await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
 
 // Checking quoting details is rendering properly              
@@ -95,7 +93,6 @@ test.describe('Quote Page', () => {
         await page.getByRole('button', {name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
 
-        await page.waitForLoadState('networkidle');
         await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
         
 // Checking total price is rendering properly              
@@ -120,7 +117,6 @@ test.describe('Quote Page', () => {
         await page.getByRole('button', { name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
 
-        await page.waitForLoadState('networkidle');
         await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
 
         const addItemButton = page.getByRole('button', { name: 'Add Item(s) to Quote' });
@@ -146,8 +142,7 @@ test.describe('Quote Page', () => {
 
         await page.getByRole('button', { name: 'Start New Quote' }).click();
         await expect(page).toHaveURL('/quote');
-        
-        await page.waitForLoadState('networkidle');
+
         await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
 // Enter required customer information
         await page.getByPlaceholder('Enter customer name').fill('John Smith');
