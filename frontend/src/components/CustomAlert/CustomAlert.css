@@ -1,4 +1,4 @@
-/* 🔥 Modal Overlay (Dimming Background) */
+/* Modal Overlay (Dimming Background) */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -12,7 +12,7 @@
   z-index: 1000;
 }
 
-/* 🔥 Modal Content Box */
+/* Modal Content Box */
 .modal-content {
   background: white;
   padding: 20px;
@@ -23,7 +23,7 @@
   animation: fadeIn 0.3s ease-in-out;
 }
 
-/* 🔥 Buttons */
+/* Buttons */
 .alert-actions {
   margin-top: 15px;
   display: flex;
@@ -54,7 +54,7 @@
   color: white;
 }
 
-/* 🔥 Fade In Animation */
+/* Fade In Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;

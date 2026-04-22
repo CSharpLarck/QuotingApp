@@ -51,7 +51,7 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  // ✅ Close dropdown if clicking outside
+  // Close dropdown if clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -66,7 +66,7 @@ const Navbar = () => {
 
   return (
     <div className="navbar">
-      {/* ✅ Left Branding */}
+      {/* Left Branding */}
       <div className="nav-left">
         <a href="https://www.designerblindco.com" className="brand-link">
           <h2 className="brand-title">Designer Blinds</h2>
@@ -74,14 +74,14 @@ const Navbar = () => {
         </a>
       </div>
 
-      {/* ✅ Right Section: User Info, Menu, and Logout */}
+      {/* Right Section: User Info, Menu, and Logout */}
       <div className="nav-right">
-        {/* ✅ Show User Name Above Menu */}
+        {/* Show User Name Above Menu */}
         {userData && (
           <span className="user-name">{loading ? "Loading..." : userData?.User || "Unknown User"}</span>
         )}
 
-        {/* ✅ Dropdown Menu */}
+        {/* Dropdown Menu */}
         <div className="dropdown-container" ref={dropdownRef}>
           <button className="menu-button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
             Menu ▼
@@ -89,7 +89,7 @@ const Navbar = () => {
 
           {isDropdownOpen && (
             <div className="dropdown-menu">
-              {/* ✅ Show "Manage Quotes" & "Settings" only if user is signed in */}
+              {/* Show "Manage Quotes" & "Settings" only if user is signed in */}
               {userData && (
                 <>
                   <Link to="/" className="dropdown-item" onClick={() => setIsDropdownOpen(false)}>Manage Quotes</Link>
@@ -97,7 +97,7 @@ const Navbar = () => {
                 </>
               )}
 
-              {/* ✅ Resources always visible */}
+              {/* Resources always visible */}
               <a 
   href="/resources" 
   className="dropdown-item" 
@@ -111,7 +111,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* ✅ Logout or Sign In Button BELOW the Menu Button */}
+        {/* Logout or Sign In Button BELOW the Menu Button */}
         {userData ? (
           <button className="logout-button" onClick={handleLogout}>Logout</button>
         ) : (

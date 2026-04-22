@@ -1,4 +1,4 @@
-/* ✅ Overlay */
+/* Overlay */
 .confirm-modal-overlay {
     position: fixed;
     inset: 0;
@@ -10,7 +10,7 @@
     padding: 1rem;
   }
   
-  /* ✅ Modal Container */
+  /* Modal Container */
   .confirm-modal-container {
     background-color: #ffffff;
     border-radius: 1rem;
@@ -22,7 +22,7 @@
     animation: fadeIn 0.3s ease-out;
   }
   
-  /* ✅ Title */
+  /* Title */
   .confirm-modal-title {
     font-size: 1.5rem;
     font-weight: 700;
@@ -30,14 +30,14 @@
     margin-bottom: 1rem;
   }
   
-  /* ✅ Message */
+  /* Message */
   .confirm-modal-message {
     font-size: 1rem;
     color: #4a5568;
     margin-bottom: 2rem;
   }
   
-  /* ✅ Button Container */
+  /* Button Container */
   .confirm-modal-buttons {
     display: flex;
     justify-content: center;
@@ -45,7 +45,7 @@
     flex-wrap: wrap;
   }
   
-  /* ✅ Button Base Style */
+  /* Button Base Style */
   .confirm-btn {
     font-weight: 600;
     padding: 0.6rem 1.25rem;
@@ -57,7 +57,7 @@
     font-size: 0.95rem;
   }
   
-  /* ❌ Cancel Button */
+  /* Cancel Button */
   .cancel-btn {
     background-color: #f0e2e2;
     color: #1a202c;
@@ -67,7 +67,7 @@
     background-color: #cbd5e0;
   }
   
-  /* ✅ Submit Button */
+  /* Submit Button */
   .submit-btn {
     background-color: #16a34a;
     color: #ffffff;
@@ -77,7 +77,7 @@
     background-color: #15803d;
   }
   
-  /* ✅ Animations */
+  /* Animations */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -89,7 +89,7 @@
     }
   }
   
-  /* ✅ Responsive Adjustments */
+  /* Responsive Adjustments */
   @media (max-width: 480px) {
     .confirm-modal-title {
       font-size: 1.25rem;

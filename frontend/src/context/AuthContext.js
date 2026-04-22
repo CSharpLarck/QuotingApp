@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // ✅ Fetch user details from Firestore based on email
+        // Fetch user details from Firestore based on email
         const usersRef = collection(db, "users");
         const q = query(usersRef, where("Email", "==", user.email));
         const querySnapshot = await getDocs(q);
@@ -19,13 +19,13 @@ export const AuthProvider = ({ children }) => {
         if (!querySnapshot.empty) {
           const userData = querySnapshot.docs[0].data();
           setCurrentUser({ uid: user.uid, ...userData });
-          localStorage.setItem("userData", JSON.stringify(userData)); // ✅ Store in localStorage
+          localStorage.setItem("userData", JSON.stringify(userData)); // Store in localStorage
         } else {
           setCurrentUser(null);
         }
       } else {
         setCurrentUser(null);
-        localStorage.removeItem("userData"); // ✅ Clear data on logout
+        localStorage.removeItem("userData"); // Clear data on logout
       }
     });
 

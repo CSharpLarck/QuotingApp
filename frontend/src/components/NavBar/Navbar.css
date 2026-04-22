@@ -1,4 +1,4 @@
-/* ✅ Navbar Styling */
+/* Navbar Styling */
 .navbar {
     max-width: 1000px;
     margin: auto;
@@ -13,7 +13,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* ✅ Branding */
+/* Branding */
 .brand-link {
     text-decoration: none;
     color: inherit;
@@ -34,14 +34,14 @@
     color: #b0b3b8;
 }
 
-/* ✅ Right Section */
+/* Right Section */
 .nav-right {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-/* ✅ User Name Display */
+/* User Name Display */
 .user-name {
     font-weight: bold;
     font-size: 14px;
@@ -49,7 +49,7 @@
     margin-bottom: 5px;
 }
 
-/* ✅ Dropdown Button */
+/* Dropdown Button */
 .menu-button {
     background: #40444b;
     color: white;
@@ -65,7 +65,7 @@
     background: #5865f2;
 }
 
-/* ✅ Dropdown Menu */
+/* Dropdown Menu */
 .dropdown-container {
     position: relative;
 }
@@ -84,7 +84,7 @@
     z-index: 1000;
 }
 
-/* ✅ Dropdown Items */
+/* Dropdown Items */
 .dropdown-item {
     text-decoration: none;
     color: #2c2f33;
@@ -98,7 +98,7 @@
     background: #f1f1f1;
 }
 
-/* ✅ Logout Button */
+/* Logout Button */
 .logout-button {
     background: #ff4d4d;
     color: white;
@@ -116,7 +116,7 @@
     background: #cc0000;
 }
 
-/* ✅ Sign In Button */
+/* Sign In Button */
 .signin-button {
     background: #32cd32;
     padding: 8px 10px;
@@ -134,7 +134,7 @@
     background: #228b22;
 }
 
-/* ✅ Mobile Responsiveness */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: row;

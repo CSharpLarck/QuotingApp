@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { db, auth } from "../firebase"; // ✅ Import Firebase services
+import { db, auth } from "../firebase"; // Import Firebase services
 import { collection, addDoc, getDocs, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import "./UserManagement.css"; // ✅ Custom styles
+import "./UserManagement.css"; // Custom styles
 
 const UserManagement = () => {
-  const [users, setUsers] = useState([]); // ✅ Store users
+  const [users, setUsers] = useState([]); // Store users
   const [newUser, setNewUser] = useState({ name: "", email: "", password: "", role: "Standard" });
 
-  // ✅ Fetch Users from Firestore
+  // Fetch Users from Firestore
   useEffect(() => {
     const fetchUsers = async () => {
       const usersRef = collection(db, "users");
@@ -20,7 +20,7 @@ const UserManagement = () => {
     fetchUsers();
   }, []);
 
-  // ✅ Handle User Creation
+  // Handle User Creation
   const handleAddUser = async () => {
     if (!newUser.email || !newUser.password || !newUser.name) {
       alert("Please fill in all fields.");
@@ -28,11 +28,11 @@ const UserManagement = () => {
     }
 
     try {
-      // ✅ Step 1: Create user in Firebase Authentication
+      // Step 1: Create user in Firebase Authentication
       const userCredential = await createUserWithEmailAndPassword(auth, newUser.email, newUser.password);
       const userId = userCredential.user.uid;
 
-      // ✅ Step 2: Store user data in Firestore
+      // Step 2: Store user data in Firestore
       await setDoc(doc(db, "users", userId), {
         name: newUser.name,
         email: newUser.email,
@@ -40,18 +40,18 @@ const UserManagement = () => {
         createdAt: new Date(),
       });
 
-      // ✅ Step 3: Refresh UI
+      // Step 3: Refresh UI
       setUsers([...users, { id: userId, ...newUser }]);
       setNewUser({ name: "", email: "", password: "", role: "Standard" });
 
       alert("User added successfully!");
     } catch (error) {
-      console.error("❌ Error adding user:", error.message);
+      console.error("Error adding user:", error.message);
       alert("Failed to add user. Try again.");
     }
   };
 
-  // ✅ Handle User Deletion
+  // Handle User Deletion
   const handleDeleteUser = async (userId) => {
     if (!window.confirm("Are you sure you want to delete this user?")) return;
 
@@ -60,7 +60,7 @@ const UserManagement = () => {
       setUsers(users.filter(user => user.id !== userId));
       alert("User deleted successfully!");
     } catch (error) {
-      console.error("❌ Error deleting user:", error.message);
+      console.error("Error deleting user:", error.message);
       alert("Failed to delete user.");
     }
   };
@@ -69,7 +69,7 @@ const UserManagement = () => {
     <div className="user-management-container">
       <h2>User Management</h2>
 
-      {/* ✅ User Input Form */}
+      {/* User Input Form */}
       <div className="user-form">
         <input
           type="text"
@@ -97,7 +97,7 @@ const UserManagement = () => {
         <button onClick={handleAddUser}>Add User</button>
       </div>
 
-      {/* ✅ User List */}
+      {/* User List */}
       <h3>Existing Users</h3>
       <table className="user-table">
         <thead>
@@ -115,7 +115,7 @@ const UserManagement = () => {
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
-                <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}>❌ Delete</button>
+                <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}>Delete</button>
               </td>
             </tr>
           ))}
