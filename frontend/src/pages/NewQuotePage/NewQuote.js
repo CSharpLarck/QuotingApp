@@ -1855,7 +1855,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
     value={selectedCategory}
     onChange={handleCategoryChange}
   >
-    <option value="">-- Select Category --</option>
+    <option value="">Select Category</option>
     {categories.length > 0 ? (
       categories.sort().map((category, index) => (
         <option key={index} value={category}>
@@ -1879,7 +1879,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
     onChange={handleProductChange}
     disabled={products.length === 0}
   >
-    <option value="">--Select Product--</option>
+    <option value="">Select Product</option>
     {products.length > 0 ? (
       products
         .sort((a, b) => a.name.localeCompare(b.name))
@@ -1926,7 +1926,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
         }}
       >
          <option value="">
-          {["Blinds", "Shutters"].includes(selectedCategory) ? "--Select Color--" : "--Select Fabric--"}
+          {["Blinds", "Shutters"].includes(selectedCategory) ? "Select Color" : "Select Fabric"}
         </option>
         {fabricCollectionOptions
           .sort((a, b) => a.localeCompare(b)) // ✅ SORTING ADDED
@@ -1975,7 +1975,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Color--</option>
+        <option value="">Select Color</option>
         {fabricColorOptions
           .sort((a, b) => a.localeCompare(b))
           .map((color, index) => (
@@ -2039,7 +2039,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select a Width--</option>
+        <option value="">Select a Width</option>
         <option value="24">20"</option> {/* UI shows 20 but stores 24 */}
         <option value="40">40"</option>
       </select>
@@ -2102,7 +2102,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select a Height--</option>
+        <option value="">Select a Height</option>
         <option value="60">60"</option>
         <option value="72">72"</option>
         <option value="84">84"</option>
@@ -2173,7 +2173,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Pleat Style--</option>
+        <option value="">Select Pleat Style</option>
         <option value="2-Finger Pinch Pleat">2-Finger Pinch Pleat</option>
         <option value="3-Finger Pinch Pleat">3-Finger Pinch Pleat</option>
         <option value="2-Finger Inverted Pinch Pleat">2-Finger Inverted Pinch Pleat</option>
@@ -2220,7 +2220,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Mounting Position--</option>
+        <option value="">Select Mounting Position</option>
         <option value="Inside Mount">Inside Mount</option>
         <option value="Outside Mount">Outside Mount</option>
       </select>
@@ -2330,7 +2330,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
                 value={selectedOptions[categoryKey] || ""}
                 onChange={(e) => handleOptionChange(categoryKey, e.target.value)}
               >
-                <option value="">--Select Option--</option>
+                <option value="">Select Option</option>
                 {options
                   .sort((a, b) => a.localeCompare(b))
                   .map((option, idx) => (
@@ -2363,7 +2363,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Tilt Option--</option>
+        <option value="">Select Tilt Option</option>
         {optionsData["Tilt Options"]
           .sort((a, b) => a.localeCompare(b))
           .map((option, idx) => (
@@ -2421,7 +2421,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
             }));
           }}
         >
-          <option value="">--Select Headbox Option--</option>
+          <option value="">Select Headbox Option</option>
           {allowedOptions
             .sort((a, b) => a.localeCompare(b))
             .map((option, idx) => (
@@ -2470,7 +2470,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Fascia Color--</option>
+        <option value="">Select Fascia Color</option>
         <option value="Black">Black</option>
         <option value="Grey">Grey</option>
         <option value="Tan">Tan</option>
@@ -2512,7 +2512,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Liner--</option>
+        <option value="">Select Liner</option>
         {optionsData["Liner Options"]
           .sort((a, b) => a.localeCompare(b))
           .map((option, idx) => (
@@ -2558,7 +2558,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
             }));
           }}
         >
-          <option value="">--Select Liner Color--</option>
+          <option value="">Select Liner Color</option>
           <option value="White">White</option>
           <option value="Off White">Off White</option>
         </select>
@@ -2585,7 +2585,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
             }));
           }}
         >
-          <option value="">--Select Liner Color--</option>
+          <option value="">Select Liner Color</option>
           {["White", "Cream", "Teak", "Natural", "Gray"].map((color, idx) => (
             <option key={idx} value={color}>
               {color}
@@ -2614,7 +2614,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Shade Style--</option>
+        <option value="">Select Shade Style</option>
         {optionsData["Shade Styles"]
           .slice() // ✅ Make a copy before sorting (to prevent modifying the original array)
           .sort((a, b) => a.localeCompare(b)) // ✅ Alphabetical Sorting
@@ -2679,7 +2679,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
             }));
           }}
         >
-          <option value="">--Select Option--</option>
+          <option value="">Select Option</option>
           {filteredOptions.map((option, idx) => (
             <option key={idx} value={option}>
               {option}
@@ -2709,7 +2709,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Option--</option>
+        <option value="">Select Option</option>
         {optionsData["Control Options"].map((option, idx) => (
           <option key={idx} value={option}>
             {option}
@@ -2743,7 +2743,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Hardware Option--</option>
+        <option value="">Select Hardware Option</option>
         {optionsData["Hardware Options"].map((option, idx) => {
           const renamedOption = {
             "Decorative Pole With Rings": "Decorative Pole",
@@ -2799,7 +2799,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
         }));
       }}
     >
-      <option value="">--Select Control Position--</option>
+      <option value="">Select Control Position</option>
       <option value="Right Side">Right Side</option>
       <option value="Left Side">Left Side</option>
     </select>
@@ -2864,7 +2864,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Color--</option>
+        <option value="">Select Color</option>
         <option value="Black">Black</option>
         <option value="Gold">Gold</option>
         <option value="Silver">Silver</option>
@@ -2895,7 +2895,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
             }));
           }}
         >
-          <option value="">--Select Finial Option--</option>
+          <option value="">Select Finial Option</option>
           <option value="Ball">Ball</option>
           <option value="End Cap">End Cap</option>
           <option value="Faceted">Faceted</option>
@@ -2944,7 +2944,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Option--</option>
+        <option value="">Select Option</option>
         {optionsData["Additional Options"]
           .filter(option => option !== "6 Valence") // ✅ Exclude "Valence"
           .map((option, idx) => (
@@ -2974,7 +2974,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
                 }));
               }}
             >
-              <option value="">--Select Tape Type--</option>
+              <option value="">Select Tape Type</option>
               <option value="Chain">Chain</option>
               <option value="Diamond">Diamond</option>
               <option value="Scalloped">Scalloped</option>
@@ -3016,7 +3016,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
                   }));
                 }}
               >
-                <option value="">--Select Tape Color--</option>
+                <option value="">Select Tape Color</option>
                 {getAvailableColors(decorativeTapeType).map((color) => (
                   <option key={color} value={color}>
                     {color}
@@ -3052,7 +3052,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
         }));
       }}
     >
-      <option value="">--Select Handle Option--</option>
+      <option value="">Select Handle Option</option>
       <option value="4ft Handle">4ft Handle</option>
       <option value="5ft Handle">5ft Handle</option>
       <option value="6ft Handle">6ft Handle</option>
@@ -3080,7 +3080,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-        <option value="">--Select Hinge Color--</option>
+        <option value="">Select Hinge Color</option>
         <option value="Antique Brass">Antique Brass</option>
         <option value="Off White">Off White</option>
         <option value="Oil Rubbed Bronze">Oil Rubbed Bronze</option>
