@@ -1,8 +1,8 @@
 # Quoting App – QA Automation / SDET Project
 
-Portfolio project demonstrating junior SDET practices using Playwright, TypeScript, UI/API testing, and CI automation via GitHub Actions.
+Portfolio project demonstrating junior SDET practices using Playwright, TypeScript, UI/API testing, and CI/CD automation with GitHub Actions.
 
-This is a real-world B2B SaaS quoting application originally built for a remodeling and wholesale supply business, now used as a live automation testing environment.
+This is a real-world B2B SaaS quoting application originally built for a remodeling and wholesale supply business, now used as a live automation testing environment for test design, debugging, and continuous testing.
 
 The application simulates production workflows including authentication, quote creation, pricing logic, form validation, and data persistence.
 
@@ -28,16 +28,21 @@ A demo account is available directly on the sign-in page.
 - Playwright  
 - TypeScript  
 - End-to-End Testing  
-- API Testing (Playwright APIRequest)  
-- GitHub Actions (CI)
+- API Testing (Playwright APIRequest)
+
+### DevOps / CI/CD
+- GitHub Actions  
+- Automated Test Pipelines  
+- Test-Gated Deployment Workflow  
+- Firebase Hosting Deployment Automation
 
 ---
 
 ## Current Test Coverage
 
 - 20+ automated tests  
-- 5 critical user workflows covered  
 - Smoke and regression suites implemented  
+- Critical quote workflow coverage in place  
 - UI and API validation coverage in progress  
 
 ### Core Flows Tested
@@ -67,65 +72,3 @@ tests/
   pages/
   fixtures/
   utils/
-```
-
----
-
-## CI/CD
-
-Automated UI tests run through GitHub Actions on every push to `main`.
-
-Pipeline:
-- Installs dependencies  
-- Executes Playwright test suite  
-- Surfaces failures during CI before changes are merged  
-
----
-
-## Why This Project
-
-Unlike tutorial automation projects, this framework tests a real application used in business workflows, including pricing logic, authentication, and persisted quote data.
-
-The goal is to demonstrate practical SDET skills around automation design, system validation, and continuous testing.
-
----
-
-## Example Test
-
-```ts
-test('invalid login shows validation error', async ({ page }) => {
-  await page.goto('/signin');
-  await page.fill('#email', 'bad@test.com');
-  await page.fill('#password', 'wrongpass');
-  await page.click('text=Sign In');
-
-  await expect(
-    page.getByText(/invalid/i)
-  ).toBeVisible();
-});
-```
-
----
-
-## Run Tests Locally
-
-```bash
-npm install
-npx playwright test
-```
-
-Run smoke suite only:
-
-```bash
-npx playwright test -m smoke
-```
-
----
-
-## Repository Purpose
-
-This repository serves as:
-- QA Automation / SDET portfolio project  
-- Real-world Playwright testing framework  
-- Sandbox for expanding UI and API automation coverage  
-- Continuous learning project focused on scalable test engineering
