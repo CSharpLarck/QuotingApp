@@ -1906,9 +1906,9 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
 {/* Select Fabric OR Color (Dynamic) */}
 {fabricCollectionOptions.length > 0 && (
   <div className="dropdown-container">
-    <label className="form-label">
-      {["Blinds", "Shutters"].includes(selectedCategory) ? "Select Color:" : "Select Fabric:"}
-    </label>
+<label htmlFor="fabric-option" className="form-label">
+  {["Blinds", "Shutters"].includes(selectedCategory) ? "Select Color:" : "Select Fabric:"}
+</label>
     <div className="dropdown-with-info">
       <select
         className={`form-select ${validationErrors.selectedFabricOption ? "error" : ""}`}
@@ -1925,9 +1925,9 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
           }));
         }}
       >
-         <option value="">
-          {["Blinds", "Shutters"].includes(selectedCategory) ? "Select Color" : "Select Fabric"}
-        </option>
+        <option value="">
+      {["Blinds", "Shutters"].includes(selectedCategory) ? "Select Color" : "Select Fabric"}
+    </option>
         {fabricCollectionOptions
           .sort((a, b) => a.localeCompare(b)) // ✅ SORTING ADDED
           .map((option, index) => (
