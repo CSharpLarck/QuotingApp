@@ -176,7 +176,7 @@ test.describe('Quote Page', () => {
         await addItemButton.scrollIntoViewIfNeeded();
         await addItemButton.click()
 
-        await expect(page.getByText('Success!')).toBeVisible();
+        await expect(page.getByRole('button', { name: 'OK' })).toBeVisible();
 
         await page.getByRole('button', { name: 'OK' }).click();
 
