@@ -31,7 +31,7 @@ A demo account is available directly on the sign-in page.
 - API Testing (Playwright APIRequest)
 
 ### DevOps / CI/CD
-- GitHub Actions  
+- GitHub  Actions  
 - Automated Test Pipelines  
 - Test-Gated Deployment Workflow  
 - Firebase Hosting Deployment Automation
