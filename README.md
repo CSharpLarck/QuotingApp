@@ -72,3 +72,9 @@ tests/
   pages/
   fixtures/
   utils/
+
+
+- Refactored test setup using reusable helper functions for authentication and quote creation flows
+- Investigated and documented flaky UI modal behavior in add-item workflow
+
+// TODO: Investigate flaky add-item modal test (possible localStorage or async timing issue)
