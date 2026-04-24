@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../frontend/src/firebase";
+import { db } from "./src/firebase";
 
 async function fetchProducts() {
     const querySnapshot = await getDocs(collection(db, "products"));

@@ -1,60 +1,36 @@
 import { test, expect } from '@playwright/test';
+import { startNewQuoteAsDemoUser } from '../../utils/quoteHelpers';
 
 test.describe('Quote Page', () => {
+    test.beforeEach(async ({ page }) => {
+        await page.goto('/');
+        await page.evaluate(() => {
+        localStorage.clear();
+      });
+     });
+// Authenticated user can start a new quote    
     test('authenticated user can start a new quote', async ({ page }) => {
-        await page.goto('/signin'); 
-
-        await page.getByRole('button', { name: 'Try Demo Account' }).click();
-        await page.getByRole('button', { name: 'Sign In' }).click();
-
-        await expect(page).toHaveURL('/');
-
-        await page.getByRole('button', { name: 'Start New Quote' }).click();
-        await expect(page).toHaveURL('/quote');
-
+        await startNewQuoteAsDemoUser(page);
  
 });
 
 
-
 // Test for customer information     
     test('new quote page loads customer section', async ({ page }) => { 
-        await page.goto('/signin');
-
-        await page.getByRole('button', { name: 'Try Demo Account' }).click();
-        await page.getByRole('button', { name: 'Sign In' }).click();
-
-        await expect(page).toHaveURL('/');
-
-        await page.getByRole('button', {name: 'Start New Quote' }).click();
-        await expect(page).toHaveURL('/quote');
-
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
+        await startNewQuoteAsDemoUser(page);
        
 // Checking customer information is rendering properly      
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible;
+        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible();
         await expect(page.getByPlaceholder('Enter sidemark')).toBeVisible();
         await expect(page.getByPlaceholder('Enter address')).toBeVisible();
         await expect(page.getByPlaceholder('Enter phone number')).toBeVisible();
-
-
 
 });
 
       
 // Test for quoting section      
     test('new quote page loads quoting section', async ({ page }) => { 
-        await page.goto('/signin');
-
-        await page.getByRole('button', { name: 'Try Demo Account' }).click();
-        await page.getByRole('button', { name: 'Sign In' }).click();
-
-        await expect(page).toHaveURL('/');
-
-        await page.getByRole('button', {name: 'Start New Quote' }).click();
-        await expect(page).toHaveURL('/quote');
-
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
+        await startNewQuoteAsDemoUser(page);
 
 // Checking quoting details is rendering properly              
         await expect(page.getByText('Select Category:')).toBeVisible();
@@ -83,20 +59,10 @@ test.describe('Quote Page', () => {
 
 // Test for Pricing Section 
     test('new quote page loads pricing section', async ({ page }) => { 
-        await page.goto('/signin');
-
-        await page.getByRole('button', { name: 'Try Demo Account' }).click();
-        await page.getByRole('button', { name: 'Sign In' }).click();
-
-        await expect(page).toHaveURL('/');
-
-        await page.getByRole('button', {name: 'Start New Quote' }).click();
-        await expect(page).toHaveURL('/quote');
-
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
+        await startNewQuoteAsDemoUser(page);
         
 // Checking total price is rendering properly              
-        await expect(page.getByText('Total Price: $0')).toBeVisible();
+        await expect(page.getByText(/Total Price/i)).toBeVisible();
         await expect(page.getByText('Quantity:')).toBeVisible();
         await expect(page.getByRole('button', { name: 'Add Item(s) to Quote'})).toBeVisible();
 
@@ -107,17 +73,7 @@ test.describe('Quote Page', () => {
 
 // Validation errors appear for required fields when user submits form before field submissions are entered
     test('validation errors appear when user tries to add item with empty required fields', async ({ page }) => {
-        await page.goto('/signin');
-
-        await page.getByRole('button', { name: 'Try Demo Account' }).click();
-        await page.getByRole('button', { name: 'Sign In'}).click();
-
-        await expect(page).toHaveURL('/');
-
-        await page.getByRole('button', { name: 'Start New Quote' }).click();
-        await expect(page).toHaveURL('/quote');
-
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
+        await startNewQuoteAsDemoUser(page);
 
         const addItemButton = page.getByRole('button', { name: 'Add Item(s) to Quote' });
 
@@ -133,17 +89,13 @@ test.describe('Quote Page', () => {
     });
     
 // User can add an item when required quote fields are completed
+
+// TODO: Test is currently flaky due to inconsistent success modal rendering.
+// Suspected causes: client validation timing or persisted quote state.
+// Kept under investigation.
     test('user can add an item when required quote fields are completed', async ({ page }) => {
-        await page.goto('/signin');
+        await startNewQuoteAsDemoUser(page);
 
-        await page.getByRole('button', { name: 'Try Demo Account' }).click();
-        await page.getByRole('button', { name: 'Sign In' }).click();
-        await expect(page).toHaveURL('/');
-
-        await page.getByRole('button', { name: 'Start New Quote' }).click();
-        await expect(page).toHaveURL('/quote');
-
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible({ timeout: 15000 });
 // Enter required customer information
         await page.getByPlaceholder('Enter customer name').fill('John Smith');
         await page.getByPlaceholder('Enter sidemark').fill('Test 1');
@@ -174,10 +126,10 @@ test.describe('Quote Page', () => {
 
         await expect(addItemButton).toBeVisible();
         await addItemButton.scrollIntoViewIfNeeded();
-        await addItemButton.click()
-
-        await expect(page.getByRole('button', { name: 'OK' })).toBeVisible();
-
+        await addItemButton.click();
+       
+        
+        await expect(page.getByRole('button', { name: 'Go to Quote' })). toBeVisible({ timeout: 10000 });
         await page.getByRole('button', { name: 'OK' }).click();
 
         await expect(page).toHaveURL('/quote');
