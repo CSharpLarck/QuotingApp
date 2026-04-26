@@ -67,10 +67,9 @@ jobs:
       - name: Run regression tests
         run: npx playwright test --grep "@regression"
         env:
-          env:
-            FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
-            FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
-            FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.FIREBASE_CLIENT_EMAIL }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
             
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
