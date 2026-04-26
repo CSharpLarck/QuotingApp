@@ -1,6 +1,6 @@
 # Quoting App — QA Automation / SDET Portfolio Project
 
-[![Playwright Tests](https://github.com/YOUR-USERNAME/QuotingApp/actions/workflows/playwright.yml/badge.svg)](https://github.com/YOUR-USERNAME/QuotingApp/actions/workflows/playwright.yml)
+[![Playwright Tests](https://github.com/matthewlarck-portfolio/QuotingApp/actions/workflows/playwright.yml/badge.svg)](https://github.com/matthewlarck-portfolio/QuotingApp/actions/workflows/playwright.yml)
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
