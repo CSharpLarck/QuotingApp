@@ -19,3 +19,4 @@ export async function loginAsTestUser(page: Page) {
     await page.getByPlaceholder('Password').fill(testUserPassword);
     await page.getByRole('button', { name: 'Sign In' }).click();
 }
+

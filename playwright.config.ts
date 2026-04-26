@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import 'dotenv/config';
 
 const baseURL = process.env.BASE_URL || 'http://localhost:3000';
 

@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/plugin-transform-classes": "^7.25.9"
+    "@babel/plugin-transform-classes": "^7.25.9",
+    "dotenv": "^17.4.2"
   }
 }
