@@ -12,8 +12,6 @@ import ManageQuotesOrders from "./pages/ManageQuotesPage/ManageQuotesOrders";
 import Resources from "./pages/ResourcesPage/Resources";
 import Settings from "./pages/SettingsPage/Settings";
 import SignIn from "./pages/SignInPage/SignIn";
-import BrochurePage from "./pages/BrochurePage/BrochurePage";
-import CuratedCollection from "./pages/CuratedCollectionPage/CuratedCollection";
 import QuotingPage from "./pages/NewQuotePage/NewQuote";
 import QuotePage from "./pages/QuotePage/QuotePage";
 import RegisterUser from "./pages/RegisterUserPage/RegisterUser";
@@ -93,8 +91,6 @@ const MainRoutes = ({ categories }) => {
         {/* Public routes that do not require authentication. */}
         <Route path="/resources" element={<Resources />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/brochure" element={<BrochurePage />} />
-        <Route path="/curatedcollection" element={<CuratedCollection />} />
         <Route
           path="/quotingpage/edit/:quoteId/:editItemIndex"
           element={<QuotingPage />}

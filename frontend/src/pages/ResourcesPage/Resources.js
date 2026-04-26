@@ -1,28 +1,11 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';  // Ensure this import is present
 import './Resources.css';
 
 const Resources = () => {
-  const navigate = useNavigate();  // Use navigate here
-
-  const handleViewBrochure = () => {
-    navigate('/brochure');
-  };
-
-  const handleViewCuratedCollection = () => {
-    navigate('/curatedcollection');
-  };
 
   return (
     <div className="resources-container">
-      <section className="resources">
-        <h1>Resources</h1>
-      </section>
-      <div className="resources-buttons">
-    <button className="resources-button" onClick={handleViewBrochure}>Product Brochure</button>
-    <button className="resources-button" onClick={handleViewCuratedCollection}>Fabric Collection</button>
-
-  </div>
+      
 
       <div className="product-resources">
         {/* Quick Ship Panels & Hardware */}
