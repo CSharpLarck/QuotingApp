@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { startNewQuoteAsDemoUser } from '../../utils/quoteHelpers';
+import { startNewQuoteAsDemoUser, startNewQuoteAsTestUser } from '../../utils/quoteHelpers';
 
 test.describe('Quote Page', () => {
     test.beforeEach(async ({ page }) => {
@@ -10,14 +10,18 @@ test.describe('Quote Page', () => {
 
 // Authenticated user can start a new quote    
     test('@smoke authenticated user can start a new quote', async ({ page }) => {
-        await startNewQuoteAsDemoUser(page);
+        await startNewQuoteAsTestUser(page);
  
 });
 
-
+// Demo User can Sign In
+    test('@smoke demo user can start a new quote', async ({ page }) => {
+        await startNewQuoteAsDemoUser(page);
+ 
+});
 // Test for customer information     
     test('@smoke new quote page loads customer section', async ({ page }) => { 
-        await startNewQuoteAsDemoUser(page);
+        await startNewQuoteAsTestUser(page);
        
 // Checking customer information is rendering properly      
         await expect(page.getByPlaceholder('Enter customer name')).toBeVisible();
@@ -30,7 +34,7 @@ test.describe('Quote Page', () => {
       
 // Test for quoting section      
     test('@regression new quote page loads quoting section', async ({ page }) => { 
-        await startNewQuoteAsDemoUser(page);
+        await startNewQuoteAsTestUser(page);
 
 // Checking quoting details is rendering properly              
         const categorySelect = page.getByTestId('category-select');
@@ -58,7 +62,7 @@ test.describe('Quote Page', () => {
 
 // Test for Pricing Section 
     test('@smoke new quote page loads pricing section', async ({ page }) => { 
-        await startNewQuoteAsDemoUser(page);
+        await startNewQuoteAsTestUser(page);
         
 // Checking total price is rendering properly              
         await expect(page.getByText(/Total Price/i)).toBeVisible();
@@ -72,7 +76,7 @@ test.describe('Quote Page', () => {
 
 // Validation errors appear for required fields when user submits form before field submissions are entered
     test('@regression validation errors appear when user tries to add item with empty required fields', async ({ page }) => {
-        await startNewQuoteAsDemoUser(page);
+        await startNewQuoteAsTestUser(page);
 
         const addItemButton = page.getByRole('button', { name: 'Add Item(s) to Quote' });
 
@@ -93,7 +97,7 @@ test.describe('Quote Page', () => {
 // Suspected causes: client validation timing or persisted quote state.
 // Kept under investigation.
     test('@flaky user can add an item when required quote fields are completed', async ({ page }) => {
-        await startNewQuoteAsDemoUser(page);
+        await startNewQuoteAsTestUser(page);
 
         const id = Date.now();
         const uniqueCustomerName = `Customer-${id}`
