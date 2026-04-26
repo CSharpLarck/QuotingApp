@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { loginAsDemoUser, loginAsTestUser } from '../../utils/authHelpers';
 
 test.describe('Authentication', () => {
     test('@smoke login page loads', async ({ page }) => {
@@ -15,9 +16,7 @@ test.describe('Authentication', () => {
 
         await page.getByPlaceholder('Email Address').fill('Wrongemail@email.com');
         await page.getByPlaceholder('Password').fill('Wrongpassword');
-
         await page.getByRole('button', { name: 'Sign In' }).click();
-
         await expect(page.getByText('Invalid email or password')).toBeVisible();    });
     });
 
@@ -25,13 +24,7 @@ test.describe('Authentication', () => {
 
 // Testing user can login with correct email and password
     test('@smoke valid login redirects to qoutes dashboard', async ({ page }) => {
-        await page.goto('/');
-
-        await page.getByPlaceholder('Email Address').fill('demo@designerblindsapp.com');
-        await page.getByPlaceholder('Password').fill('Demo1234!');
-
-        await page.getByRole('button', { name: 'Sign In' }).click();
-
+        await loginAsTestUser(page);
         await expect(page).toHaveURL('/');
     });
 
@@ -39,13 +32,7 @@ test.describe('Authentication', () => {
 
 // Testing logout functionailty works as expected
     test('@smoke valid logout returns user to sign in page', async ({ page }) => {
-        await page.goto('/');
-
-        await page.getByPlaceholder('Email Address').fill('demo@designerblindsapp.com');
-        await page.getByPlaceholder('Password').fill('Demo1234!');
-
-        await page.getByRole('button', { name: 'Sign In' }).click();
-
+        await loginAsTestUser(page);
         await expect(page).toHaveURL('/');
 
         await page.getByRole('button', { name: 'Logout' }).click();
@@ -73,13 +60,9 @@ test.describe('Authentication', () => {
 
         await page.getByRole('button', { name: 'Try Demo Account' }).click();
 
-        await expect(
-            page.getByPlaceholder('Email Address')
-        ).toHaveValue('demo@designerblindsapp.com');
+        await expect(page.getByPlaceholder('Email Address')).toHaveValue(process.env.DEMO_EMAIL!);
 
-        await expect(
-            page.getByPlaceholder('Password')
-        ).toHaveValue('Demo1234!');
+        await expect(page.getByPlaceholder('Password')).toHaveValue(process.env.DEMO_PASSWORD!);
 
         await page.getByRole('button', { name: 'Sign In' }).click();
 

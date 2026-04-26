@@ -6,8 +6,8 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { useAuth } from "../../context/AuthContext";
 import "./SignIn.css";
 
-const DEMO_EMAIL = "demo@designerblindsapp.com";
-const DEMO_PASSWORD = "Demo1234!";
+const DEMO_EMAIL = process.env.REACT_APP_DEMO_EMAIL;
+const DEMO_PASSWORD = process.env.REACT_APP_DEMO_PASSWORD;
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
