@@ -9,22 +9,23 @@ test.describe('Quote Page', () => {
         await page.reload();
 });
 
-// Authenticated user can start a new quote    
+// Verifies an authenticated test user can initiate the core quote creation workflow.
     test('@smoke authenticated user can start a new quote', async ({ page }) => {
         await startNewQuoteAsTestUser(page);
  
 });
 
-// Demo User can Sign In
+// Verifies demo-account access can reach quote creation using the alternate login path.
     test('@demo demo user can start a new quote', async ({ page }) => {
         await startNewQuoteAsTestUser(page);
  
 });
-// Test for customer information     
+
+// Verifies the customer information section renders all required inputs for quote creation.
     test('@smoke new quote page loads customer section', async ({ page }) => { 
         await startNewQuoteAsTestUser(page);
        
-// Checking customer information is rendering properly      
+// Verifies required customer fields are present and available for user input.
         await expect(page.getByPlaceholder('Enter customer name')).toBeVisible();
         await expect(page.getByPlaceholder('Enter sidemark')).toBeVisible();
         await expect(page.getByPlaceholder('Enter address')).toBeVisible();
@@ -33,11 +34,11 @@ test.describe('Quote Page', () => {
 });
 
       
-// Test for quoting section      
+// Verifies the quoting section renders product configuration inputs needed for quote building.
     test('@regression new quote page loads quoting section', async ({ page }) => { 
         await startNewQuoteAsTestUser(page);
 
-// Checking quoting details is rendering properly              
+// Verifies product-selection controls and dependent quote configuration fields render correctly.
         const categorySelect = page.getByTestId('category-select');
         await expect(categorySelect).toBeVisible();
         await categorySelect.selectOption('Blinds');
@@ -60,12 +61,10 @@ test.describe('Quote Page', () => {
 });
 
         
-
-// Test for Pricing Section 
+// Verifies pricing components and add-item controls are present in the quote workflow.
     test('@smoke new quote page loads pricing section', async ({ page }) => { 
         await startNewQuoteAsTestUser(page);
         
-// Checking total price is rendering properly              
         await expect(page.getByText(/Total Price/i)).toBeVisible();
         await expect(page.getByText('Quantity:')).toBeVisible();
         await expect(page.getByRole('button', { name: 'Add Item(s) to Quote'})).toBeVisible();
@@ -75,7 +74,7 @@ test.describe('Quote Page', () => {
 
 
 
-// Validation errors appear for required fields when user submits form before field submissions are entered
+// Verifies required-field validation blocks incomplete quote submissions.
     test('@regression validation errors appear when user tries to add item with empty required fields', async ({ page }) => {
         await startNewQuoteAsTestUser(page);
 
@@ -92,11 +91,11 @@ test.describe('Quote Page', () => {
 
     });
     
-// User can add an item when required quote fields are completed
+// Verifies a user can complete a quote item workflow when all required data is provided.
 
-// TODO: Test is currently flaky due to inconsistent success modal rendering.
-// Suspected causes: client validation timing or persisted quote state.
-// Kept under investigation.
+// Temporarily marked flaky due to inconsistent modal behavior after submission.
+// Suspected instability relates to async UI timing or persisted quote state.
+// Retained for investigation because it covers an important end-to-end workflow.
     test('@flaky user can add an item when required quote fields are completed', async ({ page }) => {
         const id = Date.now();
 
@@ -107,32 +106,32 @@ test.describe('Quote Page', () => {
         await startNewQuoteAsTestUser(page);
 
 
-// Enter required customer information
+// Populate required customer data needed for quote submission.
         await page.getByPlaceholder('Enter customer name').fill(uniqueCustomerName);
         await page.getByPlaceholder('Enter sidemark').fill(uniqueSideMark);
         await page.getByPlaceholder('Enter address').fill('123 Test Rd.');
         await page.getByPlaceholder('Enter phone number').fill('1232343455');
 
-// Category Selection
+// Configure product category selection.
         const categorySelect = page.getByTestId('category-select');
         await expect(categorySelect).toBeVisible();
         await categorySelect.selectOption('Blinds');   
 
-// Product Selection        
+// Configure product selection.
         const productSelect = page.getByTestId('product-select');
         await expect(productSelect).toBeVisible();
         await productSelect.selectOption({ label: '2" Faux Wood Blinds' });
 
-// Wait for color dropdown to appear after product selection
+// Verifies dependent color options appear after product selection.
         const colorSelect = page.getByTestId('color-select');
         await expect(colorSelect).toBeVisible();
         await colorSelect.selectOption({ label: 'Alabaster' });
 
-// Dimensions
+// Populate required dimensional inputs.
         await page.getByPlaceholder('Width (inches)').fill('24');
         await page.getByPlaceholder('Height (inches)').fill('42');
 
-// Wait for mounting postion dropdown too
+// Verifies mounting options render after dimensions and product selections.
         const mountingSelect = page.getByTestId('mounting-position-select');
         await expect(mountingSelect).toBeVisible();
         await mountingSelect.selectOption({ label: 'Inside Mount' });
@@ -157,6 +156,7 @@ test.describe('Quote Page', () => {
 
         await expect(page).toHaveURL(/\/quote\/.+/);
         
+// Ensure test-created quote data is cleaned up regardless of test outcome.
     } finally {
         await deleteQuotesByCustomerName(uniqueCustomerName);
     }
