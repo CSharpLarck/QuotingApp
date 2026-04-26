@@ -1,10 +1,16 @@
-# Quoting App – QA Automation / SDET Project
+# Quoting App — QA Automation / SDET Portfolio Project
 
 Portfolio project demonstrating junior SDET practices using Playwright, TypeScript, UI/API testing, and CI/CD automation with GitHub Actions.
 
-This is a real-world B2B SaaS quoting application originally built for a remodeling and wholesale supply business, now used as a live automation testing environment for test design, debugging, and continuous testing.
+This is a real-world B2B SaaS quoting application originally built for business use and now used as a live automation testing environment for test design, debugging, and continuous testing.
 
-The application simulates production workflows including authentication, quote creation, pricing logic, form validation, and data persistence.
+The application includes workflows involving:
+
+- Authentication  
+- Quote creation  
+- Pricing logic  
+- Form validation  
+- Firestore data persistence
 
 ---
 
@@ -12,7 +18,7 @@ The application simulates production workflows including authentication, quote c
 
 https://designerblinds-c482a.web.app
 
-A demo account is available directly on the sign-in page.
+A demo account is available on the sign-in page.
 
 ---
 
@@ -21,60 +27,79 @@ A demo account is available directly on the sign-in page.
 ### Application
 - React  
 - Firebase Authentication  
-- Firestore Database  
-- Firebase Hosting  
+- Firestore  
+- Firebase Hosting
 
 ### Test Automation
 - Playwright  
 - TypeScript  
 - End-to-End Testing  
-- API Testing (Playwright APIRequest)
+- API Testing (in progress)
 
-### DevOps / CI/CD
-- GitHub  Actions  
-- Automated Test Pipelines  
-- Test-Gated Deployment Workflow  
-- Firebase Hosting Deployment Automation
+### CI/CD
+- GitHub Actions  
+- Test-gated deployment workflow
 
 ---
 
 ## Current Test Coverage
 
-- 20+ automated tests  
-- Smoke and regression suites implemented  
-- Critical quote workflow coverage in place  
-- UI and API validation coverage in progress  
+Current automated coverage includes:
 
-### Core Flows Tested
-- User authentication (valid + invalid login)  
-- Route protection and session handling  
-- Quote creation and editing  
-- Form validation and required fields  
-- Data persistence and retrieval  
+- Authentication workflows  
+- Quote creation validation  
+- Required field validation  
+- Pricing section checks  
+- Critical-path smoke tests
+
+Additional regression coverage in progress.
 
 ---
 
 ## Test Architecture
 
 - Playwright Test Runner  
-- Page Object Model (POM)  
-- Modular test structure (e2e / smoke / regression)  
-- Reusable fixtures and test data  
-- Environment-based configuration  
+- Reusable helper abstractions  
+- Page Object Model patterns (in progress)  
+- Fixture-driven test setup  
+- Environment-based configuration (planned)
 
 ```text
 tests/
-  e2e/
-    auth/
-    quotes/
-  smoke/
-  regression/
-  pages/
-  fixtures/
-  utils/
+ ├── auth/
+ └── quotes/
 
+utils/
+fixtures/
+.github/workflows/
+```
 
-- Refactored test setup using reusable helper functions for authentication and quote creation flows
-- Investigated and documented flaky UI modal behavior in add-item workflow
+---
 
-// TODO: Investigate flaky add-item modal test (possible localStorage or async timing issue)
+## Getting Started
+
+```bash
+npm ci
+npx playwright install
+npm start
+npm run test:e2e
+npm run test:smoke
+```
+
+---
+
+## Recent Improvements
+
+- Added smoke test tagging for critical workflows  
+- Refactored reusable helpers for auth and quote setup  
+- Investigating flaky add-item modal behavior  
+- Improving condition-based waits to reduce flakiness
+
+---
+
+## Roadmap
+
+- Expand regression coverage  
+- Add quote edit/delete coverage  
+- Expand API validation  
+- Continue reducing flaky behavior

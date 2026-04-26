@@ -3,19 +3,26 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:regression": "playwright test --grep @regression",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CSharpLarck/QuotingApp.git"
+    "url": "git+https://github.com/matthewlarck-portfolio/QuotingApp.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/CSharpLarck/QuotingApp/issues"
+    "url": "https://github.com/matthewlarck-portfolio/QuotingApp/issues"
   },
-  "homepage": "https://github.com/CSharpLarck/QuotingApp#readme",
+  "homepage": "https://github.com/matthewlarck-portfolio/QuotingApp#readme",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.0",
