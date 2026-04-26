@@ -30,6 +30,10 @@ jobs:
 
       - name: Run smoke tests
         run: npx playwright test --grep "@smoke"
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.designerblinds-c482a }}
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.github-action-932390538@designerblinds-c482a.iam.gserviceaccount.com }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDcsCQec8UqnyjE\nbJMXE81H/bt5yJlo1TMFrtF/nELleKJVY3i8RGlC4TW+ZTal3k+M4K/my6bqAk4U\nhiAmdLnC6tNP2yH5GBDAPE8mS3uqQF1AzpQsPcBS78qtawsmGUD92JHKE99sH4yI\nxPSXsi61GXJRth35jxrR59vl9YCgLhrqPda980uGs0ygPzVVTfZY/AJynffJX6wE\nFHiwNOUuO2AW3gw+rba9w72vr+LJ002bRVYHaB2diPPcCaw3xg91J2FEvXvVlSb6\nqK2kuXzHDrRfVuw7RFKqUpQMqsnXEupfz1r5n/PEgsdl7tLMMeq6BT2VLav8X6Xm\npmIu40E9AgMBAAECggEAOcmh25uDEJMWsMChj5Ru16AYXF5r1WimcKGDWEAJwF7j\nWyqt7daYHZwtX4rPUYWyHPik9vFy5qnt2i/48Tj1f5XP+YQvFDP6BuyD6UowurcZ\n9CNj52XQG6eQ0fJKvBI204HHQzwK8Bwex52TUrmkw2VDayQeG0AezMJC8adkpAyR\n9KU8yBsMqWheOtCnfJBme9oDUhycU0l/VY37I5hc2P/jKKa23jv9JZi95BVSQFoV\neH4JkpUVpzeq/eqfqayVC1wX12EmrS6ZLDQJRKsUdIX1JNTwevKIOUfjEgFApQHK\nwGY7TGQwtl8sfHYlus3pSJOqQpdfMVS6tZNVXyDpfQKBgQD6ze5LCl2k4LD3tOdS\nSql8Cxnzcn+vn9CqAO4CUF9BdcswDU0nkR/xfWRTS71VNqlXcUSstYLM0+cc5DQZ\nQwmY6c2SZmLsX4qPs3NnISEC0cv6AjOuifmC2ddvtqJN6bdXjn5M2MzwXNbaaciE\n1FMogpRcOf5ecJ+IteG2ppueRwKBgQDhQn8ryp6qJbPuNZMihwMCcCBWNwfiVjHP\nBfrZGuDOYRXFIVTfSyFE/yACPR0q3s5H7vdd5wgVuXySk82N/7oM9XUPNz9daGNB\namzhiqV7j2XCZIF0nuJAjI9OIvsA/OFfYQwkAMJZToW1huc3JSZ3SxpgOeEfjz4I\nTSfbi4cSWwKBgQCCjSNXSGQKaTN1HWO0AE1M1nKBuL4iayww8h7ycWfEKU7FCod4\n6yAXkk/g0/IQI03uyHUY+brGaB9LeLZt1+ltAXcSl90ycWEtABo4OpR2ZUKqNu80\nEXoh1MdBzW2a5Oec2f2AfvHexFTKiHnqOqO22JHlmAKCollIznRZoUwsDQKBgQCG\nZGHzAoP/B1d+O0B5TQuinLruNQ7jHoHA/dRXSw3sk0elwOkd/3jt7ThvnX6VYTC5\nAf1bbMcKDwwfd0cf/P5HVPpuBYwscmclVBV5ynpIaZlQjR4fMdvSnwmwmHYgdL8R\nZJkVsc5B8fMcBkxUPjng2lH2LxH8/j0IPuAUv/3qGQKBgQCllW3XD81pfNKPrj4J\nwPSV7QjiKM5agdX4oZGybNpQtm/34jC6xVeOIf5yHOcO2cXSbUl4oBGAipng4S+P\nHmFNC7QRwR4afFj1oamUWf6wjR5smkxJPcgNdzAFBJJhRRjSRi1/v8n4ycx4DLv9\ndIXoVIhtr1ZaHrFSniegXPzBoA==\n-----END PRIVATE KEY-----\n }}
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
@@ -62,6 +66,10 @@ jobs:
 
       - name: Run regression tests
         run: npx playwright test --grep "@regression"
+        env:
+          FIREBASE_PROJECT_ID: ${{ secrets.designerblinds-c482a }}
+          FIREBASE_CLIENT_EMAIL: ${{ secrets.github-action-932390538@designerblinds-c482a.iam.gserviceaccount.com }}
+          FIREBASE_PRIVATE_KEY: ${{ secrets.-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDcsCQec8UqnyjE\nbJMXE81H/bt5yJlo1TMFrtF/nELleKJVY3i8RGlC4TW+ZTal3k+M4K/my6bqAk4U\nhiAmdLnC6tNP2yH5GBDAPE8mS3uqQF1AzpQsPcBS78qtawsmGUD92JHKE99sH4yI\nxPSXsi61GXJRth35jxrR59vl9YCgLhrqPda980uGs0ygPzVVTfZY/AJynffJX6wE\nFHiwNOUuO2AW3gw+rba9w72vr+LJ002bRVYHaB2diPPcCaw3xg91J2FEvXvVlSb6\nqK2kuXzHDrRfVuw7RFKqUpQMqsnXEupfz1r5n/PEgsdl7tLMMeq6BT2VLav8X6Xm\npmIu40E9AgMBAAECggEAOcmh25uDEJMWsMChj5Ru16AYXF5r1WimcKGDWEAJwF7j\nWyqt7daYHZwtX4rPUYWyHPik9vFy5qnt2i/48Tj1f5XP+YQvFDP6BuyD6UowurcZ\n9CNj52XQG6eQ0fJKvBI204HHQzwK8Bwex52TUrmkw2VDayQeG0AezMJC8adkpAyR\n9KU8yBsMqWheOtCnfJBme9oDUhycU0l/VY37I5hc2P/jKKa23jv9JZi95BVSQFoV\neH4JkpUVpzeq/eqfqayVC1wX12EmrS6ZLDQJRKsUdIX1JNTwevKIOUfjEgFApQHK\nwGY7TGQwtl8sfHYlus3pSJOqQpdfMVS6tZNVXyDpfQKBgQD6ze5LCl2k4LD3tOdS\nSql8Cxnzcn+vn9CqAO4CUF9BdcswDU0nkR/xfWRTS71VNqlXcUSstYLM0+cc5DQZ\nQwmY6c2SZmLsX4qPs3NnISEC0cv6AjOuifmC2ddvtqJN6bdXjn5M2MzwXNbaaciE\n1FMogpRcOf5ecJ+IteG2ppueRwKBgQDhQn8ryp6qJbPuNZMihwMCcCBWNwfiVjHP\nBfrZGuDOYRXFIVTfSyFE/yACPR0q3s5H7vdd5wgVuXySk82N/7oM9XUPNz9daGNB\namzhiqV7j2XCZIF0nuJAjI9OIvsA/OFfYQwkAMJZToW1huc3JSZ3SxpgOeEfjz4I\nTSfbi4cSWwKBgQCCjSNXSGQKaTN1HWO0AE1M1nKBuL4iayww8h7ycWfEKU7FCod4\n6yAXkk/g0/IQI03uyHUY+brGaB9LeLZt1+ltAXcSl90ycWEtABo4OpR2ZUKqNu80\nEXoh1MdBzW2a5Oec2f2AfvHexFTKiHnqOqO22JHlmAKCollIznRZoUwsDQKBgQCG\nZGHzAoP/B1d+O0B5TQuinLruNQ7jHoHA/dRXSw3sk0elwOkd/3jt7ThvnX6VYTC5\nAf1bbMcKDwwfd0cf/P5HVPpuBYwscmclVBV5ynpIaZlQjR4fMdvSnwmwmHYgdL8R\nZJkVsc5B8fMcBkxUPjng2lH2LxH8/j0IPuAUv/3qGQKBgQCllW3XD81pfNKPrj4J\nwPSV7QjiKM5agdX4oZGybNpQtm/34jC6xVeOIf5yHOcO2cXSbUl4oBGAipng4S+P\nHmFNC7QRwR4afFj1oamUWf6wjR5smkxJPcgNdzAFBJJhRRjSRi1/v8n4ycx4DLv9\ndIXoVIhtr1ZaHrFSniegXPzBoA==\n-----END PRIVATE KEY-----\n }}
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

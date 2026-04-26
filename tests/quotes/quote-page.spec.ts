@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { startNewQuoteAsDemoUser, startNewQuoteAsTestUser } from '../../utils/quoteHelpers';
+import { deleteQuotesByCustomerName } from '../../utils/firebaseCleanup';
 
 test.describe('Quote Page', () => {
     test.beforeEach(async ({ page }) => {
