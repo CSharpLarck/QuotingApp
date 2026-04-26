@@ -66,7 +66,7 @@ Additional regression coverage in progress.
 - Reusable helper abstractions  
 - Page Object Model patterns (in progress)  
 - Fixture-driven test setup  
-- Environment-based configuration (planned)
+- Environment-based configuration  
 
 ```text
 tests/
@@ -82,12 +82,71 @@ fixtures/
 
 ## Getting Started
 
+### Prerequisites
+
+- Node.js 20+
+- npm
+- Playwright browsers
+
+### Clone repository
+
+```bash
+git clone https://github.com/matthewlarck-portfolio/QuotingApp.git
+cd QuotingApp
+```
+
+### Install root dependencies
+
 ```bash
 npm ci
+```
+
+### Install frontend dependencies
+
+```bash
+cd frontend
+npm ci
+```
+
+### Install Playwright browsers
+
+```bash
+cd ..
 npx playwright install
+```
+
+### Start the development server
+
+```bash
+cd frontend
 npm start
+```
+
+### Run tests (from project root)
+
+Open a second terminal:
+
+```bash
+# From project root
 npm run test:e2e
 npm run test:smoke
+npm run test:regression
+```
+
+### Notes
+
+- Local development currently uses a two-terminal workflow:
+  - Terminal 1 runs the React development server
+  - Terminal 2 runs Playwright tests
+
+- GitHub Actions runs smoke and regression suites in CI.
+
+- Test credentials are managed through environment variables using:
+
+```bash
+.env
+.env.example
+GitHub Actions secrets
 ```
 
 ---
