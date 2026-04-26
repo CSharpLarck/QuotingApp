@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const baseURL = process.env.BASE_URL || 'http://localhost:3000';
+
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -9,8 +11,10 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL,
     trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
 
   projects: [
@@ -20,10 +24,12 @@ export default defineConfig({
     },
   ],
 
-  webServer: {
-    command: 'cd frontend && npm start',
-    url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
-  },
+  webServer: process.env.BASE_URL
+    ? undefined
+    : {
+        command: 'cd frontend && npm start',
+        url: baseURL,
+        reuseExistingServer: !process.env.CI,
+        timeout: 120 * 1000,
+      },
 });

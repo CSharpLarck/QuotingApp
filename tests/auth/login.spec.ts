@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Authentication', () => {
-    test('login page loads', async ({ page }) => {
+    test('@smoke login page loads', async ({ page }) => {
         await page.goto('/');
 
         await expect(page).toHaveTitle(/Designer Blinds/i);
@@ -10,7 +10,7 @@ test.describe('Authentication', () => {
 
 
     // Testing user cannot login with incorrect email or password
-    test('invalid login shows error message', async ({ page }) => {
+    test('@smoke invalid login shows error message', async ({ page }) => {
         await page.goto('/');
 
         await page.getByPlaceholder('Email Address').fill('Wrongemail@email.com');
@@ -24,7 +24,7 @@ test.describe('Authentication', () => {
 
 
 // Testing user can login with correct email and password
-    test('valid login redirects to qoutes dashboard', async ({ page }) => {
+    test('@smoke valid login redirects to qoutes dashboard', async ({ page }) => {
         await page.goto('/');
 
         await page.getByPlaceholder('Email Address').fill('demo@designerblindsapp.com');
@@ -38,7 +38,7 @@ test.describe('Authentication', () => {
 
 
 // Testing logout functionailty works as expected
-    test('valid logout returns user to sign in page', async ({ page }) => {
+    test('@smoke valid logout returns user to sign in page', async ({ page }) => {
         await page.goto('/');
 
         await page.getByPlaceholder('Email Address').fill('demo@designerblindsapp.com');
@@ -57,7 +57,7 @@ test.describe('Authentication', () => {
 
 
 // Testing protected routes are redirected to signin page
-    test('Unauthenticated user is redirected to sign in page', async ({ page }) => {
+    test('@smoke Unauthenticated user is redirected to sign in page', async ({ page }) => {
         await page.goto('/');
 
         await expect(page).toHaveURL('/signin');
@@ -68,7 +68,7 @@ test.describe('Authentication', () => {
 
 
 // Testing that try demo button autofills email and password inputs
-    test('user can sign in using demo autofill button', async ({ page }) => {
+    test('@smoke user can sign in using demo autofill button', async ({ page }) => {
         await page.goto('/signin');
 
         await page.getByRole('button', { name: 'Try Demo Account' }).click();

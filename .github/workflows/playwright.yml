@@ -7,8 +7,8 @@ on:
     branches: [main, master]
 
 jobs:
-  test:
-    timeout-minutes: 60
+  smoke:
+    timeout-minutes: 30
     runs-on: ubuntu-latest
 
     steps:
@@ -28,12 +28,44 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run smoke tests
+        run: npx playwright test --grep "@smoke"
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report
+          name: playwright-smoke-report
+          path: playwright-report/
+          retention-days: 30
+
+  regression:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    needs: smoke
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 20
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Run regression tests
+        run: npx playwright test --grep "@regression"
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-regression-report
           path: playwright-report/
           retention-days: 30

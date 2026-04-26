@@ -4,19 +4,19 @@ import { startNewQuoteAsDemoUser } from '../../utils/quoteHelpers';
 test.describe('Quote Page', () => {
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
-        await page.evaluate(() => {
-        localStorage.clear();
-      });
-     });
+        await page.evaluate(() => localStorage.clear());
+        await page.reload();
+});
+
 // Authenticated user can start a new quote    
-    test('authenticated user can start a new quote', async ({ page }) => {
+    test('@smoke authenticated user can start a new quote', async ({ page }) => {
         await startNewQuoteAsDemoUser(page);
  
 });
 
 
 // Test for customer information     
-    test('new quote page loads customer section', async ({ page }) => { 
+    test('@smoke new quote page loads customer section', async ({ page }) => { 
         await startNewQuoteAsDemoUser(page);
        
 // Checking customer information is rendering properly      
@@ -29,15 +29,15 @@ test.describe('Quote Page', () => {
 
       
 // Test for quoting section      
-    test('new quote page loads quoting section', async ({ page }) => { 
+    test('@regression new quote page loads quoting section', async ({ page }) => { 
         await startNewQuoteAsDemoUser(page);
 
 // Checking quoting details is rendering properly              
-        await expect(page.getByText('Select Category:')).toBeVisible();
-        await expect(page.getByRole('combobox').nth(0)).toBeVisible(); // Category
+        const categorySelect = page.getByTestId('category-select');
+        await expect(categorySelect).toBeVisible();
+        await categorySelect.selectOption('Blinds');
+        await expect(page.getByTestId('product-select')).toBeVisible();
 
-        await expect(page.getByText('Select Product:')).toBeVisible();
-        await expect(page.getByRole('combobox').nth(1)).toBeVisible(); // Product
 
         await expect(page.getByText('Enter Width:')).toBeVisible();
         await expect(page.getByPlaceholder('Width (inches)')).toBeVisible();
@@ -45,12 +45,11 @@ test.describe('Quote Page', () => {
         await expect(page.getByText('Enter Height')).toBeVisible();
         await expect(page.getByPlaceholder('Height (inches)')).toBeVisible();
 
-        await expect(page.getByText('Mounting Position:')).toBeVisible();
-        await expect(page.getByRole('combobox').nth(2)).toBeVisible(); // Mounting Position
+        const mountingSelect = page.getByTestId('mounting-position-select');
+        await expect(mountingSelect).toBeVisible();
 
         await expect(page.getByText('Window Location')).toBeVisible();
         await expect(page.getByPlaceholder('(e.g., Living Room, Master Bedroom)')).toBeVisible();
-
 
    
 });
@@ -58,7 +57,7 @@ test.describe('Quote Page', () => {
         
 
 // Test for Pricing Section 
-    test('new quote page loads pricing section', async ({ page }) => { 
+    test('@smoke new quote page loads pricing section', async ({ page }) => { 
         await startNewQuoteAsDemoUser(page);
         
 // Checking total price is rendering properly              
@@ -72,7 +71,7 @@ test.describe('Quote Page', () => {
 
 
 // Validation errors appear for required fields when user submits form before field submissions are entered
-    test('validation errors appear when user tries to add item with empty required fields', async ({ page }) => {
+    test('@regression validation errors appear when user tries to add item with empty required fields', async ({ page }) => {
         await startNewQuoteAsDemoUser(page);
 
         const addItemButton = page.getByRole('button', { name: 'Add Item(s) to Quote' });
@@ -93,31 +92,42 @@ test.describe('Quote Page', () => {
 // TODO: Test is currently flaky due to inconsistent success modal rendering.
 // Suspected causes: client validation timing or persisted quote state.
 // Kept under investigation.
-    test('user can add an item when required quote fields are completed', async ({ page }) => {
+    test('@flaky user can add an item when required quote fields are completed', async ({ page }) => {
         await startNewQuoteAsDemoUser(page);
 
+        const id = Date.now();
+        const uniqueCustomerName = `Customer-${id}`
+        const uniqueSideMark = `Quote-${id}`;
+
 // Enter required customer information
-        await page.getByPlaceholder('Enter customer name').fill('John Smith');
-        await page.getByPlaceholder('Enter sidemark').fill('Test 1');
+        await page.getByPlaceholder('Enter customer name').fill(uniqueCustomerName);
+        await page.getByPlaceholder('Enter sidemark').fill(uniqueSideMark);
         await page.getByPlaceholder('Enter address').fill('123 Test Rd.');
         await page.getByPlaceholder('Enter phone number').fill('1232343455');
 
-// Enter required quoting details
-        const dropdowns = page.locator('select');
-        await dropdowns.nth(0).selectOption({ label: 'Blinds' });
-        await dropdowns.nth(1).selectOption({ label: '2" Faux Wood Blinds' });
-        
-// Wait for color dropdown to appear after product selectio
-        await expect(dropdowns.nth(2)).toBeVisible({ timeout: 10000 });
-        await dropdowns.nth(2).selectOption({ label: 'Alabaster' });
+// Category Selection
+        const categorySelect = page.getByTestId('category-select');
+        await expect(categorySelect).toBeVisible();
+        await categorySelect.selectOption('Blinds');   
 
+// Product Selection        
+        const productSelect = page.getByTestId('product-select');
+        await expect(productSelect).toBeVisible();
+        await productSelect.selectOption({ label: '2" Faux Wood Blinds' });
+
+// Wait for color dropdown to appear after product selection
+        const colorSelect = page.getByTestId('color-select');
+        await expect(colorSelect).toBeVisible();
+        await colorSelect.selectOption({ label: 'Alabaster' });
+
+// Dimensions
         await page.getByPlaceholder('Width (inches)').fill('24');
         await page.getByPlaceholder('Height (inches)').fill('42');
 
 // Wait for mounting postion dropdown too
-        const mountingDropdown = page.locator('select').filter({ has: page.locator('option', { hasText: 'Inside Mount' })}).first();
-        await expect(mountingDropdown).toBeVisible({ timeout: 10000 });
-        await mountingDropdown.selectOption({ label: 'Inside Mount' });
+        const mountingSelect = page.getByTestId('mounting-position-select');
+        await expect(mountingSelect).toBeVisible();
+        await mountingSelect.selectOption({ label: 'Inside Mount' });
 
 
         await page.getByPlaceholder('(e.g., Living Room, Master Bedroom)').fill('Bathroom'); 
@@ -128,12 +138,17 @@ test.describe('Quote Page', () => {
         await addItemButton.scrollIntoViewIfNeeded();
         await addItemButton.click();
        
-        
-        await expect(page.getByRole('button', { name: 'Go to Quote' })). toBeVisible({ timeout: 10000 });
-        await page.getByRole('button', { name: 'OK' }).click();
 
-        await expect(page).toHaveURL('/quote');
+        const okButton = page.getByRole('button', { name: 'OK' });
+        await expect(okButton).toBeVisible({ timeout: 10000 });
+        await okButton.click();
 
+        await expect(page.getByRole('button', { name: 'Go to Quote' })).toBeVisible({ timeout: 10000 });
+        await page.getByRole('button', { name: 'Go to Quote' }).click();
+
+
+        await expect(page).toHaveURL(/\/quote\/.+/);
+    
     })
 
 });

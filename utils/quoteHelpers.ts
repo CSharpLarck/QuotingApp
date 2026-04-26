@@ -10,4 +10,6 @@ export async function startNewQuoteAsDemoUser(page: Page) {
 
     await expect(page).toHaveURL('/quote');
 
+    await expect(page.getByTestId('category-select')).toBeVisible({ timeout: 10000 });
+    
 }

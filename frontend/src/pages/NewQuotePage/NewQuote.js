@@ -1851,6 +1851,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
       <label className="form-label">
   Select Category:
   <select
+    data-testid="category-select"
     className={`form-select ${validationErrors.selectedCategory ? "error" : ""}`}
     value={selectedCategory}
     onChange={handleCategoryChange}
@@ -1874,6 +1875,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
 <label className="form-label">
   Select Product:
   <select
+    data-testid="product-select"
     className={`form-select ${validationErrors.selectedProduct ? "error" : ""}`}
     value={selectedProduct}
     onChange={handleProductChange}
@@ -1911,6 +1913,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
 </label>
     <div className="dropdown-with-info">
       <select
+        data-testid="color-select"
         className={`form-select ${validationErrors.selectedFabricOption ? "error" : ""}`}
         value={selectedFabricOption}
         onChange={(e) => {
@@ -2209,6 +2212,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
     <label className="form-label">Mounting Position:</label>
     <div className="dropdown-with-info">
       <select
+        data-testid="mounting-position-select"
         className={`form-select ${validationErrors["Mounting Position"] ? "error" : ""}`}
         value={mountingPosition || ""}
         onChange={(e) => {
