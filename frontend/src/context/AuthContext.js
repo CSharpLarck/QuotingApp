@@ -7,32 +7,49 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+  const [userRole, setUserRole] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        // Fetch user details from Firestore based on email
         const usersRef = collection(db, "users");
         const q = query(usersRef, where("Email", "==", user.email));
         const querySnapshot = await getDocs(q);
 
         if (!querySnapshot.empty) {
           const userData = querySnapshot.docs[0].data();
+
           setCurrentUser({ uid: user.uid, ...userData });
-          localStorage.setItem("userData", JSON.stringify(userData)); // Store in localStorage
+
+          // add this
+          setUserRole(userData?.Role?.toLowerCase());
+
+          localStorage.setItem("userData", JSON.stringify(userData));
         } else {
           setCurrentUser(null);
+          setUserRole(null);
         }
+
       } else {
         setCurrentUser(null);
-        localStorage.removeItem("userData"); // Clear data on logout
+        setUserRole(null);
+
+        localStorage.removeItem("userData");
       }
+
+      // add this
+      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  return <AuthContext.Provider value={{ currentUser }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ currentUser, userRole, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => useContext(AuthContext);
