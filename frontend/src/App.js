@@ -4,8 +4,9 @@ import {
   Routes,
   Route,
   useLocation,
-  Navigate,
 } from "react-router-dom";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import Navbar from "./components/NavBar/Navbar";
 import ManageQuotesOrders from "./pages/ManageQuotesPage/ManageQuotesOrders";
@@ -80,75 +81,84 @@ const MainRoutes = ({ categories }) => {
     return <div>Loading...</div>;
   }
 
-  const isAuthenticated = Boolean(userRole);
-  const isAdmin = userRole === "admin";
-
   return (
     <>
       {shouldShowNavbar && <Navbar userRole={userRole} />}
 
       <Routes>
-        {/* Public routes that do not require authentication. */}
-        <Route path="/resources" element={<Resources />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route
-          path="/quotingpage/edit/:quoteId/:editItemIndex"
-          element={<QuotingPage />}
-        />
+  {/* Public routes that do not require authentication. */}
+  <Route path="/resources" element={<Resources />} />
+  <Route path="/signin" element={<SignIn />} />
+  <Route
+    path="/quotingpage/edit/:quoteId/:editItemIndex"
+    element={<QuotingPage />}
+  />
 
-        {/* Protected routes that require an authenticated user. */}
-        <Route
-          path="/"
-          element={
-            isAuthenticated ? <ManageQuotesOrders /> : <Navigate to="/signin" />
-          }
-        />
+  {/* Protected routes that require an authenticated user. */}
+  <Route
+    path="/"
+    element={
+      <ProtectedRoute>
+        <ManageQuotesOrders />
+      </ProtectedRoute>
+    }
+  />
 
-        <Route
-          path="/settings"
-          element={isAuthenticated ? <Settings /> : <Navigate to="/signin" />}
-        />
+  <Route
+    path="/settings"
+    element={
+      <ProtectedRoute>
+        <Settings />
+      </ProtectedRoute>
+    }
+  />
 
-        <Route
-          path="/quote"
-          element={
-            isAuthenticated ? (
-              <QuotingPage categories={categories} />
-            ) : (
-              <Navigate to="/signin" />
-            )
-          }
-        />
+  <Route
+    path="/quote"
+    element={
+      <ProtectedRoute>
+        <QuotingPage categories={categories} />
+      </ProtectedRoute>
+    }
+  />
 
-        <Route
-          path="/quote/:quoteId"
-          element={isAuthenticated ? <QuotePage /> : <Navigate to="/signin" />}
-        />
+  <Route
+    path="/quote/:quoteId"
+    element={
+      <ProtectedRoute>
+        <QuotePage />
+      </ProtectedRoute>
+    }
+  />
 
-        <Route
-          path="/quotingpage/:quoteId"
-          element={
-            isAuthenticated ? <QuotingPage /> : <Navigate to="/signin" />
-          }
-        />
+  <Route
+    path="/quotingpage/:quoteId"
+    element={
+      <ProtectedRoute>
+        <QuotingPage />
+      </ProtectedRoute>
+    }
+  />
 
-        <Route
-          path="/quotingpage"
-          element={
-            isAuthenticated ? (
-              <QuotingPage categories={categories} />
-            ) : (
-              <Navigate to="/signin" />
-            )
-          }
-        />
+  <Route
+    path="/quotingpage"
+    element={
+      <ProtectedRoute>
+        <QuotingPage categories={categories} />
+      </ProtectedRoute>
+    }
+  />
 
-        {/* Admin-only route. Non-admin authenticated users are redirected to Settings. */}
-        <Route
-          path="/register-user"
-          element={isAdmin ? <RegisterUser /> : <Navigate to="/settings" />}
-        />
-      </Routes>
+  {/* Admin-only route. */}
+<Route
+  path="/register-user"
+  element={
+    <ProtectedRoute allowedRoles={["admin"]} unauthorizedRedirectTo="/settings">
+      <RegisterUser />
+    </ProtectedRoute>
+  }
+/>
+</Routes>
     </>
   );
 };
