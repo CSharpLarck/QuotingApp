@@ -16,8 +16,8 @@ test.describe('Quote Page', () => {
 });
 
 // Demo User can Sign In
-    test('@smoke demo user can start a new quote', async ({ page }) => {
-        await startNewQuoteAsDemoUser(page);
+    test('@demo demo user can start a new quote', async ({ page }) => {
+        await startNewQuoteAsTestUser(page);
  
 });
 // Test for customer information     
@@ -98,11 +98,14 @@ test.describe('Quote Page', () => {
 // Suspected causes: client validation timing or persisted quote state.
 // Kept under investigation.
     test('@flaky user can add an item when required quote fields are completed', async ({ page }) => {
-        await startNewQuoteAsTestUser(page);
-
         const id = Date.now();
+
         const uniqueCustomerName = `Customer-${id}`
         const uniqueSideMark = `Quote-${id}`;
+
+    try {
+        await startNewQuoteAsTestUser(page);
+
 
 // Enter required customer information
         await page.getByPlaceholder('Enter customer name').fill(uniqueCustomerName);
@@ -153,7 +156,11 @@ test.describe('Quote Page', () => {
 
 
         await expect(page).toHaveURL(/\/quote\/.+/);
-    
+        
+    } finally {
+        await deleteQuotesByCustomerName(uniqueCustomerName);
+    }
+        
     })
 
 });

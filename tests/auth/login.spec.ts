@@ -40,7 +40,7 @@ test.describe('Authentication', () => {
     await expect(page.getByRole('button', { name: 'Sign In' })).toBeVisible();
   });
 
-  test('@smoke user can sign in using demo autofill button', async ({ page }) => {
+  test('@regression user can sign in using demo autofill button', async ({ page }) => {
     await page.goto('/signin');
 
     await page.getByRole('button', { name: 'Try Demo Account' }).click();
