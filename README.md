@@ -1,5 +1,9 @@
 # Quoting App — QA Automation / SDET Portfolio Project
 
+[![Playwright Tests](https://github.com/matthewlarck-portfolio/QuotingApp/actions/workflows/playwright.yml/badge.svg)](https://github.com/matthewlarck-portfolio/QuotingApp/actions/workflows/playwright.yml)
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 Portfolio project demonstrating junior SDET practices using Playwright, TypeScript, UI/API testing, and CI/CD automation with GitHub Actions.
 
 This is a real-world B2B SaaS quoting application originally built for business use and now used as a live automation testing environment for test design, debugging, and continuous testing.
