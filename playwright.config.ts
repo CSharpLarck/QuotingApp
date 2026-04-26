@@ -25,12 +25,12 @@ export default defineConfig({
     },
   ],
 
-  webServer: process.env.BASE_URL
-    ? undefined
-    : {
-        command: 'cd frontend && npm start',
-        url: baseURL,
-        reuseExistingServer: !process.env.CI,
-        timeout: 120 * 1000,
-      },
+webServer: process.env.BASE_URL
+  ? undefined
+  : {
+      command: 'cd frontend && npm start',
+      url: baseURL,
+      reuseExistingServer: !process.env.CI,
+      timeout: 120 * 1000,
+    },
 });
