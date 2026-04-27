@@ -68,10 +68,10 @@ const Navbar = () => {
     <div className="navbar">
       {/* Left Branding */}
       <div className="nav-left">
-        <a href="https://www.designerblindco.com" className="brand-link">
+        <Link to="/" className="brand-link">
           <h2 className="brand-title">Designer Blinds</h2>
           <h3 className="brand-subtitle">Quoting Software</h3>
-        </a>
+       </Link>
       </div>
 
       {/* Right Section: User Info, Menu, and Logout */}
