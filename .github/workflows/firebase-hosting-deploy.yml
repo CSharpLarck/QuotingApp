@@ -28,6 +28,9 @@ jobs:
 
       - name: Build frontend
         working-directory: frontend
+        env:
+          REACT_APP_DEMO_EMAIL: ${{ secrets.REACT_APP_DEMO_EMAIL }}
+          REACT_APP_DEMO_PASSWORD: ${{ secrets.REACT_APP_DEMO_PASSWORD }}
         run: npm run build
 
       - name: Deploy to Firebase Hosting
