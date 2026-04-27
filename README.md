@@ -64,7 +64,7 @@ Additional regression coverage in progress.
 
 - Playwright Test Runner  
 - Reusable helper abstractions  
-- Page Object Model patterns (Planning) 
+- Page Object Model patterns (In Progress) 
 - Fixture-driven test setup  
 - Environment-based configuration  
 
