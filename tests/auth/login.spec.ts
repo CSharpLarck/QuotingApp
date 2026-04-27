@@ -48,7 +48,7 @@ test.describe('Authentication', () => {
 
   // Temporarily quarantined in CI until React demo credentials reliably populate in the frontend runtime.
   // Kept as regression coverage because it validates a convenience UI flow, not a critical authentication path.
-  test.skip('@regression user can sign in using demo autofill button', async ({ page }) => {
+  test('@regression user can sign in using demo autofill button', async ({ page }) => {
     await page.goto('/signin');
 
     await page.getByRole('button', { name: 'Try Demo Account' }).click();
