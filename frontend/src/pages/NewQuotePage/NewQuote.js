@@ -33,7 +33,7 @@ const QuotingPage = () => {
   const [sizeBasedPricingData, setSizeBasedPricingData] = useState({});
   const [quantity, setQuantity] = useState(1); // Default quantity is 1
   const [, setShowMotorizationOptions] = useState(false);
-  const [tooltip, setTooltip] = useState(""); // Ensures it's always a string
+  const [tooltip] = useState(""); // Ensures it's always a string
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [selectedSize] = useState(''); 
   const [showAlert, setShowAlert] = useState(false);
@@ -703,22 +703,6 @@ useEffect(() => {
 
 
 
-// eslint-disable-next-line no-unused-vars
-const handleSubmit = (e) => {
-  e.preventDefault();
-  if (validateForm()) {
-    alert("Form submitted successfully!");
-  } else {
-    alert("Please fill out all required fields.");
-  }
-};
-
-// eslint-disable-next-line no-unused-vars
-const handleMouseLeave = () => {
-  setTooltip({ visible: false, x: 0, y: 0 });
-};
-
-
 const handleQuantityChange = (e) => {
   let newQuantity = parseInt(e.target.value, 10);
   if (isNaN(newQuantity) || newQuantity < 1) {
@@ -741,16 +725,6 @@ const handleAddMoreItems = () => {
 
   resetAllInputs(); // ✅ Reset form but keep the current quote
 };
-
-
-
-
-// eslint-disable-next-line no-unused-vars
-const handleGoToQuote = () => {
-  navigate(`/quote/${currentQuoteId}`);
-};
-
-
 
 
 const handleCategoryChange = (e) => {
@@ -1438,11 +1412,6 @@ const fetchSizeBasedPricing = (selectedOption, selectedSize, sizeBasedPricingDat
   }
   return sizeBasedPricingData[selectedOption]?.[selectedSize] || null;
 };
-
-// eslint-disable-next-line no-unused-vars
-const nonMotorizationOptions = Object.keys(selectedOptions).filter(
-  (option) => !optionsData["Motorization Options"]?.includes(option)
-);
 
 
 // ✅ Calculate total price including motorization accessories
