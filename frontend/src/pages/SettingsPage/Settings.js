@@ -7,43 +7,43 @@ const Settings = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    // ✅ Load user data from localStorage
     const storedUser = localStorage.getItem("userData");
+
     if (storedUser) {
       setUserData(JSON.parse(storedUser));
-    } else {
-      console.warn("⚠️ No user data found in localStorage.");
     }
   }, []);
 
   const handleRegisterUser = () => {
-    console.log("🆕 Register User button clicked!");
-    
-    setTimeout(() => {
-      console.log("🚀 Navigating to /register-user...");
-      navigate("/register-user"); // ✅ Navigate after a short delay
-    }, 100);
+    navigate("/register-user");
   };
-  
+
+  if (!userData) {
+    return (
+      <div className="settings-container">
+        <p>No user information available.</p>
+      </div>
+    );
+  }
+
+  const isAdmin = userData?.Role?.toLowerCase() === "admin";
+
   return (
     <div className="settings-container">
-      {/* ✅ Admins See "Register User" Button */}
-      {userData?.Role?.toLowerCase() === "admin" && (
+      {isAdmin && (
         <button className="register-user-button" onClick={handleRegisterUser}>
           Register New User
         </button>
       )}
 
-      {/* ✅ User Information */}
       <div className="user-info">
         <h2>User Information</h2>
-        <p><strong>User:</strong> {userData?.User || "N/A"}</p>
-        <p><strong>Email:</strong> {userData?.Email || "N/A"}</p>
-        <p><strong>Phone Number:</strong> {userData?.["PhoneNumber"] || "N/A"}</p> {/* 🔥 Correct field name */}
-        <p><strong>Password:</strong> ****** (Hidden)</p>
-        <p><strong>Role:</strong> {userData?.Role || "N/A"}</p>
-        <p><strong>Address:</strong> {userData?.Address || "N/A"}</p>
-        <p><strong>Cost Factor:</strong> {userData?.CostFactor || "N/A"}</p>
+        <p><strong>User:</strong> {userData.User || "N/A"}</p>
+        <p><strong>Email:</strong> {userData.Email || "N/A"}</p>
+        <p><strong>Phone Number:</strong> {userData.PhoneNumber || "N/A"}</p>
+        <p><strong>Role:</strong> {userData.Role || "N/A"}</p>
+        <p><strong>Address:</strong> {userData.Address || "N/A"}</p>
+        <p><strong>Cost Factor:</strong> {userData.CostFactor || "N/A"}</p>
       </div>
     </div>
   );
