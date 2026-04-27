@@ -13,6 +13,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
   const { currentUser } = useAuth();
   const navigate = useNavigate();
 
@@ -23,6 +24,11 @@ const SignIn = () => {
   }, [currentUser, navigate]);
 
   const handleDemoFill = () => {
+    if (!DEMO_EMAIL || !DEMO_PASSWORD) {
+      setError("Demo credentials are not configured.");
+      return;
+    }
+
     setEmail(DEMO_EMAIL);
     setPassword(DEMO_PASSWORD);
     setError("");
@@ -35,41 +41,32 @@ const SignIn = () => {
     try {
       const normalizedEmail = email.trim().toLowerCase();
 
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        normalizedEmail,
-        password
-      );
-
-      await userCredential.user.reload();
+      await signInWithEmailAndPassword(auth, normalizedEmail, password);
 
       const usersRef = collection(db, "users");
       const q = query(usersRef, where("Email", "==", normalizedEmail));
       const querySnapshot = await getDocs(q);
 
-      if (!querySnapshot.empty) {
-        setTimeout(() => {
-          window.location.replace("/");
-        }, 100);
-      } else {
+      if (querySnapshot.empty) {
         setError("User not found in database. Contact admin.");
+        return;
       }
-    }
 
-    catch (error) {
+      navigate("/");
+    } catch (error) {
       console.error("Sign-In Failed:", error);
 
-      if (error.code === 'auth/invalid-credential') {
-        setError('Invalid email or password');
-      } else if (error.code === 'auth/user-not-found') {
-        setError('No account found with this email');
-      } else if (error.code === 'auth/wrong-password') { 
-        setError('Invalid email or password');
+      if (
+        error.code === "auth/invalid-credential" ||
+        error.code === "auth/wrong-password"
+      ) {
+        setError("Invalid email or password");
+      } else if (error.code === "auth/user-not-found") {
+        setError("No account found with this email");
       } else {
-        setError('Something went wrong. Please try again.');
+        setError("Something went wrong. Please try again.");
       }
-  
-  }
+    }
   };
 
   return (
@@ -84,7 +81,9 @@ const SignIn = () => {
 
         <div className="demo-access-box">
           <h3>Demo Access</h3>
-        <p>Click below to automatically fill the demo credentials.</p>          <button
+          <p>Click below to automatically fill the demo credentials.</p>
+
+          <button
             type="button"
             className="demo-fill-button"
             onClick={handleDemoFill}
@@ -95,7 +94,6 @@ const SignIn = () => {
 
         {error && <p className="error-message">{error}</p>}
 
-    
         <input
           type="email"
           placeholder="Email Address"
