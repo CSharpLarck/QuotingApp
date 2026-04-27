@@ -3,7 +3,7 @@ import { db, collection, getDocs, auth, updateDoc, query, where, doc, setDoc, ge
 import './NewQuote.css';
 import CustomAlert from '../../components/CustomAlert/CustomAlert';
 import { useNavigate } from "react-router-dom";
-import { useParams, useLocation } from "react-router-dom"; // ✅ Import useParams
+import { useParams } from "react-router-dom"; // ✅ Import useParams
 import { v4 as uuidv4 } from "uuid"; // ✅ Import UUID for unique Quote IDs
 
 
@@ -21,13 +21,9 @@ const QuotingPage = () => {
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const navigate = useNavigate(); // ✅ Enables navigation
-// eslint-disable-next-line no-unused-vars
-const location = useLocation();
   const [widthFraction, setWidthFraction] = useState('');
   const [heightFraction, setHeightFraction] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
- // eslint-disable-next-line no-unused-vars
-const [isPriceMatched, setIsPriceMatched] = useState(true);
 
 // eslint-disable-next-line no-unused-vars
 const [widthErrorMessage, setWidthErrorMessage] = useState('');
@@ -1676,15 +1672,6 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
     finalTotal += tariffTotal;
   
     setTotalPrice(finalTotal);
-    setIsPriceMatched(true);
-  
-    console.log("🔍 Price Debug:", {
-      basePrice,
-      basePriceTotal,
-      accessoryTotal,
-      tariffTotal,
-      finalTotal
-    });
       }, [
     selectedProduct,
     selectedOptions,
