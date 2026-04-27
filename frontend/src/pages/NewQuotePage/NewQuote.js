@@ -24,27 +24,18 @@ const QuotingPage = () => {
   const [widthFraction, setWidthFraction] = useState('');
   const [heightFraction, setHeightFraction] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
-
-// eslint-disable-next-line no-unused-vars
-const [widthErrorMessage, setWidthErrorMessage] = useState('');
-
-// eslint-disable-next-line no-unused-vars
-const [heightErrorMessage, setHeightErrorMessage] = useState('');
-const [hasPrefilledProduct, setHasPrefilledProduct] = useState(false);
+  const [hasPrefilledProduct, setHasPrefilledProduct] = useState(false);
 
   const [isQuickShip, setIsQuickShip] = useState(false); // Track if Quick Ship Panel
+
   const [optionsData, setOptionsData] = useState({}); // Store options categorized by product
   const [sizeBasedPricing, setSizeBasedPricing] = useState(new Map());
   const [sizeBasedPricingData, setSizeBasedPricingData] = useState({});
   const [quantity, setQuantity] = useState(1); // Default quantity is 1
-   // eslint-disable-next-line no-unused-vars
-  const [calculatedTotal, setCalculatedTotal] = useState(0); // Stores final price
-  // eslint-disable-next-line no-unused-vars
-  const [showMotorizationOptions, setShowMotorizationOptions] = useState(false);
+  const [, setShowMotorizationOptions] = useState(false);
   const [tooltip, setTooltip] = useState(""); // Ensures it's always a string
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-   // eslint-disable-next-line no-unused-vars
-  const [selectedSize, setSelectedSize] = useState(''); 
+  const [selectedSize] = useState(''); 
   const [showAlert, setShowAlert] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [currentQuoteId, setCurrentQuoteId] = useState(null); // ✅ Store Quote ID
@@ -63,37 +54,33 @@ const [hasPrefilledProduct, setHasPrefilledProduct] = useState(false);
   const numericEditItemIndex = parseInt(editItemIndex, 10);
   const isEditMode = !isNaN(numericEditItemIndex);
   const [itemToEdit, setItemToEdit] = useState(null);
-  // eslint-disable-next-line no-unused-vars
-  const [controlOption, setControlOption] = useState("");
+  const [, setControlOption] = useState("");
 
   const [mountingPosition, setMountingPosition] = useState("");
-const [windowLocation, setWindowLocation] = useState("");
+  const [windowLocation, setWindowLocation] = useState("");
+  const [linerOption, setLinerOption] = useState("N/A");
 
-const [linerOption, setLinerOption] = useState("N/A");
+  const [shadeStyle, setShadeStyle] = useState("N/A");
+  const [motorizationOption, setMotorizationOption] = useState("N/A");
 
-const [shadeStyle, setShadeStyle] = useState("N/A");
-const [motorizationOption, setMotorizationOption] = useState("N/A");
-const [decorativeTapeType, setDecorativeTapeType] = useState("N/A");
-const [decorativeTapeColor, setDecorativeTapeColor] = useState("N/A");
-const [additionalOptions, setAdditionalOptions] = useState("N/A");
-const [hardwareOption, setHardwareOption] = useState("N/A");
-const [hardwareColor, setHardwareColor] = useState("N/A");
-const [headboxOption, setHeadboxOption] = useState("N/A");
-const [handleOption, setHandleOption] = useState("N/A");
-const [finialOption, setFinialOption] = useState("N/A");
-const [tiltOption, setTiltOption] = useState("N/A");
-const [controlPosition, setControlPosition] = useState("N/A");
-const [fasciaColor, setFasciaColor] = useState("N/A");
-const [hingeColor, setHingeColor] = useState("N/A");
-const [pleatStyle, setPleatStyle] = useState("N/A");
-const [linerColor, setLinerColor] = useState("N/A");
-const [alertMessage, setAlertMessage] = useState("");
- // eslint-disable-next-line 
-const [quoteData, setQuoteData] = useState(null);
-// eslint-disable-next-line
-const [initialPrefillComplete, setInitialPrefillComplete] = useState(false);
+  const [decorativeTapeType, setDecorativeTapeType] = useState("N/A");
+  const [decorativeTapeColor, setDecorativeTapeColor] = useState("N/A");
+  const [additionalOptions, setAdditionalOptions] = useState("N/A");
+  const [hardwareOption, setHardwareOption] = useState("N/A");
+  const [hardwareColor, setHardwareColor] = useState("N/A");
+  const [headboxOption, setHeadboxOption] = useState("N/A");
+  const [handleOption, setHandleOption] = useState("N/A");
+  const [finialOption, setFinialOption] = useState("N/A");
+  const [tiltOption, setTiltOption] = useState("N/A");
+  const [controlPosition, setControlPosition] = useState("N/A");
+  const [fasciaColor, setFasciaColor] = useState("N/A");
+  const [hingeColor, setHingeColor] = useState("N/A");
+  const [pleatStyle, setPleatStyle] = useState("N/A");
+  const [linerColor, setLinerColor] = useState("N/A");
+  const [alertMessage, setAlertMessage] = useState("");
+  const [, setInitialPrefillComplete] = useState(false);
 
-const resolvedLinerColor = linerOption === "N/A" ? "N/A" : (linerColor || "N/A");
+  const resolvedLinerColor = linerOption === "N/A" ? "N/A" : (linerColor || "N/A");
 
   const [minMaxDimensions, setMinMaxDimensions] = useState({
     minWidth: null,  // Use null instead of Infinity
@@ -853,9 +840,7 @@ const handleProductChange = (e) => {
         } else {
           updatedOptions[category] = [...currentOptions, newOption];
         }
-  
-        console.log("✅ Updated Motorization Options:", updatedOptions[category]);
-  
+    
         const pricingData = sizeBasedPricingData[newOption];
         if (pricingData) {
           setSizeBasedPricing((prev) => ({
@@ -1191,13 +1176,11 @@ const handleUpdateItem = async () => {
 
 
   // Function to update the selected option for a category
-// eslint-disable-next-line no-unused-vars
-const [selectedOption, setSelectedOption] = useState(null);
+const [selectedOption] = useState(null);
     useEffect(() => {
       // Ensure all necessary values are available
       if (selectedOption && selectedSize && sizeBasedPricingData) {
         const price = fetchSizeBasedPricing(selectedOption, selectedSize, sizeBasedPricingData);
-        console.log('Fetched price:', price);
         // Do something with the fetched price, like updating the state
         setTotalPrice(price);  // Assuming `setTotalPrice` is a state setter for the total price
       }
