@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, collection, getDocs, auth, updateDoc, query, where, doc, setDoc, getDoc, serverTimestamp } from '../../firebase'; // Assuming firebase is already set up
 import './NewQuote.css';
-import CustomAlert from '../../components/CustomAlert/CustomAlert';
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom"; // ✅ Import useParams
 import { v4 as uuidv4 } from "uuid"; // ✅ Import UUID for unique Quote IDs
@@ -36,7 +35,7 @@ const QuotingPage = () => {
   const [tooltip] = useState(""); // Ensures it's always a string
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [selectedSize] = useState(''); 
-  const [showAlert, setShowAlert] = useState(false);
+  const [, setShowAlert] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [currentQuoteId, setCurrentQuoteId] = useState(null); // ✅ Store Quote ID
   const [hoveredInfo, setHoveredInfo] = useState(null);   
@@ -77,7 +76,7 @@ const QuotingPage = () => {
   const [hingeColor, setHingeColor] = useState("N/A");
   const [pleatStyle, setPleatStyle] = useState("N/A");
   const [linerColor, setLinerColor] = useState("N/A");
-  const [alertMessage, setAlertMessage] = useState("");
+  const [, setAlertMessage] = useState("");
   const [, setInitialPrefillComplete] = useState(false);
 
   const resolvedLinerColor = linerOption === "N/A" ? "N/A" : (linerColor || "N/A");
@@ -3263,40 +3262,29 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
   </div>
 )}
 
-  {/* ✅ Add/Update Item to Quote Button */}
-  <div className="quote-actions">
-    {isEditMode ? (
-      <button className="add-to-quote-btn" onClick={handleUpdateItem}>
-        Update Item
-      </button>
-    ) : (
-      <button className="add-to-quote-btn" onClick={handleSaveItem}>
-        Add Item(s) to Quote
-      </button>
-    )}
+{/* Add/Update Item to Quote Button */}
+<div className="quote-actions">
+  {isEditMode ? (
+    <button className="add-to-quote-btn" onClick={handleUpdateItem}>
+      Update Item
+    </button>
+  ) : (
+    <button className="add-to-quote-btn" onClick={handleSaveItem}>
+      Add Item(s) to Quote
+    </button>
+  )}
 
-    {(hasAddedItem || localStorage.getItem("hasAddedItem") === "true") && currentQuoteId && (
-      <button
-        className="add-to-quote-btn"
-        onClick={() => {
-          console.log("📌 Navigating to quote:", currentQuoteId);
-          navigate(`/quote/${currentQuoteId}`);
-        }}
-      >
-        Go to Quote
-      </button>
-    )}
-  </div>
-
-  {showAlert && (
-  <CustomAlert
-    message={alertMessage}
-    onClose={() => setShowAlert(false)}
-  />
-)}
-
-
-
+  {(hasAddedItem || localStorage.getItem("hasAddedItem") === "true") && currentQuoteId && (
+    <button
+      className="add-to-quote-btn"
+      onClick={() => {
+        navigate(`/quote/${currentQuoteId}`);
+      }}
+    >
+      Go to Quote
+    </button>
+  )}
+</div>
 
     </div>
 
