@@ -5,10 +5,15 @@ const baseURL = process.env.BASE_URL || 'http://localhost:3000';
 
 export default defineConfig({
   testDir: './tests',
+
   fullyParallel: true,
+
   forbidOnly: !!process.env.CI,
+
   retries: process.env.CI ? 2 : 0,
+
   workers: process.env.CI ? 1 : undefined,
+
   reporter: 'html',
 
   use: {
@@ -21,16 +26,25 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+      },
     },
   ],
 
-webServer: process.env.BASE_URL
-  ? undefined
-  : {
-      command: 'cd frontend && npm start',
-      url: baseURL,
-      reuseExistingServer: !process.env.CI,
-      timeout: 120 * 1000,
-    },
+  webServer: process.env.BASE_URL
+    ? undefined
+    : {
+        command: 'cd frontend && npm start',
+        url: baseURL,
+        reuseExistingServer: !process.env.CI,
+        timeout: 120 * 1000,
+      },
 });

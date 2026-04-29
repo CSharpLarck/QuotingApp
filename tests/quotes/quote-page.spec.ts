@@ -1,6 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { startNewQuoteAsDemoUser, startNewQuoteAsTestUser } from '../../utils/quoteHelpers';
-import { validQuoteItem } from '../data/quoteTestData';
+import { validQuoteItem } from '../../utils/testData/quoteTestData';
+import {   startNewQuoteAsDemoUser, 
+            startNewQuoteAsTestUser, 
+            clickAddItemsToQuote, 
+            expectRequiredCustomerFieldErrors
+        } from '../../utils/quoteHelpers';
 
 test.describe('Quote Page', () => {
     test.beforeEach(async ({ page }) => {
@@ -9,15 +13,15 @@ test.describe('Quote Page', () => {
         await page.reload();
 });
 
-// Verifies an authenticated test user can initiate the core quote creation workflow.
-    test('@smoke authenticated user can start a new quote', async ({ page }) => {
-        await startNewQuoteAsTestUser(page);
- 
-});
-
 // Verifies demo-account access can reach quote creation using the alternate login path.
     test('@regression demo user can start a new quote', async ({ page }) => {
         await startNewQuoteAsDemoUser(page);
+ 
+});
+
+// Verifies an authenticated test user can initiate the core quote creation workflow.
+    test('@smoke authenticated user can start a new quote', async ({ page }) => {
+        await startNewQuoteAsTestUser(page);
  
 });
 
@@ -72,19 +76,11 @@ test.describe('Quote Page', () => {
     test('@regression validation errors appear when user tries to add item with empty required fields', async ({ page }) => {
         await startNewQuoteAsTestUser(page);
 
-        const addItemButton = page.getByRole('button', { name: 'Add Item(s) to Quote' });
+        await clickAddItemsToQuote(page);
 
-        await expect(addItemButton).toBeVisible({ timeout: 10000 });
-        await addItemButton.scrollIntoViewIfNeeded();
-        await addItemButton.click();
+        await expectRequiredCustomerFieldErrors(page);
 
-        await expect(page.getByText('Customer name is required.')).toBeVisible();
-        await expect(page.getByText('Sidemark is required.')).toBeVisible();
-        await expect(page.getByText('Address is required.')).toBeVisible();
-        await expect(page.getByText('Phone Number is required.')).toBeVisible();
 
     });
     
-
-
 });

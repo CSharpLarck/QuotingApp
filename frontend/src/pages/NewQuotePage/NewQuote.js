@@ -3053,15 +3053,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
 
 {/* ✅ Total Price */}
 <div className="total-price">
-  <h2>Total Price: ${Math.round(totalPrice)}</h2>
-
-  {/* ✅ Show tariff message for Motorized Roller Shades OR any Natural Shades */}
-  {(selectedProduct === "Roller Shades" && selectedOptions["Control Options"] === "Motorized") ||
-   selectedProduct === "Natural Shades" ? (
-    <p className="tariff-warning">
-      *Includes 10% import tariff for {selectedProduct === "Natural Shades" ? "natural shade materials" : "motorized components"}.
-    </p>
-  ) : null}
+  <h2 data-testid="total-price">Total Price: ${Math.round(totalPrice)}</h2>
 </div>
 
 
