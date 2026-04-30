@@ -62,18 +62,9 @@ const QuotingPage = () => {
   const [shadeStyle, setShadeStyle] = useState("N/A");
   const [motorizationOption, setMotorizationOption] = useState("N/A");
 
-  const [decorativeTapeType, setDecorativeTapeType] = useState("N/A");
-  const [decorativeTapeColor, setDecorativeTapeColor] = useState("N/A");
-  const [additionalOptions, setAdditionalOptions] = useState("N/A");
-  const [hardwareOption, setHardwareOption] = useState("N/A");
-  const [hardwareColor, setHardwareColor] = useState("N/A");
   const [headboxOption, setHeadboxOption] = useState("N/A");
-  const [handleOption, setHandleOption] = useState("N/A");
-  const [finialOption, setFinialOption] = useState("N/A");
-  const [tiltOption, setTiltOption] = useState("N/A");
   const [controlPosition, setControlPosition] = useState("N/A");
   const [fasciaColor, setFasciaColor] = useState("N/A");
-  const [hingeColor, setHingeColor] = useState("N/A");
   const [pleatStyle, setPleatStyle] = useState("N/A");
   const [linerColor, setLinerColor] = useState("N/A");
   const [, setAlertMessage] = useState("");
@@ -243,16 +234,6 @@ const roundedWidth = Math.ceil(width / 12) * 12;
 const roundedHeight = Math.ceil(height / 12) * 12;
 // eslint-disable-next-line
 const dimensionKey = `${roundedWidth}x${roundedHeight}`;
-
-const getAvailableColors = (tapeType) => {
-  const colorOptions = {
-    Diamond: ["Stucco", "Tender Taupe", "Acadia Haze"],
-    Chain: ["Dark Beige", "Maize", "Navy", "Acadia Haze", "Rock Gray"],
-    Scalloped: ["Cream", "Navy", "Tender Taupe", "Acadia Haze", "Morning Glory", "Rock Gray"],
-  };
-
-  return colorOptions[tapeType] || [];
-};
 
 const handleSaveItem = async () => {
   let errors = validateForm(); // ✅ Run validation and get errors object
@@ -1030,11 +1011,9 @@ useEffect(() => {
     setControlPosition(options["Control Position"] || "");
     setShadeStyle(options["Shade Styles"] || "");
     setMotorizationOption(options["Motorization Options"] || []);
-    setHardwareOption(options["Hardware Options"] || "");
     setPleatStyle(options["Pleat Styles"] || "");
     setHeadboxOption(options["Headbox Options"] || "");
     setFasciaColor(options["Fascia Color"] || "");
-    setHingeColor(options["Hinge Color"] || "");
 
     setHasPrefilledProduct(true);
     setInitialPrefillComplete(true);
@@ -1109,10 +1088,6 @@ const handleUpdateItem = async () => {
     controlPosition: controlPosition || "N/A",
     mountingPosition: mountingPosition || "N/A",
     windowLocation: windowLocation || "N/A",
-    hardwareColor: hardwareColor || "N/A",
-    finialOptions: finialOption || "N/A",
-    tiltOptions: tiltOption || "N/A",
-    hingeColor: hingeColor || "N/A",
     linerOptions: linerOption || "N/A",
     linerColor: resolvedLinerColor,
     
@@ -1123,16 +1098,9 @@ const handleUpdateItem = async () => {
     : [],
   
   
-    handleOptions: handleOption || "N/A",
     headboxOptions: headboxOption || "N/A",
     fasciaColor: fasciaColor || "N/A",
-    hardwareOptions:
-      selectedProduct === "Quick Ship Panels"
-        ? hardwareOption || "N/A"
-        : "N/A",
-    additionalOptions: additionalOptions || "N/A",
-    decorativeTapeType: decorativeTapeType || "N/A",
-    decorativeTapeColor: decorativeTapeColor || "N/A",
+    
     totalPrice: Math.round(totalPrice),
     suggestedRetailPrice: Math.round(suggestedRetailPrice),
   };
@@ -2097,52 +2065,6 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
 </div>
 
 
-{/* ✅ Conditionally show Pleat Styles if Quick Ship Panels is selected */}
-{isQuickShip && (
-  <div className="pleat-style-selection">
-    <label className="form-label">Pleat Styles:</label>
-    <div className="dropdown-with-info">
-      <select
-        className={`form-select ${validationErrors["Pleat Styles"] ? "error" : ""}`}
-        value={pleatStyle || ""}
-        onChange={(e) => {
-          setPleatStyle(e.target.value);
-          handleOptionChange("Pleat Styles", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Pleat Styles": e.target.value ? null : "Pleat style selection is required.",
-          }));
-        }}
-      >
-        <option value="">Select Pleat Style</option>
-        <option value="2-Finger Pinch Pleat">2-Finger Pinch Pleat</option>
-        <option value="3-Finger Pinch Pleat">3-Finger Pinch Pleat</option>
-        <option value="2-Finger Inverted Pinch Pleat">2-Finger Inverted Pinch Pleat</option>
-        <option value="3-Finger Inverted Pinch Pleat">3-Finger Inverted Pinch Pleat</option>
-        <option value="Back Tab">Back Tab</option>
-        <option value="Rod Pocket">Rod Pocket</option>
-      </select>
-
-      {/* ✅ Info Button with Hover Tooltip */}
-      <div
-        className="info-button"
-        onMouseEnter={(e) =>
-          handleMouseEnter(
-            e,
-            "Pleat styles define the overall appearance of your drapery. For visual examples and more details, please refer to the product brochure available in the Resources tab."
-          )
-        }
-        onMouseLeave={() => setHoveredInfo(null)}
-      >
-        ?
-      </div>
-    </div>
-    {/* Validation Error Message */}
-    {validationErrors["Pleat Styles"] && <p className="error-text">{validationErrors["Pleat Styles"]}</p>}
-  </div>
-)}
-
-
 
 {/* ✅ Mounting Position Dropdown (Hide when "Shutters" or "Quick Ship Panels" selected) */}
 {selectedProduct !== "Quick Ship Panels" && selectedProduct !== "Composite Shutters" && (
@@ -2211,39 +2133,6 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
 </div>
 
 
-{/* ✅ Window Opening Width (Only for Quick Ship Panels) */}
-{selectedProduct === "Quick Ship Panels" && (
-  <div className="window-opening-width-container">
-    <label className="form-label">
-      Window Opening Width:
-      <input
-        type="number"
-        className={`form-input ${validationErrors["Window Opening Width"] ? "error" : ""}`}
-        value={selectedOptions["Window Opening Width"] || ""}
-        onChange={(e) => {
-          handleOptionChange("Window Opening Width", e.target.value);
-
-          // ✅ Remove error once valid input is provided
-          setValidationErrors((prevErrors) => {
-            const newErrors = { ...prevErrors };
-            if (e.target.value.trim()) {
-              delete newErrors["Window Opening Width"];
-            }
-            return newErrors;
-          });
-        }}
-        placeholder="Enter Window Opening Width (inches)"
-      />
-    </label>
-
-    {/* ✅ Validation Error Message */}
-    {validationErrors["Window Opening Width"] && (
-      <p className="error-text">{validationErrors["Window Opening Width"]}</p>
-    )}
-  </div>
-)}
-
-
 {/* 🎯 Render all options normally, EXCEPT explicitly excluded options */}
 {Object.keys(optionsData).length > 0 && (
   <div className="form-container">
@@ -2288,306 +2177,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
   </div>
 )}
 
-{/* ✅ Tilt Options - Render Only If Available */}
-{optionsData["Tilt Options"] && selectedProduct && (
-  <div className="dropdown-container">
-    <label className="form-label">Tilt Options:</label>
-    <div className="dropdown-with-info">
-      <select
-        className={`form-select ${validationErrors["Tilt Options"] ? "error" : ""}`}
-        value={tiltOption || ""}
-        onChange={(e) => {
-          setTiltOption(e.target.value);
-          handleOptionChange("Tilt Options", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Tilt Options": e.target.value ? null : "Tilt option is required.",
-          }));
-        }}
-      >
-        <option value="">Select Tilt Option</option>
-        {optionsData["Tilt Options"]
-          .sort((a, b) => a.localeCompare(b))
-          .map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
-            </option>
-          ))}
-      </select>
 
-      {/* ✅ Info Button with Hover Tooltip */}
-      <div
-        className="info-button"
-        onMouseEnter={(e) =>
-          handleMouseEnter(
-            e,
-            "For visual examples and more details, please refer to the product brochure available in the Resources tab."
-          )
-        }
-        onMouseLeave={() => setHoveredInfo(null)}
-      >
-        ?
-      </div>
-    </div>
-    {/* Validation Error Message */}
-    {validationErrors["Tilt Options"] && (
-      <p className="error-text">{validationErrors["Tilt Options"]}</p>
-    )}
-  </div>
-)}
-
-{/* ✅ Render Headbox Options Separately (Only for Roller Shades) */}
-{selectedProduct === "Roller Shades" && optionsData["Headbox Options"] && (() => {
-  const widthInches = parseFloat(width) + calculateInches(0, widthFraction);
-  const heightInches = parseFloat(height) + calculateInches(0, heightFraction);
-
-  const isOversized = widthInches > 84 || heightInches > 96;
-
-  const allowedOptions = isOversized
-    ? ["Standard Open Roll", "Reverse Roll"]
-    : optionsData["Headbox Options"];
-
-  return (
-    <div className="dropdown-container">
-      <label className="form-label">Headbox Options:</label>
-      <div className="dropdown-with-info">
-        <select
-          className={`form-select ${validationErrors["Headbox Options"] ? "error" : ""}`}
-          value={headboxOption || ""}
-          onChange={(e) => {
-            setHeadboxOption(e.target.value);
-            handleOptionChange("Headbox Options", e.target.value);
-            setValidationErrors((prevErrors) => ({
-              ...prevErrors,
-              "Headbox Options": e.target.value ? null : "Headbox option is required.",
-            }));
-          }}
-        >
-          <option value="">Select Headbox Option</option>
-          {allowedOptions
-            .sort((a, b) => a.localeCompare(b))
-            .map((option, idx) => (
-              <option key={idx} value={option}>
-                {option}
-              </option>
-            ))}
-        </select>
-
-        <div
-          className="info-button"
-          onMouseEnter={(e) =>
-            handleMouseEnter(
-              e,
-              "For visual examples and more details, please refer to the product brochure available in the Resources tab."
-            )
-          }
-          onMouseLeave={() => setHoveredInfo(null)}
-        >
-          ?
-        </div>
-      </div>
-
-      {validationErrors["Headbox Options"] && (
-        <p className="error-text">{validationErrors["Headbox Options"]}</p>
-      )}
-    </div>
-  );
-})()}
-
-
-{/* ✅ Conditional Fascia Color Dropdown (Only If Metal Fascia is Selected) */}
-{headboxOption === "Metal Fascia" && (
-  <div className="dropdown-container">
-    <label className="form-label">Fascia Color:</label>
-    <div className="dropdown-with-info">
-      <select
-        className={`form-select ${validationErrors["Fascia Color"] ? "error" : ""}`}
-        value={fasciaColor || ""}
-        onChange={(e) => {
-          setFasciaColor(e.target.value);
-          handleOptionChange("Fascia Color", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Fascia Color": e.target.value ? null : "Fascia color is required when selecting Metal Fascia.",
-          }));
-        }}
-      >
-        <option value="">Select Fascia Color</option>
-        <option value="Black">Black</option>
-        <option value="Grey">Grey</option>
-        <option value="Tan">Tan</option>
-        <option value="White">White</option>
-      </select>
-
-      {/* ✅ Info Button with Hover Tooltip */}
-      <div
-        className="info-button"
-        onMouseEnter={(e) =>
-          handleMouseEnter(e, "Choose a Fascia Color for the Metal Fascia Headbox.")
-        }
-        onMouseLeave={() => setHoveredInfo(null)}
-      >
-        ?
-      </div>
-    </div>
-
-    {/* ✅ Validation Error Message (Displays when validation fails) */}
-    {validationErrors["Fascia Color"] && (
-      <p className="error-text">{validationErrors["Fascia Color"]}</p>
-    )}
-  </div>
-)}
-{/* ✅ Liner Options - Corrected */}
-{optionsData["Liner Options"]?.length > 0 && selectedProduct && (
-  <div className="liner-container">
-    <label className="liner-label">Liner Options:</label>
-    <div className="dropdown-with-info">
-      <select
-        className={`form-select ${validationErrors["Liner Options"] ? "error" : ""}`}
-        value={linerOption || ""}
-        onChange={(e) => {
-          setLinerOption(e.target.value);
-          handleOptionChange("Liner Options", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Liner Options": e.target.value ? null : "Liner option is required.",
-          }));
-        }}
-      >
-        <option value="">Select Liner</option>
-        {optionsData["Liner Options"]
-          .sort((a, b) => a.localeCompare(b))
-          .map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
-            </option>
-          ))}
-      </select>
-      <div
-        className="info-button"
-        onMouseEnter={(e) =>
-          handleMouseEnter(
-            e,
-            "Liners affect privacy and light control. For visual examples and more details, please refer to the product brochure available in the Resources tab."
-          )
-        }
-        onMouseLeave={() => setHoveredInfo(null)}
-      >
-        ?
-      </div>
-    </div>
-    {validationErrors["Liner Options"] && <p className="error-text">{validationErrors["Liner Options"]}</p>}
-  </div>
-)}
-
-
-
-{/* Liner Color for Roman Shades & Quick Ship Panels */}
-{["Roman Shades", "Quick Ship Panels"].includes(selectedProduct) &&
-  ["Dimout Liner", "Standard Liner", "Blackout Liner"].includes(linerOption) && (
-    <div className="dropdown-container">
-      <label className="form-label">Liner Color:</label>
-      <div className="dropdown-with-info">
-        <select
-          value={linerColor || ""}
-          className={`form-select ${validationErrors["Liner Color"] ? "error" : ""}`}
-          onChange={(e) => {
-            setLinerColor(e.target.value);
-            handleOptionChange("Liner Color", e.target.value);
-            setValidationErrors((prevErrors) => ({
-              ...prevErrors,
-              "Liner Color": e.target.value ? null : "Liner color selection is required.",
-            }));
-          }}
-        >
-          <option value="">Select Liner Color</option>
-          <option value="White">White</option>
-          <option value="Off White">Off White</option>
-        </select>
-      </div>
-      {validationErrors["Liner Color"] && <p className="error-text">{validationErrors["Liner Color"]}</p>}
-    </div>
-)}
-
-{/* Liner Color for Natural Shades */}
-{selectedProduct === "Natural Shades" &&
-  ["Privacy Liner", "Blackout Liner"].includes(linerOption) && (
-    <div className="dropdown-container">
-      <label className="form-label">Liner Color:</label>
-      <div className="dropdown-with-info">
-        <select
-          value={linerColor || ""}
-          className={`form-select ${validationErrors["Liner Color"] ? "error" : ""}`}
-          onChange={(e) => {
-            setLinerColor(e.target.value);
-            handleOptionChange("Liner Color", e.target.value);
-            setValidationErrors((prevErrors) => ({
-              ...prevErrors,
-              "Liner Color": e.target.value ? null : "Liner color selection is required.",
-            }));
-          }}
-        >
-          <option value="">Select Liner Color</option>
-          {["White", "Cream", "Teak", "Natural", "Gray"].map((color, idx) => (
-            <option key={idx} value={color}>
-              {color}
-            </option>
-          ))}
-        </select>
-      </div>
-      {validationErrors["Liner Color"] && <p className="error-text">{validationErrors["Liner Color"]}</p>}
-    </div>
-)}
-
-{/* ✅ Shade Styles - Render Separately Only for Products That Have It */}
-{optionsData["Shade Styles"] && selectedProduct && (
-  <div className="dropdown-container">
-    <label className="form-label">Shade Styles:</label>
-    <div className="dropdown-with-info">
-      <select
-        className={`form-select ${validationErrors["Shade Styles"] ? "error" : ""}`}
-        value={shadeStyle || ""}
-        onChange={(e) => {
-          setShadeStyle(e.target.value);
-          handleOptionChange("Shade Styles", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Shade Styles": e.target.value ? null : "Shade style is required.",
-          }));
-        }}
-      >
-        <option value="">Select Shade Style</option>
-        {optionsData["Shade Styles"]
-          .slice() // ✅ Make a copy before sorting (to prevent modifying the original array)
-          .sort((a, b) => a.localeCompare(b)) // ✅ Alphabetical Sorting
-          .map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
-            </option>
-          ))}
-      </select>
-
-      {/* ✅ Info Button with Hover Tooltip */}
-      <div
-        className="info-button"
-        onMouseEnter={(e) =>
-          handleMouseEnter(
-            e,
-            "Shade styles determine the overall look and functionality of your window treatment. For visual examples and more details, please refer to the product brochure available in the Resources tab."
-          )
-        }
-        onMouseLeave={() => setHoveredInfo(null)}
-      >
-        ?
-      </div>
-    </div>
-
-    {/* Validation Error Message */}
-    {validationErrors["Shade Styles"] && (
-      <p className="error-text">{validationErrors["Shade Styles"]}</p>
-    )}
-  </div>
-)}
 {selectedProduct === "Natural Shades" ? (
   <div className="control-options-container">
     <label className="form-label">Control Options:</label>
@@ -2667,92 +2257,6 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
 )}
 
 
-{/* ✅ Hardware Options Dropdown (Only for Quick Ship Panels) */}
-{selectedProduct === "Quick Ship Panels" && optionsData["Hardware Options"] && (
-  <div className="hardware-options-container">
-    <label className="form-label">Hardware Options:</label>
-    <div className="dropdown-with-info">
-      <select
-        className={`form-select ${validationErrors["Hardware Options"] ? "error-border" : ""}`}
-        value={hardwareOption || ""}
-        onChange={(e) => {
-          setHardwareOption(e.target.value);
-          handleOptionChange("Hardware Options", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Hardware Options": e.target.value ? null : "Hardware option is required for Quick Ship Panels.",
-            "Hardware Color": e.target.value ? prevErrors["Hardware Color"] : null,
-          }));
-        }}
-      >
-        <option value="">Select Hardware Option</option>
-        {optionsData["Hardware Options"].map((option, idx) => {
-          const renamedOption = {
-            "Decorative Pole With Rings": "Decorative Pole",
-            "French Return With Rings": "French Return",
-            "Decorative Traverse Rod": "Traverse Rod",
-          }[option] || option;
-
-          return (
-            <option key={idx} value={option}>
-              {renamedOption}
-            </option>
-          );
-        })}
-      </select>
-
-      {/* ✅ Info Button with Hover Tooltip */}
-      <div
-        className="info-button"
-        onMouseEnter={(e) =>
-          handleMouseEnter(
-            e,
-            "For visual examples and more details, please refer to the product brochure available in the Resources tab."
-          )
-        }
-        onMouseLeave={() => setHoveredInfo(null)}
-      >
-        ?
-      </div>
-    </div>
-
-    {/* ✅ Show Validation Error Message */}
-    {validationErrors["Hardware Options"] && (
-      <p className="error-text">{validationErrors["Hardware Options"]}</p>
-    )}
-  </div>
-)}
-
-
-
-{/* ✅ Show "Control Position" dropdown only if "Loop Control" or "Continuous Loop" is selected */}
-{["Loop Control", "Continuous Loop"].includes(selectedOptions["Control Options"]) && (
-  <div className="control-position-container">
-    <label className="form-label">Control Position:</label>
-    <select
-      className={`form-select ${validationErrors["Control Position"] ? "error" : ""}`}
-      value={controlPosition || ""}
-      onChange={(e) => {
-        setControlPosition(e.target.value);
-        handleOptionChange("Control Position", e.target.value);
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
-          "Control Position": e.target.value ? null : prevErrors["Control Position"],
-        }));
-      }}
-    >
-      <option value="">Select Control Position</option>
-      <option value="Right Side">Right Side</option>
-      <option value="Left Side">Left Side</option>
-    </select>
-
-    {/* Validation Error Message */}
-    {validationErrors["Control Position"] && (
-      <p className="error-text">{validationErrors["Control Position"]}</p>
-    )}
-  </div>
-)}
-
 {/* ✅ Motorization Options */}
 {selectedOptions["Control Options"] === "Motorized" && (
   <div className="motorization-options">
@@ -2788,254 +2292,6 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
   </div>
 )}
 
-
-{/* ✅ Hardware Color Dropdown (Only shows for Quick Ship Panels if Hardware Option is selected) */}
-{selectedProduct === "Quick Ship Panels" && hardwareOption && (
-  <div className="hardware-color-container">
-    <label className="form-label">
-      Hardware Color:
-      <select
-        className={`form-select ${validationErrors["Hardware Color"] ? "error" : ""}`}
-        value={hardwareColor || ""}
-        onChange={(e) => {
-          setHardwareColor(e.target.value);
-          handleOptionChange("Hardware Color", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Hardware Color": e.target.value ? null : "Hardware color selection is required.",
-          }));
-        }}
-      >
-        <option value="">Select Color</option>
-        <option value="Black">Black</option>
-        <option value="Gold">Gold</option>
-        <option value="Silver">Silver</option>
-      </select>
-    </label>
-
-    {/* ✅ Show Validation Error */}
-    {validationErrors["Hardware Color"] && <p className="error-text">{validationErrors["Hardware Color"]}</p>}
-  </div>
-)}
-
-{/* ✅ Finial Options Dropdown (Conditional, only for Quick Ship Panels) */}
-{selectedProduct === "Quick Ship Panels" &&
-  hardwareOption &&
-  !["French Return", "French Return With Rings", ""].includes(hardwareOption) && (
-    <div className="finial-options-container">
-      <label className="form-label">Finial Options:</label>
-      <div className="dropdown-with-info">
-        <select
-          className={`form-select ${validationErrors["Finial Options"] ? "error" : ""}`}
-          value={finialOption || ""}
-          onChange={(e) => {
-            setFinialOption(e.target.value);
-            handleOptionChange("Finial Options", e.target.value);
-            setValidationErrors((prevErrors) => ({
-              ...prevErrors,
-              "Finial Options": e.target.value ? null : "Finial option selection is required.",
-            }));
-          }}
-        >
-          <option value="">Select Finial Option</option>
-          <option value="Ball">Ball</option>
-          <option value="End Cap">End Cap</option>
-          <option value="Faceted">Faceted</option>
-          <option value="Fluted">Fluted</option>
-          <option value="Square">Square</option>
-          <option value="Trumpet">Trumpet</option>
-        </select>
-
-        {/* ✅ Info Button with Hover Tooltip */}
-        <div
-          className="info-button"
-          onMouseEnter={(e) =>
-            handleMouseEnter(
-              e,
-              "For visual examples and more details, please refer to the product brochure available in the Resources tab."
-            )
-          }
-          onMouseLeave={() => setHoveredInfo(null)}
-        >
-          ?
-        </div>
-      </div>
-
-      {/* ✅ Show Validation Error */}
-      {validationErrors["Finial Options"] && <p className="error-text">{validationErrors["Finial Options"]}</p>}
-    </div>
-)}
-
-
-
-{/* ✅ Additional Options Dropdown */}
-{(selectedProduct === "Roman Shades" || selectedProduct === "Quick Ship Panels") &&
-  optionsData["Additional Options"] &&
-  optionsData["Additional Options"].length > 0 && (
-    <div className="additional-options-container">
-      <label className="form-label">Additional Options:</label>
-      <select
-        className={`form-select ${validationErrors["Additional Options"] ? "error" : ""}`}
-        value={additionalOptions || ""}
-        onChange={(e) => {
-          setAdditionalOptions(e.target.value);
-          handleOptionChange("Additional Options", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Additional Options": e.target.value ? null : "Additional option selection is required.",
-          }));
-        }}
-      >
-        <option value="">Select Option</option>
-        {optionsData["Additional Options"]
-          .filter(option => option !== "6 Valence") // ✅ Exclude "Valence"
-          .map((option, idx) => (
-            <option key={idx} value={option}>
-              {option}
-            </option>
-          ))}
-      </select>
-
-      {/* ✅ Validation Error Message */}
-      {validationErrors["Additional Options"] && <p className="error-text">{validationErrors["Additional Options"]}</p>}
-
-      {/* 🎯 Show Decorative Tape Type & Color Dropdowns If "Decorative Tape" is Selected */}
-      {additionalOptions === "Decorative Tape" && (
-        <div className="decorative-tape-selection">
-          <label className="form-label">Select Decorative Tape Type:</label>
-          <div className="dropdown-with-info">
-            <select
-              className={`form-select ${validationErrors["Decorative Tape Type"] ? "error" : ""}`}
-              value={decorativeTapeType || ""}
-              onChange={(e) => {
-                setDecorativeTapeType(e.target.value);
-                handleOptionChange("Decorative Tape Type", e.target.value);
-                setValidationErrors((prevErrors) => ({
-                  ...prevErrors,
-                  "Decorative Tape Type": e.target.value ? null : "Tape type selection is required.",
-                }));
-              }}
-            >
-              <option value="">Select Tape Type</option>
-              <option value="Chain">Chain</option>
-              <option value="Diamond">Diamond</option>
-              <option value="Scalloped">Scalloped</option>
-            </select>
-
-            {/* ✅ Info Button for Decorative Tape Type */}
-            <div
-              className="info-button"
-              onMouseEnter={(e) =>
-                handleMouseEnter(
-                  e,
-                  "Standard placement is a 2-inch inset on the sides only. Custom placements outside this standard can be accommodated upon request. For visual references, please consult the product brochure in the Resources tab."
-                )
-              }
-              onMouseLeave={() => setHoveredInfo(null)}
-            >
-              ?
-            </div>
-          </div>
-
-          {/* ✅ Validation Error Message */}
-          {validationErrors["Decorative Tape Type"] && (
-            <p className="error-text">{validationErrors["Decorative Tape Type"]}</p>
-          )}
-
-          {/* 🖌 Show Tape Colors If Tape Type is Selected */}
-          {decorativeTapeType && (
-            <label className="form-label">
-              Select Decorative Tape Color:
-              <select
-                className={`form-select ${validationErrors["Decorative Tape Color"] ? "error" : ""}`}
-                value={decorativeTapeColor || ""}
-                onChange={(e) => {
-                  setDecorativeTapeColor(e.target.value);
-                  handleOptionChange("Decorative Tape Color", e.target.value);
-                  setValidationErrors((prevErrors) => ({
-                    ...prevErrors,
-                    "Decorative Tape Color": e.target.value ? null : "Tape color selection is required.",
-                  }));
-                }}
-              >
-                <option value="">Select Tape Color</option>
-                {getAvailableColors(decorativeTapeType).map((color) => (
-                  <option key={color} value={color}>
-                    {color}
-                  </option>
-                ))}
-              </select>
-
-              {/* ✅ Validation Error Message */}
-              {validationErrors["Decorative Tape Color"] && (
-                <p className="error-text">{validationErrors["Decorative Tape Color"]}</p>
-              )}
-            </label>
-          )}
-        </div>
-      )}
-    </div>
-)}
-
-
-{/* ✅ Handle Options (Only show if "Manual Crank" is selected) */}
-{selectedProduct === "Patio Shades" && selectedOptions["Control Options"] === "Manual Crank" && (
-  <div className="handle-options-container">
-    <label className="form-label">Handle Options:</label>
-    <select
-      className={`form-select ${validationErrors["Handle Options"] ? "error" : ""}`}
-      value={handleOption || ""}
-      onChange={(e) => {
-        setHandleOption(e.target.value);
-        handleOptionChange("Handle Options", e.target.value);
-        setValidationErrors((prevErrors) => ({
-          ...prevErrors,
-          "Handle Options": e.target.value ? null : "Handle option is required.",
-        }));
-      }}
-    >
-      <option value="">Select Handle Option</option>
-      <option value="4ft Handle">4ft Handle</option>
-      <option value="5ft Handle">5ft Handle</option>
-      <option value="6ft Handle">6ft Handle</option>
-    </select>
-
-    {/* Validation Error Message - Directly Below Dropdown */}
-    {validationErrors["Handle Options"] && <p className="error-text">{validationErrors["Handle Options"]}</p>}
-  </div>
-)}
-
-{/* ✅ NEW: "Hinge Color" Category (Only for Shutters) */}
-{selectedProduct === "Composite Shutters" && (
-  <div className="hinge-color-selection">
-    <label className="form-label">
-      Hinge Color:
-      <select
-        className={`form-select ${validationErrors["Hinge Color"] ? "error" : ""}`}
-        value={hingeColor || ""}
-        onChange={(e) => {
-          setHingeColor(e.target.value);
-          handleOptionChange("Hinge Color", e.target.value);
-          setValidationErrors((prevErrors) => ({
-            ...prevErrors,
-            "Hinge Color": e.target.value ? null : "Hinge color is required.",
-          }));
-        }}
-      >
-        <option value="">Select Hinge Color</option>
-        <option value="Antique Brass">Antique Brass</option>
-        <option value="Off White">Off White</option>
-        <option value="Oil Rubbed Bronze">Oil Rubbed Bronze</option>
-        <option value="Satin Nickel">Satin Nickel</option>
-        <option value="Stainless Steel">Stainless Steel</option>
-        <option value="White">White</option>
-      </select>
-    </label>
-
-    {/* Validation Error Message */}
-    {validationErrors["Hinge Color"] && <p className="error-text">{validationErrors["Hinge Color"]}</p>}
-  </div>
-)}
 
 {/* Tooltip (Shows on Hover) */}
 {tooltip.visible && (
@@ -3150,44 +2406,6 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
       </label>
     </div>
 
-{/* ✅ Hardware Accessories Section */}
-{selectedProduct === "Quick Ship Panels" && selectedOptions["Hardware Options"] && (
-  <div className="hardware-accessories">
-    <h3>Hardware Accessories</h3>
-    <div className="option-price-item">
-      <span className="option-name">
-        {selectedOptions["Hardware Options"].replace(" With Rings", "")}
-      </span>
-      {(() => {
-        const dimensionKey = `${Math.ceil(width / 12) * 12}x${Math.ceil(height / 12) * 12}`;
-        const pricingData = sizeBasedPricing[selectedOptions["Hardware Options"]];
-        const hardwarePrice = typeof pricingData === "object"
-          ? pricingData[dimensionKey] || 0
-          : pricingData || 0;
-        return hardwarePrice > 0 && (
-          <span className="option-price">${Math.round(hardwarePrice * costFactor)}</span>
-        );
-      })()}
-    </div>
-
-    {selectedOptions["Hardware Color"] && (
-      <div className="option-price-item">
-        <span className="option-name">Color: {selectedOptions["Hardware Color"]}</span>
-      </div>
-    )}
-
-    {selectedOptions["Finial Options"] && !selectedOptions["Hardware Options"].includes("French Return") && (
-      <div className="option-price-item">
-        <span className="option-name">Finial: {selectedOptions["Finial Options"]}</span>
-      </div>
-    )}
-
-    <p className="accessory-info-message">
-      *Accessories are priced separately and do not multiply with the selected quantity.
-    </p>
-  </div>
-)}
-
 
 {/* ✅ Motorization & Manual Crank Accessories Section */}
 <div className="motorization-subtotal">
@@ -3234,23 +2452,6 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
         )}
       </>
     )}
-
-    {/* ✅ General Accessory Message */}
-    <p className="accessory-info-message">
-      *Accessories are priced separately and do not multiply with the selected quantity.
-    </p>
-
-    {/* ✅ Product-Specific Guidance */}
-    <p className="accessory-info-message1">
-      {selectedOptions["Control Options"] === "Manual Crank"
-        ? "*At least (1) Crank Handle is required per order."
-        : selectedOptions["Control Options"] === "Motorized" && selectedProduct === "Patio Shades"
-        ? "*At least (1) Remote is required per order when ordering Motorized Patio Shades."
-        : selectedOptions["Control Options"] === "Motorized"
-        ? "*At least (1) Remote and (1) Charger are required per order."
-        : ""}
-    </p>
-
   </div>
 )}
 
