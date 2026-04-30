@@ -96,6 +96,7 @@ const SignIn = () => {
 
         <input
           type="email"
+          data-testid="email-input"
           placeholder="Email Address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -104,6 +105,7 @@ const SignIn = () => {
 
         <input
           type="password"
+          data-testid="password-input"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

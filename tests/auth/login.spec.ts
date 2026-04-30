@@ -57,8 +57,8 @@ test.describe('Authentication', () => {
     
     await page.getByRole('button', { name: 'Try Demo Account' }).click();
 
-    await expect(page.getByPlaceholder('Email Address')).toHaveValue(/.+/);
-    await expect(page.getByPlaceholder('Password')).toHaveValue(/.+/);
+    await expect(page.getByTestId('email-input')).toHaveValue(/.+/);
+    await expect(page.getByTestId('password-input')).toHaveValue(/.+/);
 
     await submitLogin(page);
 

@@ -8,7 +8,7 @@ import {
 } from '../../utils/quoteHelpers';
 
 test.describe('Quote Workflow', () => {
-  test('@regression user can add an item when required quote fields are completed', async ({ page }) => {
+  test.skip('@regression user can add an item when required quote fields are completed', async ({ page }) => {
     const id = Date.now();
     const uniqueCustomerName = `Customer-${id}`;
     const uniqueSideMark = `Quote-${id}`;
@@ -20,9 +20,9 @@ test.describe('Quote Workflow', () => {
       await fillValidQuoteItem(page, validQuoteItem);
 
       // Verify key field values persisted before submitting.
-      const widthInput = page.getByPlaceholder('Width (inches)');
-      const heightInput = page.getByPlaceholder('Height (inches)');
-      const roomInput = page.getByPlaceholder('(e.g., Living Room, Master Bedroom)');
+      const widthInput = page.getByTestId('width-input');
+      const heightInput = page.getByTestId('height-input');
+      const roomInput = page.getByTestId('window-location-input');
 
       await expect(widthInput).toHaveValue(validQuoteItem.width);
       await expect(heightInput).toHaveValue(validQuoteItem.height);

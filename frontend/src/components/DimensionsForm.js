@@ -19,6 +19,7 @@ const DimensionsForm = ({
         <div className="dimension-input-wrapper">
           <input
             type="number"
+            data-testid="width-input"
             className={`width-input ${validationErrors.width ? "error-border" : ""}`}
             value={width || ""}
             onChange={(e) => {
@@ -56,6 +57,7 @@ const DimensionsForm = ({
         <div className="dimension-input-wrapper">
           <input
             type="number"
+            data-testid="height-input"
             className={`height-input ${validationErrors.height ? "error-border" : ""}`}
             value={height || ""}
             onChange={(e) => {

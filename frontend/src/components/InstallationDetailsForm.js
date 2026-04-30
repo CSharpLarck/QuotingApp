@@ -45,7 +45,7 @@ const InstallationDetailsForm = ({
 
         <input
           type="text"
-          placeholder="Enter window location"
+          data-testid="window-location-input"
           className={`form-input ${
             validationErrors["Window Location"] ? "error-border" : ""
           }`}

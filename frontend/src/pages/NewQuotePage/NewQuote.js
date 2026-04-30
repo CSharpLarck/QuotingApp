@@ -702,292 +702,246 @@ useEffect(() => {
 }, [selectedCategory]);
 
 
-// ✅ Check if products state updates correctly
+// Check if products state updates correctly
 useEffect(() => {
-  console.log("📌 Updated Products State:", products);
+  console.log("Updated Products State:", products);
 }, [products]);
 
-
-// Fetch products based on selected category
 useEffect(() => {
-  const fetchData = async () => {
+  const fetchProductsByCategory = async () => {
     if (!selectedCategory) return;
 
-    // Reset options data when the category changes
     setOptionsData({});
 
     try {
-      console.log('Fetching products for category:', selectedCategory);
+      const productsRef = collection(db, "products");
+      const productsQuery = query(
+        productsRef,
+        where("category", "==", selectedCategory)
+      );
 
-      const productsRef = collection(db, 'products');
-      const q = query(productsRef, where('category', '==', selectedCategory));
-      const querySnapshot = await getDocs(q);
+      const querySnapshot = await getDocs(productsQuery);
 
       if (querySnapshot.empty) {
-        console.log('No products found for the selected category');
         setProducts([]);
+        setProductsData([]);
         return;
       }
 
       const fetchedProducts = querySnapshot.docs.map((doc) => doc.data());
-      const uniqueProducts = [
-        ...new Map(fetchedProducts.map((product) => [product.name, product])).values(),
-      ];
-      setProducts(uniqueProducts);
 
-      const allProductsData = querySnapshot.docs.map((doc) => {
+      const uniqueProducts = [
+        ...new Map(
+          fetchedProducts.map((product) => [product.name, product])
+        ).values(),
+      ];
+
+      const formattedProductsData = querySnapshot.docs.map((doc) => {
         const data = doc.data();
+
         return {
           productId: doc.id,
           name: data.name,
           fabricCollectionOptions: data.fabricCollectionOptions || [],
-          fabricColorOptions: Array.isArray(data.fabricColorOptions) ? data.fabricColorOptions : [],
+          fabricColorOptions: Array.isArray(data.fabricColorOptions)
+            ? data.fabricColorOptions
+            : [],
           pricingRules: data.pricingRules || {},
           optionRefs: data.options || [],
         };
       });
 
-      setProductsData(allProductsData);
+      setProducts(uniqueProducts);
+      setProductsData(formattedProductsData);
 
-      // 🔥🔥 THIS is the key: ensure you fetch options if editing a product and there's no selected fabric yet
-      const selectedProductData = allProductsData.find((prod) =>
+      const selectedProductData = formattedProductsData.find((product) =>
         selectedFabricOption
-          ? prod.fabricCollectionOptions.includes(selectedFabricOption)
-          : prod.name === selectedProduct
+          ? product.fabricCollectionOptions.includes(selectedFabricOption)
+          : product.name === selectedProduct
       );
 
       if (selectedProductData?.optionRefs?.length > 0) {
-        console.log('Fetching options for:', selectedProductData.name);
         await fetchOptions(selectedProductData.optionRefs);
-      } else {
-        console.log('⚠️ No product match found to fetch optionRefs for.');
       }
     } catch (error) {
-      console.error('❌ Error fetching products data:', error);
+      console.error("Error fetching products data:", error);
     }
   };
 
-  fetchData();
-}, [selectedCategory, selectedFabricOption, selectedProduct]); // ✅ Add selectedProduct here
-
-
+  fetchProductsByCategory();
+}, [selectedCategory, selectedFabricOption, selectedProduct]);
 
 
 useEffect(() => {
   if (!selectedCategory || !selectedProduct) return;
 
-  const selectedCategoryProducts = productsData.filter(product => product.name === selectedProduct);
+  const selectedCategoryProducts = productsData.filter(
+    (product) => product.name === selectedProduct
+  );
 
-  const allFabricCollectionOptions = new Set();
+  const fabricOptions = new Set();
+
   selectedCategoryProducts.forEach((product) => {
     product.fabricCollectionOptions.forEach((option) => {
-      allFabricCollectionOptions.add(option);
+      fabricOptions.add(option);
     });
   });
 
-  setFabricCollectionOptions([...allFabricCollectionOptions]);
-  console.log('Fabric Collection Options:', [...allFabricCollectionOptions]);
+  setFabricCollectionOptions([...fabricOptions]);
 }, [selectedProduct, selectedCategory, productsData]);
 
 useEffect(() => {
   if (!totalPrice || !costFactor || isNaN(costFactor) || costFactor === 0) return;
 
-  const retailPrice = totalPrice / costFactor;
-  setSuggestedRetailPrice(retailPrice);
+  setSuggestedRetailPrice(totalPrice / costFactor);
 }, [totalPrice, costFactor]);
 
+const fetchPricingRules = async (selectedProductData) => {
+  try {
+    const pricingDocRef = selectedProductData.pricingRules;
+    const pricingDocSnapshot = await getDoc(pricingDocRef);
 
-  // Function to fetch pricing rules based on productId and selected fabricCollectionOption
-  const fetchPricingRules = async (selectedProductData) => {
-    try {
-      const pricingDocRef = selectedProductData.pricingRules;
-      const pricingDocSnapshot = await getDoc(pricingDocRef);
-  
-      if (!pricingDocSnapshot.exists()) {
-        console.error('No pricing rules document found for selected product');
-        return;
-      }
-  
-      const pricingData = pricingDocSnapshot.data();
-  
-      if (pricingData && pricingData.widthHeightPricing) {
-        let rulesArray = [];
-  
-        if (Array.isArray(pricingData.widthHeightPricing)) {
-          rulesArray = pricingData.widthHeightPricing.map((rule) => ({
-            dimension: rule.dimension,
-            price: rule.price,
-          }));
-        } else {
-          rulesArray = Object.entries(pricingData.widthHeightPricing).map(([dimension, price]) => ({
-            dimension,
-            price,
-          }));
-        }
-  
-        const pricingMap = new Map(rulesArray.map(rule => [rule.dimension, rule.price]));
-        setPricingRules(pricingMap);
-  
-        // ✅ Ensure proper min/max dimensions
-        const updatedMinMax = rulesArray.reduce((acc, rule) => {
-          const [width, height] = rule.dimension.split('x').map(Number);
-          if (!isNaN(width) && !isNaN(height)) {
-            acc.minWidth = Math.min(acc.minWidth, width);
-            acc.maxWidth = Math.max(acc.maxWidth, width);
-            acc.minHeight = Math.min(acc.minHeight, height);
-            acc.maxHeight = Math.max(acc.maxHeight, height);
-          }
-          return acc;
-        }, {
-          minWidth: Infinity,
-          maxWidth: -Infinity,
-          minHeight: Infinity,
-          maxHeight: -Infinity,
-        });
-  
-        // ✅ Set default values if no dimensions found
-        setMinMaxDimensions({
-          minWidth: isFinite(updatedMinMax.minWidth) ? updatedMinMax.minWidth : 24,
-          maxWidth: isFinite(updatedMinMax.maxWidth) ? updatedMinMax.maxWidth : 120,
-          minHeight: isFinite(updatedMinMax.minHeight) ? updatedMinMax.minHeight : 24,
-          maxHeight: isFinite(updatedMinMax.maxHeight) ? updatedMinMax.maxHeight : 120,
-        });
-  
-        console.log('✅ Updated Min/Max Dimensions:', updatedMinMax);
-      } else {
-        console.error('widthHeightPricing not found or incorrectly formatted');
-      }
-    } catch (error) {
-      console.error('Error fetching pricing rules:', error);
-    }
-  };
-  
-  useEffect(() => {
-    const widthInches = isNaN(parseFloat(width)) ? 0 : parseFloat(width) + calculateInches(0, widthFraction);
-  
-    if (widthInches < minMaxDimensions.minWidth || widthInches > minMaxDimensions.maxWidth) {
-      setValidationErrors((prev) => ({
-        ...prev,
-        width: `Width must be between ${minMaxDimensions.minWidth} and ${minMaxDimensions.maxWidth} inches.`,
-      }));
-    } else {
-      setValidationErrors((prev) => {
-        if (prev.width) return { ...prev, width: "" }; // ✅ Remove error when valid
-        return prev;
-      });
-    }
-  }, [width, widthFraction, minMaxDimensions]);
-  
-  useEffect(() => {
-    const heightInches = isNaN(parseFloat(height)) ? 0 : parseFloat(height) + calculateInches(0, heightFraction);
-  
-    if (heightInches < minMaxDimensions.minHeight || heightInches > minMaxDimensions.maxHeight) {
-      setValidationErrors((prev) => ({
-        ...prev,
-        height: `Height must be between ${minMaxDimensions.minHeight} and ${minMaxDimensions.maxHeight} inches.`,
-      }));
-    } else {
-      setValidationErrors((prev) => {
-        if (prev.height) return { ...prev, height: "" }; // ✅ Remove error when valid
-        return prev;
-      });
-    }
-  }, [height, heightFraction, minMaxDimensions]);
-  
-
-
-  useEffect(() => {
-    if (!selectedProduct || pricingRules.size === 0) return;
-  
-    const widthInches = parseFloat(width || 0) + calculateInches(0, widthFraction);
-    const heightInches = parseFloat(height || 0) + calculateInches(0, heightFraction);
-  
-    const roundedWidth = Math.ceil(widthInches / 12) * 12;
-    const roundedHeight = Math.ceil(heightInches / 12) * 12;
-    const dimensionKey = `${roundedWidth}x${roundedHeight}`;
-  
-    const basePrice = pricingRules.get(dimensionKey);
-    if (basePrice === undefined) {
-      console.warn("❌ No base price for dimensions:", dimensionKey);
-      setTotalPrice(0);
+    if (!pricingDocSnapshot.exists()) {
+      console.error("No pricing rules document found for selected product");
       return;
     }
-  
-    let basePriceTotal = 0;
-    let accessoryTotal = 0;
-    let tariffTotal = 0;
-  
-    const basePriceCategories = [
-      "Control Options", "Liner Options", "Shade Styles", "Tilt Options", "Headbox Options"
-    ];
-  
-    const accessoryCategories = [
-      "Hardware Options", "Hardware Color", "Finial Options", "Motorization Options", "Handle Options"
-    ];
-  
-    Object.entries(selectedOptions).forEach(([categoryKey, selectedValue]) => {
-      if (!selectedValue) return;
-  
-      // Handle Motorization Options array
-      if (categoryKey === "Motorization Options" && Array.isArray(selectedValue)) {
-        selectedValue.forEach((motorOption) => {
-          const pricingData = sizeBasedPricingData[motorOption] || sizeBasedPricing[motorOption];
-          const price = typeof pricingData === "number" 
-            ? pricingData 
-            : pricingData?.[dimensionKey] || 0;
-  
-          accessoryTotal += price;
-  
-// Apply appropriate tariffs by product type
-if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natural Shade")) {
-  tariffTotal += price * 0.10;
-} else if (
-  selectedProduct.includes("Shutter") ||
-  selectedProduct.includes("Roman Shade") ||
-  selectedProduct.includes("Quick Ship Panel")
-) {
-  tariffTotal += price * 0.20;
-}
 
-        });
-        return;
-      }
-  
-      // Handle single option (not array)
-      const pricingData = sizeBasedPricingData[selectedValue] || sizeBasedPricing[selectedValue];
-      const price = typeof pricingData === "number" 
-        ? pricingData 
-        : pricingData?.[dimensionKey] || 0;
-  
-      if (basePriceCategories.includes(categoryKey)) {
-        basePriceTotal += price;
-      } else if (accessoryCategories.includes(categoryKey)) {
-        accessoryTotal += price;
-      }
-    });
-  
-    // Base calculation
-    let subtotal = (basePrice + basePriceTotal) * quantity * costFactor;
-    let finalTotal = subtotal + (accessoryTotal * costFactor);
-  
-    // Add Roller Shade motor tariff if applicable
-    if (selectedProduct.includes("Roller Shade") && selectedOptions["Control Options"] === "Motorized") {
-      tariffTotal += subtotal * 0.10;
+    const pricingData = pricingDocSnapshot.data();
+
+    if (!pricingData?.widthHeightPricing) {
+      console.error("Width/height pricing data not found");
+      return;
     }
+
+    const rulesArray = Array.isArray(pricingData.widthHeightPricing)
+      ? pricingData.widthHeightPricing.map((rule) => ({
+          dimension: rule.dimension,
+          price: rule.price,
+        }))
+      : Object.entries(pricingData.widthHeightPricing).map(
+          ([dimension, price]) => ({
+            dimension,
+            price,
+          })
+        );
+
+    const pricingMap = new Map(
+      rulesArray.map((rule) => [rule.dimension, rule.price])
+    );
+
+    setPricingRules(pricingMap);
+
+    const updatedMinMax = rulesArray.reduce(
+      (acc, rule) => {
+        const [width, height] = rule.dimension.split("x").map(Number);
+
+        if (!isNaN(width) && !isNaN(height)) {
+          acc.minWidth = Math.min(acc.minWidth, width);
+          acc.maxWidth = Math.max(acc.maxWidth, width);
+          acc.minHeight = Math.min(acc.minHeight, height);
+          acc.maxHeight = Math.max(acc.maxHeight, height);
+        }
+
+        return acc;
+      },
+      {
+        minWidth: Infinity,
+        maxWidth: -Infinity,
+        minHeight: Infinity,
+        maxHeight: -Infinity,
+      }
+    );
+
+    setMinMaxDimensions({
+      minWidth: isFinite(updatedMinMax.minWidth) ? updatedMinMax.minWidth : 24,
+      maxWidth: isFinite(updatedMinMax.maxWidth) ? updatedMinMax.maxWidth : 120,
+      minHeight: isFinite(updatedMinMax.minHeight) ? updatedMinMax.minHeight : 24,
+      maxHeight: isFinite(updatedMinMax.maxHeight) ? updatedMinMax.maxHeight : 120,
+    });
+  } catch (error) {
+    console.error("Error fetching pricing rules:", error);
+  }
+};
+
+
+
+useEffect(() => {
+  const widthInches =
+    isNaN(parseFloat(width)) ? 0 : parseFloat(width) + calculateInches(0, widthFraction);
+
+  if (
+    widthInches < minMaxDimensions.minWidth ||
+    widthInches > minMaxDimensions.maxWidth
+  ) {
+    setValidationErrors((prev) => ({
+      ...prev,
+      width: `Width must be between ${minMaxDimensions.minWidth} and ${minMaxDimensions.maxWidth} inches.`,
+    }));
+  } else {
+    setValidationErrors((prev) => {
+      const { width, ...rest } = prev;
+      return rest;
+    });
+  }
+}, [width, widthFraction, minMaxDimensions]);
   
-    finalTotal += tariffTotal;
+  useEffect(() => {
+  const heightInches =
+    isNaN(parseFloat(height)) ? 0 : parseFloat(height) + calculateInches(0, heightFraction);
+
+  if (
+    heightInches < minMaxDimensions.minHeight ||
+    heightInches > minMaxDimensions.maxHeight
+  ) {
+    setValidationErrors((prev) => ({
+      ...prev,
+      height: `Height must be between ${minMaxDimensions.minHeight} and ${minMaxDimensions.maxHeight} inches.`,
+    }));
+  } else {
+    setValidationErrors((prev) => {
+      const { height, ...rest } = prev;
+      return rest;
+    });
+  }
+}, [height, heightFraction, minMaxDimensions]);
   
-    setTotalPrice(finalTotal);
-      }, [
-    selectedProduct,
-    selectedOptions,
-    width, height,
-    widthFraction, heightFraction,
-    pricingRules,
-    sizeBasedPricing, sizeBasedPricingData,
-    quantity, costFactor
-  ]);
-  
+
+
+
+useEffect(() => {
+  if (!selectedProduct || pricingRules.size === 0) return;
+
+  const widthInches =
+    parseFloat(width || 0) + calculateInches(0, widthFraction);
+
+  const heightInches =
+    parseFloat(height || 0) + calculateInches(0, heightFraction);
+
+  const roundedWidth = Math.ceil(widthInches / 12) * 12;
+  const roundedHeight = Math.ceil(heightInches / 12) * 12;
+  const dimensionKey = `${roundedWidth}x${roundedHeight}`;
+
+  const basePrice = pricingRules.get(dimensionKey);
+
+  if (basePrice === undefined) {
+    setTotalPrice(0);
+    return;
+  }
+
+  const finalTotal = basePrice * quantity * costFactor;
+
+  setTotalPrice(finalTotal);
+}, [
+  selectedProduct,
+  width,
+  height,
+  widthFraction,
+  heightFraction,
+  pricingRules,
+  quantity,
+  costFactor,
+]);
+
   
   useEffect(() => {
     setFabricColorOptions([]);
@@ -995,7 +949,7 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
   
     if (!selectedFabricOption || !selectedProduct) return;
   
-    // 🔍 Step 1: Find the selected product in productsData
+    // Step 1: Find the selected product in productsData
     const selectedProductData = productsData.find(
       (product) =>
         product.name === selectedProduct &&
@@ -1003,27 +957,18 @@ if (selectedProduct.includes("Roller Shade") || selectedProduct.includes("Natura
     );
   
     if (!selectedProductData) {
-      console.error("❌ Selected product not found for the fabric option.");
       return;
     }
   
-    // ✅ Step 2: Set fabric color options
+    // Step 2: Set fabric color options
     const fabricColorOptionsData = selectedProductData.fabricColorOptions || [];
     setFabricColorOptions(fabricColorOptionsData);
   
-    console.log(
-      fabricColorOptionsData.length > 0
-        ? "🎨 Fabric Color Options Loaded:"
-        : "⚠️ No fabric color options found for this product.",
-      fabricColorOptionsData
-    );
   
-    // ✅ Step 3: Fetch pricing rules for this product
+    // Step 3: Fetch pricing rules for this product
     fetchPricingRules(selectedProductData);
   }, [selectedProduct, selectedFabricOption, productsData]);
   
-
-
 
   // Calculate the fractional inch value (used in width and height calculations)
   const calculateInches = (inches, fraction) => {

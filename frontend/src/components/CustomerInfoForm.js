@@ -19,6 +19,7 @@ const CustomerInfoForm = ({
           Customer Name:
           <input
             type="text"
+            data-testid="customer-name-input"
             placeholder="Enter customer name"
             className={`customer-column-input ${validationErrors.customerName ? "error-border" : ""}`}
             value={customerName}
@@ -30,12 +31,16 @@ const CustomerInfoForm = ({
               }));
             }}
           />
+          {validationErrors.customerName && (
+            <p className="error-text">{validationErrors.customerName}</p>
+          )}
         </label>
 
         <label className="customer-column-label">
           Sidemark:
           <input
             type="text"
+            data-testid="sidemark-input"
             placeholder="Enter sidemark"
             className={`customer-column-input ${validationErrors.sidemark ? "error-border" : ""}`}
             value={sidemark}
@@ -47,12 +52,16 @@ const CustomerInfoForm = ({
               }));
             }}
           />
+          {validationErrors.sidemark && (
+            <p className="error-text">{validationErrors.sidemark}</p>
+          )}
         </label>
 
         <label className="customer-column-label">
           Address:
           <input
             type="text"
+            data-testid="customer-address-input"
             placeholder="Enter address"
             className={`customer-column-input ${validationErrors.address ? "error-border" : ""}`}
             value={address}
@@ -64,12 +73,16 @@ const CustomerInfoForm = ({
               }));
             }}
           />
+          {validationErrors.address && (
+            <p className="error-text">{validationErrors.address}</p>
+          )}
         </label>
 
         <label className="customer-column-label">
           Phone Number:
           <input
             type="text"
+            data-testid="customer-phone-number-input"
             placeholder="Enter phone number"
             className={`customer-column-input ${validationErrors.phoneNumber ? "error-border" : ""}`}
             value={phoneNumber}
@@ -77,10 +90,13 @@ const CustomerInfoForm = ({
               setPhoneNumber(e.target.value);
               setValidationErrors((prev) => ({
                 ...prev,
-                phoneNumber: e.target.value.trim() ? "" : "Phone number is required.",
+                phoneNumber: e.target.value.trim() ? "" : "Phone Number is required.",
               }));
             }}
           />
+          {validationErrors.phoneNumber && (
+            <p className="error-text">{validationErrors.phoneNumber}</p>
+          )}
         </label>
       </div>
     </div>
