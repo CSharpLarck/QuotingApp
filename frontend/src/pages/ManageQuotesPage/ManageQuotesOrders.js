@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { db, collection, auth, query, orderBy, getDocs, doc, deleteDoc } from "../../firebase";
 import "./ManageQuotesOrders.css";
 import { onSnapshot} from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 
 
@@ -258,18 +259,23 @@ const totalPages = Math.ceil(quotes.length / quotesPerPage);
 </div>
 )}
 
+<button
+  onClick={() => {
+    console.log("Start New Quote clicked");
 
+    const newQuoteId = uuidv4();
+    const shortQuoteId = newQuoteId.slice(-4);
 
-      <button
-        onClick={() => {
-          localStorage.removeItem("currentQuoteId");
-          setCurrentQuoteId(null);
-          navigate("/quote");
-        }}
-        className="start-quote-button"
-      >
-        Start New Quote
-      </button>
+    localStorage.setItem("currentQuoteId", newQuoteId);
+    localStorage.setItem("shortQuoteId", shortQuoteId);
+    localStorage.removeItem("hasAddedItem");
+
+navigate(`/new-quote/${newQuoteId}`);
+  }}
+  className="start-quote-button"
+>
+  Start New Quote
+</button>
   
       <main className="table-container">
         <table className="quotes-table">

@@ -113,41 +113,23 @@ const MainRoutes = ({ categories }) => {
     }
   />
 
-  <Route
-    path="/quote"
-    element={
-      <ProtectedRoute>
-        <QuotingPage categories={categories} />
-      </ProtectedRoute>
-    }
-  />
+<Route
+  path="/new-quote/:quoteId"
+  element={
+    <ProtectedRoute>
+      <QuotingPage categories={categories} />
+    </ProtectedRoute>
+  }
+/>
 
-  <Route
-    path="/quote/:quoteId"
-    element={
-      <ProtectedRoute>
-        <QuotePage />
-      </ProtectedRoute>
-    }
-  />
-
-  <Route
-    path="/quotingpage/:quoteId"
-    element={
-      <ProtectedRoute>
-        <QuotingPage />
-      </ProtectedRoute>
-    }
-  />
-
-  <Route
-    path="/quotingpage"
-    element={
-      <ProtectedRoute>
-        <QuotingPage categories={categories} />
-      </ProtectedRoute>
-    }
-  />
+<Route
+  path="/quote/:quoteId"
+  element={
+    <ProtectedRoute>
+      <QuotePage />
+    </ProtectedRoute>
+  }
+/>
 
   {/* Admin-only route. */}
 <Route

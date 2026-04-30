@@ -11,7 +11,7 @@ export async function clickStartNewQuote(page: Page) {
 }
 
 export async function expectQuotePageLoaded(page: Page) {
-  await page.waitForURL('**/quote', { timeout: 10000 });
+  await page.waitForURL('**/new-quote/**', { timeout: 10000 });
   await expect(page.getByTestId('category-select')).toBeVisible({ timeout: 15000 });
 }
 
