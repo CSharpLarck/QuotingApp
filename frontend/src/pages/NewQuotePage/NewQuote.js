@@ -36,11 +36,11 @@ const QuotingPage = () => {
   const [sizeBasedPricing, setSizeBasedPricing] = useState(new Map());
   const [sizeBasedPricingData, setSizeBasedPricingData] = useState({});
   const [quantity, setQuantity] = useState(1); // Default quantity is 1
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
+  const [, setTooltipPosition] = useState({ x: 0, y: 0 });
   const [, setShowAlert] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
   const [currentQuoteId, setCurrentQuoteId] = useState(null); // ✅ Store Quote ID
-  const [hoveredInfo, setHoveredInfo] = useState(null);   
+  const [, setHoveredInfo] = useState(null);   
   const [categories, setCategories] = useState([]); // ✅ State for storing categories
 
   const [customerName, setCustomerName] = useState("");
@@ -54,7 +54,7 @@ const QuotingPage = () => {
   const { quoteId, editItemIndex } = useParams();
   const numericEditItemIndex = parseInt(editItemIndex, 10);
   const isEditMode = !isNaN(numericEditItemIndex);
-  const [itemToEdit, setItemToEdit] = useState(null);
+  const [itemToEdit] = useState(null);
   const [mountingPosition, setMountingPosition] = useState("");
   const [windowLocation, setWindowLocation] = useState("");
 
