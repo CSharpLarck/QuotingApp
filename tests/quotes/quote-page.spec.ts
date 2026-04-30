@@ -30,10 +30,10 @@ test.describe('Quote Page', () => {
         await startNewQuoteAsTestUser(page);
        
 // Verifies required customer fields are present and available for user input.
-        await expect(page.getByPlaceholder('Enter customer name')).toBeVisible();
-        await expect(page.getByPlaceholder('Enter sidemark')).toBeVisible();
-        await expect(page.getByPlaceholder('Enter address')).toBeVisible();
-        await expect(page.getByPlaceholder('Enter phone number')).toBeVisible();
+        await expect(page.getByTestId('customer-name-input')).toBeVisible();
+        await expect(page.getByTestId('sidemark-input')).toBeVisible();
+        await expect(page.getByTestId('customer-address-input')).toBeVisible();
+        await expect(page.getByTestId('customer-phone-number-input')).toBeVisible();
 
 });
 
@@ -49,13 +49,16 @@ test.describe('Quote Page', () => {
         await expect(page.getByTestId('product-select')).toBeVisible();
 
         await expect(page.getByText('Enter Width:')).toBeVisible();
-        await expect(page.getByPlaceholder('Width (inches)')).toBeVisible();
+        await expect(page.getByTestId('width-input')).toBeVisible();
+
+        await expect(page.getByText('Enter Height:')).toBeVisible();
+        await expect(page.getByTestId('height-input')).toBeVisible();
 
         const mountingSelect = page.getByTestId('mounting-position-select');
         await expect(mountingSelect).toBeVisible();
 
         await expect(page.getByText('Window Location')).toBeVisible();
-        await expect(page.getByPlaceholder('(e.g., Living Room, Master Bedroom)')).toBeVisible();
+        await expect(page.getByTestId('window-location-input')).toBeVisible();
 
 });
 

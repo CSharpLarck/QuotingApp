@@ -11,7 +11,7 @@ export async function clickStartNewQuote(page: Page) {
 }
 
 export async function expectQuotePageLoaded(page: Page) {
-  await page.waitForURL('**/quote', { timeout: 10000 });
+  await page.waitForURL('**/new-quote/**', { timeout: 10000 });
   await expect(page.getByTestId('category-select')).toBeVisible({ timeout: 15000 });
 }
 
@@ -60,15 +60,15 @@ export async function fillValidQuoteItem(page: Page, quoteItem = validQuoteItem)
   await expect(colorSelect).toBeVisible();
   await colorSelect.selectOption({ label: quoteItem.color });
 
-  await page.getByPlaceholder('Width (inches)').fill(quoteItem.width);
-  await page.getByPlaceholder('Height (inches)').fill(quoteItem.height);
+  await page.getByTestId('width-input').fill(quoteItem.width);
+  await page.getByTestId('height-input').fill(quoteItem.height);
 
   const mountingSelect = page.getByTestId('mounting-position-select');
   await expect(mountingSelect).toBeVisible();
   await mountingSelect.selectOption({ label: quoteItem.mountingPosition });
 
   await page
-    .getByPlaceholder('(e.g., Living Room, Master Bedroom)')
+    .getByTestId('window-location-input')
     .fill(quoteItem.room);
 }
 
@@ -77,8 +77,8 @@ export async function fillCustomerDetails(
   customerName: string,
   sidemark: string
 ) {
-  await page.getByPlaceholder('Enter customer name').fill(customerName);
-  await page.getByPlaceholder('Enter sidemark').fill(sidemark);
-  await page.getByPlaceholder('Enter address').fill('123 Test Rd.');
-  await page.getByPlaceholder('Enter phone number').fill('1232343455');
+  await page.getByTestId('customer-name-input').fill(customerName);
+  await page.getByTestId('sidemark-input').fill(sidemark);
+  await page.getByTestId('customer-address-input').fill('123 Test Rd.');
+  await page.getByTestId('customer-phone-number-input').fill('1232343455');
 }

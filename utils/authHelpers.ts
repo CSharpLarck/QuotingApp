@@ -9,8 +9,8 @@ export async function goToSignIn(page: Page) {
 }
 
 export async function fillLoginForm(page: Page, email: string, password: string) {
-  await page.getByPlaceholder('Email Address').fill(email);
-  await page.getByPlaceholder('Password').fill(password);
+  await page.getByTestId('email-input').fill(email);
+  await page.getByTestId('password-input').fill(password);
 }
 
 export async function submitLogin(page: Page) {
