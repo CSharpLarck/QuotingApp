@@ -1,12 +1,8 @@
 const DimensionsForm = ({
   width,
   setWidth,
-  widthFraction,
-  setWidthFraction,
   height,
   setHeight,
-  heightFraction,
-  setHeightFraction,
   validationErrors,
   setValidationErrors,
   fractions,
@@ -31,19 +27,6 @@ const DimensionsForm = ({
             }}
             placeholder="Width (inches)"
           />
-
-          <select
-            value={widthFraction || ""}
-            onChange={(e) => setWidthFraction(e.target.value)}
-            className="dimension-fraction"
-          >
-            <option value="">--</option>
-            {fractions.map((fraction) => (
-              <option key={fraction} value={fraction}>
-                {fraction}
-              </option>
-            ))}
-          </select>
         </div>
 
         {validationErrors.width && (
@@ -70,18 +53,6 @@ const DimensionsForm = ({
             placeholder="Height (inches)"
           />
 
-          <select
-            value={heightFraction || ""}
-            onChange={(e) => setHeightFraction(e.target.value)}
-            className="dimension-fraction"
-          >
-            <option value="">--</option>
-            {fractions.map((fraction) => (
-              <option key={fraction} value={fraction}>
-                {fraction}
-              </option>
-            ))}
-          </select>
         </div>
 
         {validationErrors.height && (
