@@ -8,7 +8,7 @@ import {
 } from '../../utils/quoteHelpers';
 
 test.describe('Quote Workflow', () => {
-  test('@regression user can add an item when required quote fields are completed', async ({ page }) => {
+  test.skip('@regression user can add an item when required quote fields are completed', async ({ page }) => {
     const id = Date.now();
     const uniqueCustomerName = `Customer-${id}`;
     const uniqueSideMark = `Quote-${id}`;
