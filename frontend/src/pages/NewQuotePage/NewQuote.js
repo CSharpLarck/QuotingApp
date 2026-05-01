@@ -27,10 +27,7 @@ const QuotingPage = () => {
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const navigate = useNavigate(); // ✅ Enables navigation
-  const [widthFraction, setWidthFraction] = useState('');
-  const [heightFraction, setHeightFraction] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
-  const [hasPrefilledProduct, setHasPrefilledProduct] = useState(false);
 
   const [optionsData, setOptionsData] = useState({}); // Store options categorized by product
   const [sizeBasedPricing, setSizeBasedPricing] = useState(new Map());
@@ -54,7 +51,7 @@ const QuotingPage = () => {
   const { quoteId, editItemIndex } = useParams();
   const numericEditItemIndex = parseInt(editItemIndex, 10);
   const isEditMode = !isNaN(numericEditItemIndex);
-  const [itemToEdit] = useState(null);
+  const [itemBeingEdited, setItemBeingEdited] = useState(null);
   const [mountingPosition, setMountingPosition] = useState("");
   const [windowLocation, setWindowLocation] = useState("");
 
@@ -67,7 +64,6 @@ const QuotingPage = () => {
   });
   
 
-  const fractions = ['', '1/8', '1/4', '3/8', '1/2', '5/8', '3/4', '7/8'];
 
   const formatProductName = (product) => {
     if (product === "2.5 Faux Wood Blinds") return '2.5" Faux Wood Blinds';
@@ -138,67 +134,85 @@ const QuotingPage = () => {
 
 
 
+useEffect(() => {
+  const fetchQuoteData = async () => {
+    if (!quoteId) return;
 
+    const user = auth.currentUser;
 
-  useEffect(() => {
-    const fetchQuoteData = async () => {
-      if (!quoteId) {
-        return;
+    if (!user) {
+      navigate("/signin");
+      return;
+    }
+
+    try {
+      const quoteRef = doc(db, "quotes", quoteId);
+      const quoteSnap = await getDoc(quoteRef);
+
+      if (quoteSnap.exists()) {
+        const data = quoteSnap.data();
+
+        if (data.createdBy !== user.uid) {
+          navigate("/unauthorized");
+          return;
+        }
+
+        setCustomerName(data.customerName || "");
+        setPoNumber(data.poNumber || "");
+        setSidemark(data.sidemark || "");
+        setAddress(data.address || "");
+        setPhoneNumber(data.phoneNumber || "");
+        setCurrentQuoteId(quoteId);
+
+     if (!isNaN(numericEditItemIndex) && data.items?.[numericEditItemIndex]) {
+  const itemToEdit = data.items[numericEditItemIndex];
+
+  setItemBeingEdited(itemToEdit);
+
+  setQuantity(itemToEdit.quantity || "");
+  setSelectedCategory(itemToEdit.category || "");
+  setSelectedProduct(itemToEdit.product || "");
+  setWindowLocation(itemToEdit.windowLocation || "");
+  setWidth(itemToEdit.width || "");
+  setHeight(itemToEdit.height || "");
+  setMountingPosition(itemToEdit.mountingPosition || "");
+  setSelectedFabricOption(itemToEdit.fabricOption || "");
+    }
+      } else {
+        resetAllInputs();
+        setCustomerName("");
+        setPoNumber("");
+        setSidemark("");
+        setAddress("");
+        setPhoneNumber("");
+        setCurrentQuoteId(quoteId);
+        setHasAddedItem(false);
       }
-  
-      const user = auth.currentUser; // ✅ Get logged-in user
-      if (!user) {
-        navigate("/signin"); // ✅ Redirect unauthenticated users
-        return;
-      }
-  
-      try {
-        const quoteRef = doc(db, "quotes", quoteId);
-        const quoteSnap = await getDoc(quoteRef);
-  
-        if (quoteSnap.exists()) {
-          const data = quoteSnap.data();
-  
-          // ✅ Check if the current user is the creator
-          if (data.createdBy !== user.uid) {
-            navigate("/unauthorized"); // ✅ Redirect unauthorized users
-            return;
-          }
-  
-          setCustomerName(data.customerName || "");
-          setPoNumber(data.poNumber || "");
-          setSidemark(data.sidemark || "");
-          setAddress(data.address || "");
-          setPhoneNumber(data.phoneNumber || "");
-       } else {
-  resetAllInputs();
-  setCustomerName("");
-  setPoNumber("");
-  setSidemark("");
-  setAddress("");
-  setPhoneNumber("");
-  setCurrentQuoteId(quoteId);
-  setHasAddedItem(false);
-}
-      } catch (error) {
-      }
-    };
-  
-    fetchQuoteData();
-  }, [quoteId, navigate]); // ✅ Added `navigate` to dependencies
-  
+    } catch (error) {
+      console.error("Error fetching quote data:", error);
+    }
+  };
 
+  fetchQuoteData();
+}, [quoteId, navigate, numericEditItemIndex]);
 
+useEffect(() => {
+  if (!itemBeingEdited) return;
+  if (!selectedProduct) return;
+  if (!selectedFabricOption) return;
+  if (!fabricColorOptions || fabricColorOptions.length === 0) return;
 
+  const timer = setTimeout(() => {
+    setSelectedFabricColorOption(itemBeingEdited.fabricColor || "");
+  }, 100);
 
-
-
-
-
-
-
-
-
+  return () => clearTimeout(timer);
+}, [
+  itemBeingEdited,
+  selectedProduct,
+  selectedFabricOption,
+  fabricColorOptions,
+]);
 
 
 
@@ -248,17 +262,7 @@ const handleSaveItem = async () => {
     return;
   }
 
-  // ✅ Convert width and height including fractions
-  const widthInches = parseFloat(width) + calculateInches(0, widthFraction);
-  const heightInches = parseFloat(height) + calculateInches(0, heightFraction);
 
-  // ✅ Ensure dimensions do not exceed the max limits before saving
-  if (widthInches > minMaxDimensions.maxWidth) {
-    errors.width = `Maximum width is ${minMaxDimensions.maxWidth} inches.`;
-  }
-  if (heightInches > minMaxDimensions.maxHeight) {
-    errors.height = `Maximum height is ${minMaxDimensions.maxHeight} inches.`;
-  }
 
     // ✅ Prevent saving if errors exist
     if (Object.keys(errors).length > 0) {
@@ -294,11 +298,9 @@ const handleSaveItem = async () => {
     category: selectedCategory,
     product: selectedProduct,
     width,
-    widthFraction,
     height,
-    heightFraction,
     quantity,
-   mountingPosition: mountingPosition || "N/A",
+    mountingPosition: mountingPosition || "N/A",
     windowLocation: windowLocation || "N/A",
     fabricOption: selectedFabricOption || "N/A",
     fabricColor: selectedFabricColorOption || "N/A",
@@ -392,8 +394,8 @@ const validateForm = () => {
     minMaxDimensions.minHeight !== null &&
     minMaxDimensions.maxHeight !== null
   ) {
-    const widthVal = (parseFloat(width) || 0) + calculateInches(0, widthFraction);
-    const heightVal = (parseFloat(height) || 0) + calculateInches(0, heightFraction);
+    const widthVal = (parseFloat(width) || 0);
+    const heightVal = (parseFloat(height) || 0);
 
     if (widthVal < minMaxDimensions.minWidth || widthVal > minMaxDimensions.maxWidth) {
       errors.width = `Width must be between ${minMaxDimensions.minWidth} and ${minMaxDimensions.maxWidth} inches.`;
@@ -422,7 +424,7 @@ if (
 
    // Roller Shades rules
   if (selectedProduct === "Roller Shades") {
-    const widthVal = (parseFloat(width) || 0) + calculateInches(0, widthFraction);
+    const widthVal = (parseFloat(width) || 0);
 
     if (widthVal > 108) {
       errors.width = "Maximum width for Roller Shades is 108 inches.";
@@ -510,41 +512,6 @@ const handleProductChange = (e) => {
   });
 
 
-useEffect(() => {
-  if (itemToEdit && productsData.length > 0 && !hasPrefilledProduct) {
-    const matchingProduct = productsData.find((p) => p.name === itemToEdit.product);
-
-    if (matchingProduct) {
-      setSelectedProduct(itemToEdit.product || "");
-      fetchOptions(matchingProduct.optionRefs);
-    }
-
-    setWidth(itemToEdit.width || "");
-    setWidthFraction(itemToEdit.widthFraction || "");
-    setHeight(itemToEdit.height || "");
-    setHeightFraction(itemToEdit.heightFraction || "");
-    setQuantity(itemToEdit.quantity || 1);
-    setSelectedFabricOption(itemToEdit.fabricOption || "");
-    setSelectedFabricColorOption(itemToEdit.fabricColor || "");
-    setWindowLocation(itemToEdit.windowLocation || "");
-    setMountingPosition(itemToEdit.mountingPosition || "");
-
-    setSelectedOptions({
-      ...(itemToEdit.mountingPosition && {
-        "Mounting Position": itemToEdit.mountingPosition,
-      }),
-      ...(itemToEdit.windowLocation && {
-        "Window Location": itemToEdit.windowLocation,
-      }),
-    });
-
-    setHasPrefilledProduct(true);
-  }
-}, [itemToEdit, productsData, hasPrefilledProduct]);
-
-
-  
-
   const handleUpdateItem = async () => {
   const errors = validateForm();
 
@@ -573,9 +540,7 @@ useEffect(() => {
     fabricOption: selectedFabricOption || "N/A",
     fabricColor: selectedFabricColorOption || "N/A",
     width,
-    widthFraction,
     height,
-    heightFraction,
     quantity,
     mountingPosition: mountingPosition || "N/A",
     windowLocation: windowLocation || "N/A",
@@ -599,8 +564,6 @@ const resetAllInputs = () => {
   setSelectedFabricColorOption("");
   setWidth("");
   setHeight("");
-  setWidthFraction("");
-  setHeightFraction("");
   setQuantity(1);
   setTotalPrice(0);
   setSelectedOptions({});
@@ -867,7 +830,7 @@ const fetchPricingRules = async (selectedProductData) => {
 
 useEffect(() => {
   const widthInches =
-    isNaN(parseFloat(width)) ? 0 : parseFloat(width) + calculateInches(0, widthFraction);
+    isNaN(parseFloat(width)) ? 0 : parseFloat(width);
 
   if (
     widthInches < minMaxDimensions.minWidth ||
@@ -883,11 +846,11 @@ useEffect(() => {
       return rest;
     });
   }
-}, [width, widthFraction, minMaxDimensions]);
+}, [width, minMaxDimensions]);
   
   useEffect(() => {
   const heightInches =
-    isNaN(parseFloat(height)) ? 0 : parseFloat(height) + calculateInches(0, heightFraction);
+    isNaN(parseFloat(height)) ? 0 : parseFloat(height);
 
   if (
     heightInches < minMaxDimensions.minHeight ||
@@ -903,7 +866,7 @@ useEffect(() => {
       return rest;
     });
   }
-}, [height, heightFraction, minMaxDimensions]);
+}, [height, minMaxDimensions]);
   
 
 
@@ -912,10 +875,10 @@ useEffect(() => {
   if (!selectedProduct || pricingRules.size === 0) return;
 
   const widthInches =
-    parseFloat(width || 0) + calculateInches(0, widthFraction);
+    parseFloat(width || 0);
 
   const heightInches =
-    parseFloat(height || 0) + calculateInches(0, heightFraction);
+    parseFloat(height || 0);
 
   const roundedWidth = Math.ceil(widthInches / 12) * 12;
   const roundedHeight = Math.ceil(heightInches / 12) * 12;
@@ -935,8 +898,6 @@ useEffect(() => {
   selectedProduct,
   width,
   height,
-  widthFraction,
-  heightFraction,
   pricingRules,
   quantity,
   costFactor,
@@ -969,21 +930,6 @@ useEffect(() => {
     fetchPricingRules(selectedProductData);
   }, [selectedProduct, selectedFabricOption, productsData]);
   
-
-  // Calculate the fractional inch value (used in width and height calculations)
-  const calculateInches = (inches, fraction) => {
-    if (fraction === '') return inches;
-    const fractionMap = {
-      '1/8': 1 / 8,
-      '1/4': 1 / 4,
-      '3/8': 3 / 8,
-      '1/2': 1 / 2,
-      '5/8': 5 / 8,
-      '3/4': 3 / 4,
-      '7/8': 7 / 8,
-    };
-    return inches + (fractionMap[fraction] || 0);
-  };
 
 
   useEffect(() => {
@@ -1045,15 +991,10 @@ useEffect(() => {
  <DimensionsForm
   width={width}
   setWidth={setWidth}
-  widthFraction={widthFraction}
-  setWidthFraction={setWidthFraction}
   height={height}
   setHeight={setHeight}
-  heightFraction={heightFraction}
-  setHeightFraction={setHeightFraction}
   validationErrors={validationErrors}
   setValidationErrors={setValidationErrors}
-  fractions={fractions}
 />
 <InstallationDetailsForm
   mountingPosition={mountingPosition}
